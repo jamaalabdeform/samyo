@@ -11,7 +11,7 @@ const base =
   "active:scale-[0.975] disabled:pointer-events-none disabled:opacity-40";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-marine-700 text-paper shadow-[inset_0_1px_0_rgb(255_255_255/0.08),0_1px_2px_rgb(11_37_69/0.25)] hover:bg-marine-900",
+  primary: "bg-marine-700 text-paper shadow-[inset_0_1px_0_rgb(255_255_255/0.08),0_1px_2px_rgb(14_37_99/0.25)] hover:bg-marine-900",
   secondary: "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:bg-white hover:shadow-[0_0_0_1px_rgb(20_26_34/0.18)]",
   ghost: "text-ink hover:bg-stone-100",
   inverse: "bg-paper text-marine-900 hover:bg-white",

@@ -74,7 +74,7 @@ export function Footer() {
       <div className="flex flex-col gap-4 border-t border-paper/10 py-7 text-xs text-paper/50 md:flex-row md:items-center md:justify-between">
         <p>
           © {year} {company.name}
-          {site.flags.demoNotice && <span> · Maquette — coordonnées provisoires</span>}
+          {site.flags.provisionalNotice && <span> · Coordonnées provisoires</span>}
         </p>
         <ul className="flex gap-6">
           <li>

@@ -13,7 +13,7 @@ from fontTools.pens.boundsPen import BoundsPen
 ROOT = Path(__file__).resolve().parent.parent
 FONT = ROOT / "src/fonts/instrument-sans-latin-wght-normal.woff2"
 
-MARINE = "#17467F"
+MARINE = "#1E4CC2"
 LAGON = "#45C0B5"
 WHITE = "#FFFFFF"
 
@@ -66,7 +66,7 @@ out.mkdir(parents=True, exist_ok=True)
 (out / "samyo-logo.svg").write_text(logo(MARINE, LAGON))
 (out / "samyo-logo-blanc.svg").write_text(logo(WHITE, LAGON))
 (out / "samyo-symbole.svg").write_text(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" role="img" aria-label="SAMYO">{symbol()}</svg>\n')
-square = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" rx="10" fill="#0B2545"/>{symbol(WHITE, LAGON)}</svg>
+square = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" rx="10" fill="#0E2563"/>{symbol(WHITE, LAGON)}</svg>
 '''
 (out / "samyo-symbole-carre.svg").write_text(square)
 (ROOT / "src/app/icon.svg").write_text(square)

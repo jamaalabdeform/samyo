@@ -3,7 +3,9 @@ import { site } from "@/config/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [{ userAgent: "*", allow: "/", disallow: ["/admin-demo", "/api/"] }],
+    rules: site.indexable
+      ? [{ userAgent: "*", allow: "/", disallow: ["/espace-pro", "/api/"] }]
+      : [{ userAgent: "*", disallow: "/" }],
     sitemap: `${site.url}/sitemap.xml`,
     host: site.url,
   };

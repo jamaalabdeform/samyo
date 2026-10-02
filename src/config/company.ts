@@ -2,7 +2,7 @@
  * ─────────────────────────────────────────────────────────────────────────────
  *  IDENTITÉ ENTREPRISE — SAMYO (coordonnées provisoires)
  * ─────────────────────────────────────────────────────────────────────────────
- *  SAMYO Déménagement & Transport — maquette réalisée par STIPway.
+ *  SAMYO Déménagement & Transport.
  *  Le nom et la marque sont ceux du client ; en revanche ADRESSE, TÉLÉPHONE,
  *  HORAIRES et mentions légales sont des VALEURS PROVISOIRES à remplacer
  *  par les informations réelles (voir docs/CLIENT-INFO-NEEDED.md).

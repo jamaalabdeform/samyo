@@ -10,7 +10,7 @@ import { spring } from "@/config/motion";
 
 export const inputClass =
   "h-14 w-full rounded-[var(--radius-md)] bg-paper px-4 text-[1rem] text-ink shadow-[var(--shadow-hairline)] outline-none transition-[box-shadow,background-color] duration-200 placeholder:text-stone-500 " +
-  "hover:shadow-[0_0_0_1px_rgb(20_26_34/0.2)] focus:bg-white focus:shadow-[0_0_0_1.5px_var(--color-marine-500),0_0_0_5px_rgb(44_103_168/0.14)] focus-visible:outline-none " +
+  "hover:shadow-[0_0_0_1px_rgb(20_26_34/0.2)] focus:bg-white focus:shadow-[0_0_0_1.5px_var(--color-marine-500),0_0_0_5px_rgb(30_76_194/0.14)] focus-visible:outline-none " +
   "aria-[invalid=true]:shadow-[0_0_0_1.5px_var(--color-danger)]";
 
 export const TextField = forwardRef<
@@ -170,7 +170,7 @@ export function ChoiceCard({
       className={cn(
         "relative flex w-full flex-col items-start rounded-[var(--radius-md)] p-5 text-left transition-[background-color,box-shadow,color] duration-200",
         selected
-          ? "bg-marine-700 text-paper shadow-[0_10px_30px_-12px_rgb(11_37_69/0.55)]"
+          ? "bg-marine-700 text-paper shadow-[0_10px_30px_-12px_rgb(14_37_99/0.55)]"
           : "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(20_26_34/0.22),var(--shadow-soft)]",
         className,
       )}

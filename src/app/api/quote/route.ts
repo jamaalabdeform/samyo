@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { quoteSchema, phoneRegex } from "@/features/quote/schema";
 import { PricingEngine } from "@/lib/pricing/engine";
+import { quoteEmailText, sendLeadEmail } from "@/lib/leadEmail";
 import { totalVolume, hasSpecialItem } from "@/features/inventory/volume";
 
 /**
@@ -73,6 +74,23 @@ export async function POST(req: Request) {
       // la demande n'est jamais perdue pour l'utilisateur : on journalise et on continue
       console.error("[quote] webhook failed", e);
     }
+  }
+
+  // Copie par e-mail à l'entreprise (canal de référence tant qu'aucune base n'est branchée)
+  try {
+    if (body.kind === "quote") {
+      const reasons = (payload.pricing as { reviewReasons?: string[] } | undefined)?.reviewReasons ?? [];
+      await sendLeadEmail(
+        `Devis ${ref} — ${body.draft.from.city} → ${body.draft.to.city} · ${body.draft.contact.firstName} ${body.draft.contact.lastName}`,
+        quoteEmailText(ref, body.draft, payload.volume as number, reasons),
+        body.draft.contact.email,
+      );
+    } else {
+      const cb = body.callback;
+      await sendLeadEmail(`Demande de rappel ${ref} — ${cb.firstName}`, `Demande de rappel ${ref}\n\n${cb.firstName} — ${cb.phone}\nCréneau souhaité : ${cb.slot}`);
+    }
+  } catch (e) {
+    console.error("[quote] email failed", e);
   }
 
   return NextResponse.json({ ok: true, reference: ref, pricing: payload.pricing ?? null, volume: payload.volume ?? null });

@@ -2,7 +2,7 @@
 Applique le logo SAMYO en perspective sur le flanc du fourgon.
 Entrées : creative/van/van-detoure.png (fourgon détouré, 1133 × 655)
           creative/van/logo-flanc.png  (logo bleu sur fond transparent)
-Sortie  : public/media/samyo-van-logo.webp
+Sortie  : public/media/samyo-van-roi.webp
 Usage   : python3 scripts/build-van.py
 Pour recaler le logo, ajuster QUAD (coins dans l'image du fourgon,
 dans l'ordre haut-gauche, haut-droit, bas-droit, bas-gauche).
@@ -13,7 +13,7 @@ from PIL import Image, ImageChops
 ROOT = Path(__file__).resolve().parent.parent
 VAN = ROOT / "creative/van/van-detoure.png"
 LOGO = ROOT / "creative/van/logo-flanc.png"
-OUT = ROOT / "public/media/samyo-van-logo.webp"
+OUT = ROOT / "public/media/samyo-van-roi.webp"
 
 # Zone vitrée/panneau gris du flanc (vue de trois quarts : le bord droit fuit)
 QUAD = [(676, 136), (1080, 152), (1080, 232), (676, 246)]

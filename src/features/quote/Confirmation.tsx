@@ -5,7 +5,6 @@ import { motion, useReducedMotion } from "motion/react";
 import { Phone } from "lucide-react";
 import { company, telHref } from "@/config/company";
 import { pricingConfig } from "@/config/pricing.config";
-import { routes, site } from "@/config/site";
 import { ease } from "@/config/motion";
 import { Logo } from "@/components/Logo";
 import { ButtonLink } from "@/components/ui/Button";
@@ -18,7 +17,6 @@ const nextSteps = [
 
 export function Confirmation({
   reference,
-  leadId,
   message,
   firstName,
   kind = "quote",
@@ -80,12 +78,6 @@ export function Confirmation({
             <span className="num">{company.phone.display}</span>
           </a>
         </div>
-
-        {site.flags.demoNotice && (
-          <Link href={`${routes.admin}/leads/${leadId}`} className="mt-16 text-xs text-stone-600 underline decoration-ink/20 underline-offset-4 hover:text-ink hover:decoration-ink">
-            Démo · voir cette demande côté entreprise →
-          </Link>
-        )}
       </main>
     </div>
   );

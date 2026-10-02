@@ -9,12 +9,12 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export function Testimonials() {
   const isDemo = testimonials.some((t) => t.isDemo);
   return (
-    <section aria-labelledby="avis-title" className="bg-paper py-section">
+    <section aria-labelledby="avis-title" className="bg-marine-50 py-section">
       <div className="container-page">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading id="avis-title" index="08" eyebrow="Ils nous ont confié leur déménagement" title="Ce qu'on retient, après." />
           {isDemo && (
-            <p className="max-w-xs rounded-full bg-stone-100 px-4 py-2 text-xs text-stone-600 md:mb-2">
+            <p className="max-w-xs rounded-full bg-paper px-4 py-2 text-xs text-stone-600 md:mb-2">
               Exemples de mise en page — les avis clients réels seront intégrés ici.
             </p>
           )}
@@ -22,9 +22,9 @@ export function Testimonials() {
 
         <ul className="mt-16 grid gap-5 lg:mt-20 lg:grid-cols-3 lg:gap-6">
           {testimonials.map((t, i) => (
-            <Reveal as="li" key={t.id} delay={i * 0.07} className="flex flex-col rounded-[var(--radius-lg)] bg-ivory p-8 lg:p-10">
+            <Reveal as="li" key={t.id} delay={i * 0.07} className="flex flex-col rounded-[var(--radius-lg)] bg-paper p-8 shadow-[var(--shadow-soft)] lg:p-10">
               <figure className="flex h-full flex-col">
-                <span aria-hidden className="font-display text-5xl leading-none text-lagon-600">“</span>
+                <span aria-hidden className="font-display text-5xl leading-none text-marine-700">“</span>
                 <blockquote className="font-display mt-2 text-xl leading-snug text-ink">{t.quote}</blockquote>
                 <figcaption className="mt-auto flex items-baseline justify-between gap-4 border-t border-ink/8 pt-6 text-sm">
                   <span className="font-semibold text-ink">{t.author}</span>

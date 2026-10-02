@@ -57,7 +57,7 @@ export function Transparency() {
     <section aria-labelledby="suivi-title" className="border-t border-ink/8 bg-stone-100/60 py-section">
       <div className="container-page grid gap-14 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
-          <div className="lg:sticky lg:top-28">
+          <div className="lg:sticky lg:top-36">
             <SectionHeading
               id="suivi-title"
               index="06"

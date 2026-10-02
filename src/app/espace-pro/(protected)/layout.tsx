@@ -12,7 +12,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <header className="sticky top-0 z-30 border-b border-ink/8 bg-paper/90 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-[90rem] items-center justify-between gap-4 px-4 sm:px-8">
           <div className="flex items-center gap-6">
-            <Link href="/admin-demo" aria-label="Tableau de bord">
+            <Link href="/espace-pro" aria-label="Tableau de bord">
               <Logo compact />
             </Link>
             <span className="hidden rounded-full bg-marine-50 px-3 py-1 text-xs font-medium text-marine-700 sm:inline">Espace entreprise · démo</span>

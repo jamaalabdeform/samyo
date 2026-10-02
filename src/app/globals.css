@@ -25,13 +25,14 @@
   --color-ink: #121922;            /* texte principal, noir bleuté */
   --color-ink-2: #323a45;
 
-  /* Bleu SAMYO — confiance, CTA, sections sombres */
-  --color-marine-50: #ebf2f9;
-  --color-marine-100: #d4e3f2;
-  --color-marine-300: #8fb2d8;
-  --color-marine-500: #2c67a8;
-  --color-marine-700: #17467f;
-  --color-marine-900: #0b2545;
+  /* Bleu roi SAMYO — couleur d'identité : CTA, bandeaux, sections fortes */
+  --color-marine-50: #edf2fe;
+  --color-marine-100: #d7e2fb;
+  --color-marine-300: #94aef1;
+  --color-marine-500: #3b6ae0;
+  --color-marine-700: #1e4cc2;     /* bleu roi */
+  --color-marine-800: #173b98;
+  --color-marine-900: #0e2563;     /* bleu roi profond */
 
   /* Turquoise lagon — accent lumineux, utilisé avec parcimonie */
   --color-lagon-100: #ddf3f0;
@@ -94,7 +95,7 @@
   --shadow-hairline: 0 0 0 1px rgb(20 26 34 / 0.08);
   --shadow-soft: 0 1px 2px rgb(20 30 45 / 0.05), 0 4px 16px -4px rgb(20 30 45 / 0.08);
   --shadow-lift: 0 2px 4px rgb(20 30 45 / 0.05), 0 18px 40px -12px rgb(20 30 45 / 0.18);
-  --shadow-float: 0 30px 80px -24px rgb(11 37 69 / 0.35);
+  --shadow-float: 0 30px 80px -24px rgb(14 37 99 / 0.35);
 
   /* ── Mouvement ────────────────────────────────────────── */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -109,10 +110,19 @@
 /* ═══════════════════════════ Base ═══════════════════════════ */
 
 @layer base {
+  :root {
+    --header-h: 4.5rem;
+  }
+  @media (min-width: 64rem) {
+    :root {
+      --header-h: 6.75rem; /* barre bleu roi + navigation */
+    }
+  }
+
   html {
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: calc(var(--header-h) + 1.5rem);
     background: var(--color-ivory);
   }
 

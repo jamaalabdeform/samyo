@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
-import { AlertCircle, ArrowUpRight, RotateCcw, Search } from "lucide-react";
+import { AlertCircle, ArrowUpRight, Search } from "lucide-react";
 import { QUOTE_EVENTS, readFunnel } from "@/lib/analytics";
 import { cn, formatDate, formatDateTime, formatNumber1 } from "@/lib/format";
-import { LEAD_STATUSES, leadRepository, useLeads, type Lead, type LeadStatus } from "./leads";
+import { LEAD_STATUSES, useLeads, type Lead, type LeadStatus } from "./leads";
 import { StatusBadge } from "./StatusBadge";
 
 const funnelLabels: Record<(typeof QUOTE_EVENTS)[number], string> = {
@@ -45,14 +45,6 @@ export function LeadsDashboard() {
           <p className="eyebrow text-stone-600">Tableau de bord</p>
           <h1 className="font-display mt-2 text-4xl">Demandes de devis</h1>
         </div>
-        <button
-          type="button"
-          onClick={() => confirm("Réinitialiser la démo ? Les demandes saisies seront effacées.") && leadRepository.reset()}
-          className="inline-flex h-10 items-center gap-2 self-start rounded-full px-4 text-sm text-stone-600 shadow-[var(--shadow-hairline)] hover:bg-paper hover:text-ink sm:self-auto"
-        >
-          <RotateCcw className="size-3.5" strokeWidth={1.8} aria-hidden />
-          Réinitialiser la démo
-        </button>
       </div>
 
       {/* Indicateurs */}
@@ -132,7 +124,7 @@ export function LeadsDashboard() {
               <ul className="mt-4 space-y-3 md:hidden">
                 {filtered.map((l) => (
                   <li key={l.id}>
-                    <Link href={`/admin-demo/leads/${l.id}`} className="block rounded-[var(--radius-md)] bg-paper p-4 shadow-[var(--shadow-hairline)]">
+                    <Link href={`/espace-pro/leads/${l.id}`} className="block rounded-[var(--radius-md)] bg-paper p-4 shadow-[var(--shadow-hairline)]">
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <p className="font-semibold">{name(l)}</p>
@@ -151,7 +143,7 @@ export function LeadsDashboard() {
               </ul>
             </>
           )}
-          <p className="mt-4 text-xs text-stone-500">Démo : données stockées dans ce navigateur. Les leads marqués « exemple » sont fictifs.</p>
+          <p className="mt-4 text-xs text-stone-500">Cet espace affiche les demandes enregistrées sur ce navigateur. Chaque demande est aussi transmise par e-mail à l&apos;entreprise.</p>
         </section>
 
         <aside>
@@ -163,7 +155,7 @@ export function LeadsDashboard() {
 }
 
 function Row({ lead: l }: { lead: Lead }) {
-  const href = `/admin-demo/leads/${l.id}`;
+  const href = `/espace-pro/leads/${l.id}`;
   return (
     <tr className="group relative transition-colors hover:bg-ivory">
       <td className="px-5 py-4">

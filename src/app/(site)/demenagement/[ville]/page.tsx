@@ -46,7 +46,7 @@ export default async function CityPage({ params }: { params: Promise<{ ville: st
       <JsonLd data={{ ...organizationJsonLd(), "@id": `${site.url}${routes.city(loc.slug)}#business`, areaServed: { "@type": "City", name: loc.name } }} />
       <JsonLd data={breadcrumbJsonLd([{ name: "Accueil", path: "/" }, { name: `Déménagement à ${loc.name}`, path: routes.city(loc.slug) }])} />
 
-      <section className="pt-[4.5rem]">
+      <section className="pt-[var(--header-h)]">
         <div className="container-page grid gap-12 pb-20 pt-12 md:pt-20 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <nav aria-label="Fil d'Ariane" className="text-xs text-stone-600">

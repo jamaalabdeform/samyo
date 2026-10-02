@@ -23,7 +23,7 @@ export function LeadDetail({ id }: { id: string }) {
       <div className="py-24 text-center">
         <p className="font-display text-3xl">Demande introuvable</p>
         <p className="mt-2 text-stone-600">Elle a peut-être été créée sur un autre navigateur.</p>
-        <Link href="/admin-demo" className="mt-6 inline-block text-sm underline underline-offset-4">
+        <Link href="/espace-pro" className="mt-6 inline-block text-sm underline underline-offset-4">
           Retour aux demandes
         </Link>
       </div>
@@ -44,7 +44,7 @@ function LeadView({ lead }: { lead: Lead }) {
 
   return (
     <div>
-      <Link href="/admin-demo" className="inline-flex items-center gap-2 text-sm text-stone-600 hover:text-ink">
+      <Link href="/espace-pro" className="inline-flex items-center gap-2 text-sm text-stone-600 hover:text-ink">
         <ArrowLeft className="size-4" strokeWidth={1.6} aria-hidden />
         Demandes
       </Link>

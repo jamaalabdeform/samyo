@@ -1,5 +1,20 @@
 # Nom de domaine & hébergement
 
+## 0. Adresse de prévisualisation : samyo.stipway.com (Vercel + Cloudflare)
+
+1. **Vercel** → Add New → Project → importer `jamaalabdeform/samyo` → Deploy (Next.js est détecté automatiquement).
+2. **Variables d'environnement** (Settings → Environment Variables), puis Redeploy :
+   - `NEXT_PUBLIC_SITE_URL` = `https://samyo.stipway.com`
+   - `ADMIN_ACCESS_CODE` = un code de votre choix (obligatoire pour ouvrir `/espace-pro`)
+   - `RESEND_API_KEY`, `LEAD_EMAIL_TO` (et `LEAD_EMAIL_FROM` si un domaine est vérifié dans Resend) pour recevoir les devis par e-mail
+3. **Vercel** → Settings → Domains → ajouter `samyo.stipway.com`. Vercel indique l'enregistrement DNS attendu.
+4. **Cloudflare** (zone `stipway.com`) → DNS → Add record :
+   - Type `CNAME`, nom `samyo`, cible `cname.vercel-dns.com`
+   - Proxy : **désactivé (nuage gris, « DNS only »)**, pour que Vercel délivre lui-même le certificat HTTPS
+5. **Redirection :** dans Vercel → Domains, rediriger l'adresse `*.vercel.app` du projet vers `samyo.stipway.com` (« Redirect to »).
+
+Tant que `NEXT_PUBLIC_INDEXABLE` n'est pas à `1`, le site demande aux moteurs de ne pas l'indexer : la prévisualisation ne fera pas concurrence au futur domaine définitif.
+
 ## 1. Nom de domaine
 
 À vérifier puis réserver chez OVHcloud (ou un autre registrar). La disponibilité n'a pas pu être contrôlée depuis l'environnement de développement.
@@ -51,7 +66,9 @@ PORT=3000 pm2 start .next/standalone/server.js --name samyo && pm2 save && pm2 s
 | Variable | Rôle |
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | `https://www.samyo-demenagement.fr` |
-| `ADMIN_DEMO_CODE` | Code d'accès à l'espace entreprise (à changer) |
+| `ADMIN_ACCESS_CODE` | Code d'accès à l'espace entreprise (obligatoire) |
+| `RESEND_API_KEY` / `LEAD_EMAIL_TO` / `LEAD_EMAIL_FROM` | Réception des devis par e-mail |
+| `NEXT_PUBLIC_INDEXABLE` | `1` uniquement sur le domaine définitif |
 | `LEAD_WEBHOOK_URL` | Facultatif : envoi de chaque demande vers un CRM, Make, n8n ou un e-mail |
 | `NEXT_PUBLIC_GTM_ID` | Facultatif : Google Tag Manager (avec un bandeau de consentement) |
 
@@ -61,4 +78,4 @@ PORT=3000 pm2 start .next/standalone/server.js --name samyo && pm2 save && pm2 s
 - [ ] Mettre en place une vraie authentification pour l'espace entreprise
 - [ ] Compléter les mentions légales et la politique de confidentialité
 - [ ] Ajouter un bandeau de consentement si des outils publicitaires sont activés
-- [ ] Passer `company.isDemo` et `site.flags.demoNotice` à `false`
+- [ ] Passer `company.isDemo` et `site.flags.provisionalNotice` à `false`, et `NEXT_PUBLIC_INDEXABLE=1`

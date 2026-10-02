@@ -73,7 +73,7 @@ function Container() {
   return (
     <group position={[0, SIZE.y / 2, 0]}>
       <lineSegments geometry={edges}>
-        <lineBasicMaterial color="#17467f" transparent opacity={0.45} />
+        <lineBasicMaterial color="#1e4cc2" transparent opacity={0.45} />
       </lineSegments>
       {/* paroi côté cabine */}
       <mesh position={[-SIZE.x / 2 - 0.01, 0, 0]} rotation={[0, Math.PI / 2, 0]}>

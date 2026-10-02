@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Phone } from "lucide-react";
-import { company, telHref } from "@/config/company";
+import { company, mailHref, telHref } from "@/config/company";
 import { routes, site } from "@/config/site";
 import { duration, ease } from "@/config/motion";
 import { track } from "@/lib/analytics";
@@ -46,6 +46,21 @@ export function Header() {
         scrolled || open ? "bg-ivory/85 shadow-[0_1px_0_rgb(20_26_34/0.07)] backdrop-blur-xl backdrop-saturate-150" : "bg-transparent",
       )}
     >
+      {/* Barre d'identité bleu roi (desktop) */}
+      <div className="hidden bg-marine-700 text-paper lg:block">
+        <div className="container-page flex h-9 items-center justify-between text-xs">
+          <p className="text-paper/85">{company.descriptor} · Lille, Nord et toute la France</p>
+          <div className="flex items-center gap-6 text-paper/85">
+            <span>{company.hours.short}</span>
+            <a href={mailHref} className="transition-colors hover:text-paper">
+              {company.email}
+            </a>
+            <a href={telHref} onClick={() => track("phone_click", { location: "topbar" })} className="num font-medium text-paper">
+              {company.phone.display}
+            </a>
+          </div>
+        </div>
+      </div>
       <div className="container-page flex h-[4.5rem] items-center justify-between gap-6">
         <Link href="/" aria-label={`${company.name} — accueil`} className="rounded-md" onClick={() => setOpen(false)}>
           <Logo className="h-11" />
@@ -67,7 +82,7 @@ export function Header() {
           <a
             href={telHref}
             onClick={() => track("phone_click", { location: "header" })}
-            className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm text-ink-2 transition-colors hover:text-ink md:inline-flex"
+            className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm text-ink-2 transition-colors hover:text-ink md:inline-flex lg:hidden"
           >
             <Phone className="size-4 text-marine-500" strokeWidth={1.6} aria-hidden />
             <span className="num">{company.phone.display}</span>

@@ -9,8 +9,8 @@ import { RouteForm } from "@/features/quote/RouteForm";
 
 export function Hero() {
   return (
-    <section id="hero" aria-labelledby="hero-title" className="relative overflow-hidden pt-[4.5rem]">
-      <div className="container-page grid items-center gap-12 pb-16 pt-10 md:pt-16 lg:min-h-[min(56rem,calc(100svh-4.5rem))] lg:grid-cols-12 lg:gap-8 lg:pb-20 lg:pt-8">
+    <section id="hero" aria-labelledby="hero-title" className="relative overflow-hidden pt-[var(--header-h)]">
+      <div className="container-page grid items-center gap-12 pb-16 pt-10 md:pt-16 lg:min-h-[min(56rem,calc(100svh-var(--header-h)))] lg:grid-cols-12 lg:gap-8 lg:pb-20 lg:pt-8">
         <div className="lg:col-span-6 lg:pr-6">
           <Reveal>
             <p className="eyebrow flex items-center gap-3 text-stone-600">
@@ -46,6 +46,8 @@ export function Hero() {
 
         <Reveal delay={0.1} className="lg:col-span-6">
           <figure className="relative mx-auto w-full max-w-[34rem] lg:ml-auto lg:mr-0">
+            {/* Aplat bleu roi derrière l'arche : la couleur de la marque dès le premier écran */}
+            <div aria-hidden className="absolute -bottom-[7%] -right-[5%] h-[64%] w-[86%] rounded-[var(--radius-xl)] bg-marine-700 sm:-right-[8%]" />
             <MediaSlot
               id="hero"
               priority

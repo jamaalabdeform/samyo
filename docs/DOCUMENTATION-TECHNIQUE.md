@@ -1,4 +1,4 @@
-# SAMYO Déménagement & Transport — dossier de passation STIPway
+# SAMYO Déménagement & Transport — documentation technique
 
 Maquette fonctionnelle de l'écosystème digital de SAMYO : site vitrine orienté conversion, **calculateur de volume et demande de devis** (déménagement complet ou transport de quelques objets), et back-office de suivi des demandes.
 
@@ -24,19 +24,15 @@ npm run lint && npm run typecheck
 | `/` | Homepage (13 sections) |
 | `/devis` | Calculateur et demande de devis (paramètres : `de`, `vers`, `logement`, `formule`, `besoin=transport`, `rappel=1`) |
 | `/demenagement-lille` | Page SEO locale (rewrite → `/demenagement/[ville]`) |
-| `/admin-demo` | Back-office (code : `samyo-demo`, variable `ADMIN_DEMO_CODE`) |
+| `/espace-pro` | Espace entreprise (code défini par la variable `ADMIN_ACCESS_CODE`, obligatoire en production) |
 | `/api/quote` | Réception des demandes (devis et rappel) |
 
-### Scénario de présentation (≈ 5 min)
-1. Hero : **Lille → Paris** → Continuer → **T3** → pièces pré-cochées
-2. Inventaire → **Pré-remplir** → ajuster deux meubles (le camion se remplit en 3D)
-3. Objets particuliers : **Piano droit** → message « étude spécifique »
-4. Accès : 3e étage, gabarit d'ascenseur « je ne sais pas », stationnement « non »
-5. Date, formule, options → coordonnées → récapitulatif → **Recevoir mon devis**
-6. Sur la confirmation, lien discret **« Démo · voir cette demande côté entreprise »** : la fiche apparaît avec ses **points à vérifier**
-7. Dans la fiche : saisir le montant du devis → « Devis envoyé » → cocher « Acompte encaissé » (hors site, via SumUp) → statut **Accepté**
-8. Montrer le parcours court : section Services → « Quelques meubles à transporter ? »
-9. Avant chaque rendez-vous : « Réinitialiser la démo » dans l'admin
+### Réception des demandes
+Chaque demande (devis ou rappel) passe par `/api/quote`, qui la transmet :
+- **par e-mail** à l'entreprise via Resend (`RESEND_API_KEY`, `LEAD_EMAIL_TO`, `LEAD_EMAIL_FROM`) : récapitulatif complet, avec l'adresse du client en « répondre à » ;
+- **par webhook** si `LEAD_WEBHOOK_URL` est défini (CRM, Make, n8n).
+
+L'espace `/espace-pro` affiche les demandes enregistrées dans le navigateur où elles ont été saisies. Pour centraliser les demandes de tous les visiteurs, il faudra brancher une base de données (voir §6). D'ici là, **l'e-mail fait foi**.
 
 ---
 
@@ -47,13 +43,13 @@ src/
   app/
     (site)/            homepage, pages locales, pages légales (header + footer)
     devis/             calculateur (rendu client, skeleton de chargement)
-    admin-demo/        login (server action + cookie) et espace protégé
+    espace-pro/        login (server action + cookie) et espace protégé
     api/quote/         réception des demandes
     sitemap.ts robots.ts opengraph-image.tsx icon.svg
-  proxy.ts             protection de /admin-demo (ex-« middleware » dans Next 16)
+  proxy.ts             protection de /espace-pro (ex-« middleware » dans Next 16)
   config/              company, site, media, motion, pricing.config
   data/                furnitureCatalog, services, locations, faq, cities,
-                       testimonials.demo, leads.demo
+                       testimonials.demo
   components/          Header, Footer, MobileCta, MediaSlot, Logo (+ logo-paths), ui/*
   sections/            une section de homepage par fichier
   features/
@@ -78,7 +74,8 @@ scripts/build-logo.py  génération du lettrage vectorisé du logo
 | Logos à exporter (devis, camion, réseaux) | `public/brand/*.svg` |
 | Couleurs, typographies, rayons, ombres | `src/app/globals.css` → `@theme` |
 | Libellés des CTA | `src/config/site.ts` → `cta` |
-| Mentions « maquette » | `company.isDemo`, `site.flags.demoNotice` |
+| Mention « coordonnées provisoires » | `company.isDemo`, `site.flags.provisionalNotice` |
+| Indexation Google | `NEXT_PUBLIC_INDEXABLE=1` (désactivée par défaut sur samyo.stipway.com) |
 
 Détails de la charte : `docs/CHARTE-GRAPHIQUE.md`.
 
@@ -112,7 +109,7 @@ Détails de la charte : `docs/CHARTE-GRAPHIQUE.md`.
 
 ## 6. Back-office
 
-- `features/admin/leads.ts` : interface `LeadRepository`. L'implémentation actuelle stocke les leads dans le navigateur (localStorage, avec 6 leads d'exemple). En production, il suffit d'une implémentation API (Supabase/Postgres, CRM) qui respecte la même interface.
+- `features/admin/leads.ts` : interface `LeadRepository`. L'implémentation actuelle stocke les leads dans le navigateur (localStorage). En production, il suffit d'une implémentation API (Supabase/Postgres, CRM) qui respecte la même interface.
 - **Statuts :** Nouveau → À rappeler → Devis préparé → Devis envoyé → Relance → Accepté / Perdu.
 - **Fiche lead :** coordonnées, type de demande, logistique, inventaire par pièce, objets spécifiques, points à vérifier, notes, historique, source marketing (UTM, gclid, fbclid), **suivi du devis** (montant envoyé, acompte encaissé hors site).
 - **Accès :** `proxy.ts` et un cookie httpOnly. À remplacer par une vraie authentification avant toute mise en production.
@@ -156,7 +153,7 @@ Voir `docs/DOMAINE-HEBERGEMENT.md` : Vercel ou VPS OVH, configuration DNS, varia
 
 ## 11. Choix de conception
 
-- Le bleu marine porte la confiance (CTA, sections sombres). Le turquoise reste un accent ponctuel (repères, pastille d'arrivée du logo) et n'est jamais utilisé en aplat.
+- Le bleu roi est la couleur d'identité : barre supérieure, bande de réassurance, aplat derrière le visuel du hero, boutons, chiffres, appel à l'action final. Le turquoise reste un accent ponctuel (pastille d'arrivée du logo).
 - Les contraintes à vérifier sont signalées en ambre, les erreurs en rouge : on ne mélange pas les couleurs de marque et les signaux.
 - Aucune statistique, aucun avis ni aucun prix inventé. Les témoignages sont présentés comme des exemples.
 - La 3D n'est utilisée qu'à un seul endroit, celui où elle informe : le remplissage du camion.

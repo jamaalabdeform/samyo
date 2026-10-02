@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   title: { default: site.seo.defaultTitle, template: site.seo.titleTemplate },
   description: site.seo.description,
   formatDetection: { telephone: false },
+  robots: site.indexable ? undefined : { index: false, follow: false },
 };
 
 export const viewport: Viewport = {

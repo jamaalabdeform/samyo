@@ -2,14 +2,13 @@
 
 import { useSyncExternalStore } from "react";
 import type { QuoteDraft } from "@/features/quote/types";
-import { demoLeads } from "@/data/leads.demo";
 
 /**
  * Dépôt des demandes (leads).
  *
- * DÉMO : stockage dans le navigateur (localStorage) + jeu de leads d'exemple.
- * Ainsi, une demande remplie devant le prospect apparaît immédiatement dans
- * /admin-demo sur le même poste, sans base de données.
+ * ACTUEL : stockage dans le navigateur (localStorage). Les demandes sont en
+ * parallèle transmises par e-mail et/ou webhook par /api/quote : c'est ce
+ * canal qui fait foi tant qu'aucune base de données n'est branchée.
  *
  * PRODUCTION : remplacer `LocalLeadRepository` par une implémentation API
  * (Supabase, Postgres, CRM…) respectant la même interface `LeadRepository`.
@@ -96,7 +95,7 @@ class LocalLeadRepository implements LeadRepository {
 
   list(): Lead[] {
     const stored = this.read();
-    const leads = stored ?? demoLeads();
+    const leads = stored ?? [];
     return [...leads].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   }
 

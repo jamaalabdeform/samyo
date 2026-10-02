@@ -14,17 +14,17 @@
 - **Zone de protection :** laisser autour du logo une marge au moins égale à la hauteur du symbole divisée par deux.
 - **Taille minimale :** 24 px de haut pour le logo complet. En dessous, utiliser le symbole seul.
 - **À ne pas faire :** déformer le logo, changer la couleur de la pastille, l'ombrer, le poser sur un fond turquoise.
-- **Camion :** logo blanc sur caisse bleu marine, ou logo bleu sur caisse blanche. Le symbole peut être agrandi sur les portes arrière.
+- **Camion :** logo blanc sur caisse bleu roi, ou logo bleu roi sur caisse blanche. Le symbole peut être agrandi sur les portes arrière.
 - Le lettrage est vectorisé : les fichiers s'ouvrent dans Illustrator, Figma ou chez un imprimeur sans qu'il faille installer de police. Pour le régénérer : `python3 scripts/build-logo.py`.
 
 ## Couleurs
 
 | Nom | Hex | Usage |
 |---|---|---|
-| Marine 900 | `#0B2545` | Sections sombres, pied de page, fond du symbole carré |
-| **Marine 700** | `#17467F` | **Couleur principale** : logo, boutons, liens, états actifs |
-| Marine 500 | `#2C67A8` | Icônes, focus |
-| Marine 100 | `#D4E3F2` | Fonds d'information |
+| Bleu roi profond | `#0E2563` | Sections sombres, pied de page, fond du symbole carré |
+| **Bleu roi** | `#1E4CC2` | **Couleur d'identité** : logo, barre supérieure, bande de réassurance, boutons, appel à l'action final |
+| Bleu 500 | `#3B6AE0` | Focus, survols |
+| Bleu 50 / 100 | `#EDF2FE` / `#D7E2FB` | Fonds teintés (témoignages, badges) |
 | **Lagon 400** | `#45C0B5` | **Accent** : pastille du logo, repères sur fond sombre |
 | Lagon 600 | `#0D7570` | Accent lisible sur fond clair (numéros de section) |
 | Lagon 100 | `#DDF3F0` | Badges légers |
@@ -33,7 +33,7 @@
 | Encre | `#121922` | Texte principal |
 | Pierre 600 | `#5F5C55` | Texte secondaire |
 
-Règle de dosage : environ 70 % de neutres, 25 % de bleu, 5 % de turquoise. Le turquoise ne sert jamais de fond de bouton ni de couleur de texte courant.
+Règle de dosage : le bleu roi est présent sur chaque écran (environ 35 %), le reste en neutres clairs, et le turquoise reste sous 5 %. Le turquoise ne sert jamais de fond de bouton ni de couleur de texte courant.
 
 Les couleurs fonctionnelles sont à part : **ambre** `#93560A` pour ce qui est à vérifier, **rouge** `#B42F2A` pour les erreurs.
 

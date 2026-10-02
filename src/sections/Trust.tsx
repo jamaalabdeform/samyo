@@ -15,7 +15,7 @@ export function Trust() {
     <section id="confiance" aria-labelledby="confiance-title" className="py-section">
       <div className="container-page grid gap-14 lg:grid-cols-12 lg:gap-10">
         <Reveal className="lg:col-span-5">
-          <MediaSlot id="protection" sizes="(min-width: 1024px) 40vw, 100vw" className="aspect-[4/5] rounded-[var(--radius-lg)] lg:sticky lg:top-28" />
+          <MediaSlot id="protection" sizes="(min-width: 1024px) 40vw, 100vw" className="aspect-[4/5] rounded-[var(--radius-lg)] lg:sticky lg:top-36" />
         </Reveal>
 
         <div className="lg:col-span-6 lg:col-start-7">

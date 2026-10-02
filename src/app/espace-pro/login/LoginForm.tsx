@@ -24,7 +24,6 @@ export function LoginForm({ next }: { next: string }) {
         <Button type="submit" size="lg" className="mt-6 w-full" disabled={pending} arrow>
           Entrer
         </Button>
-        <p className="mt-6 text-center text-xs text-stone-500">Démo — code : samyo-demo</p>
       </form>
     </main>
   );

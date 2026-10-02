@@ -3,7 +3,7 @@
  *
  * Aujourd'hui : push dans `window.dataLayer` (prêt pour Google Tag Manager →
  * GA4, Google Ads, Meta Pixel…) + compteur local pour l'entonnoir affiché
- * dans /admin-demo.
+ * dans /espace-pro.
  *
  * Demain : ajouter un adaptateur (Meta CAPI, PostHog, serveur interne) dans
  * `adapters` sans toucher aux composants.
