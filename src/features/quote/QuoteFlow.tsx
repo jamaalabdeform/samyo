@@ -196,7 +196,7 @@ export default function QuoteFlow({ params }: { params: InitialParams }) {
                     <IsoCargo filled={filledCells(volume, suggestVehicle(volume))} className="h-9 w-16" />
                     Volume estimé
                   </span>
-                  <VolumeCounter value={volume} className="font-display text-2xl [font-weight:400]" />
+                  <VolumeCounter value={volume} className="font-display text-2xl" />
                 </div>
               )}
 

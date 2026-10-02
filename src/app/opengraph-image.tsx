@@ -8,9 +8,9 @@ export const contentType = "image/png";
 export default function OgImage() {
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#0e2563", color: "#fbf9f4", padding: 80, fontFamily: "serif" }}>
+      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#0f1e4f", color: "#fbf9f4", padding: 80, fontFamily: "serif" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 20, fontSize: 30, letterSpacing: 8, fontFamily: "sans-serif" }}>
-          <div style={{ width: 16, height: 16, borderRadius: 99, background: "#45c0b5" }} />
+          <div style={{ width: 16, height: 16, borderRadius: 99, background: "#3ec3d3" }} />
           {company.wordmark} · {company.descriptor.toUpperCase()}
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>

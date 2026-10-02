@@ -20,8 +20,8 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <h1 id="hero-title" className="font-display mt-7 text-[clamp(2.75rem,1.6rem+2.9vw,4.25rem)] leading-[0.98] text-ink [font-weight:360]">
-              Un déménagement sans mauvaises <em className="text-marine-700 [font-weight:340]">surprises.</em>
+            <h1 id="hero-title" className="font-display mt-7 text-[clamp(2.75rem,1.6rem+2.9vw,4.25rem)] leading-[0.98] text-ink">
+              Un déménagement sans mauvaises <em className="text-marine-700">surprises.</em>
             </h1>
           </Reveal>
 

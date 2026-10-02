@@ -80,7 +80,7 @@ export function Transparency() {
                       <motion.span
                         animate={{ backgroundColor: done ? "var(--color-marine-700)" : "rgba(0,0,0,0)", scale: done && !reduce ? [0.8, 1] : 1 }}
                         transition={{ duration: 0.35 }}
-                        className={cn("grid size-5 shrink-0 place-items-center rounded-full", !done && "shadow-[inset_0_0_0_1px_rgb(20_26_34/0.2)]")}
+                        className={cn("grid size-5 shrink-0 place-items-center rounded-full", !done && "shadow-[inset_0_0_0_1px_rgb(16_24_48/0.2)]")}
                       >
                         {done && <Check className="size-3 text-paper" strokeWidth={2.5} />}
                       </motion.span>

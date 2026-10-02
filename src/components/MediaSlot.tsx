@@ -100,13 +100,13 @@ function Scene({ kind, label }: { kind: FallbackScene; label: string }) {
   switch (kind) {
     case "window-light":
       return (
-        <div className={common} {...a11y} style={{ background: "linear-gradient(168deg,#efe6d6 0%,#e3d5bf 55%,#cdbb9f 100%)" }}>
+        <div className={common} {...a11y} style={{ background: "linear-gradient(168deg,#e8eef7 0%,#d8e0ec 55%,#c2cddc 100%)" }}>
           {/* ombre portée d'une fenêtre à petits bois */}
           <div
             className="absolute -right-[12%] top-[8%] h-[78%] w-[70%] origin-top-right -skew-x-[18deg] opacity-80 blur-[6px]"
             style={{
               background:
-                "linear-gradient(90deg,transparent 0 47%,rgba(120,96,64,.18) 47% 53%,transparent 53%),linear-gradient(0deg,transparent 0 48%,rgba(120,96,64,.18) 48% 54%,transparent 54%),linear-gradient(180deg,rgba(255,250,238,.95),rgba(255,246,228,.55))",
+                "linear-gradient(90deg,transparent 0 47%,rgba(70,86,120,.16) 47% 53%,transparent 53%),linear-gradient(0deg,transparent 0 48%,rgba(70,86,120,.16) 48% 54%,transparent 54%),linear-gradient(180deg,rgba(255,255,255,.95),rgba(250,252,255,.55))",
             }}
           />
           {/* sol */}
@@ -123,7 +123,7 @@ function Scene({ kind, label }: { kind: FallbackScene; label: string }) {
       );
     case "morning":
       return (
-        <div className={common} {...a11y} style={{ background: "radial-gradient(120% 90% at 85% 10%,#fbf3e2 0%,#ecdfc8 38%,#d7c6ab 100%)" }}>
+        <div className={common} {...a11y} style={{ background: "radial-gradient(120% 90% at 85% 10%,#ffffff 0%,#e9eef6 38%,#d3dbe7 100%)" }}>
           <div className="absolute right-[10%] top-0 h-[70%] w-[34%] bg-gradient-to-b from-white/70 to-white/0 blur-2xl" />
           <div className="absolute inset-x-0 bottom-0 h-[22%] bg-gradient-to-b from-[#c6b192] to-[#b39c7b]" />
           <div className="absolute bottom-[3%] right-[4%] h-[14%] w-[44%] -skew-x-[34deg] bg-[#fbf1dd]/60 blur-lg" />

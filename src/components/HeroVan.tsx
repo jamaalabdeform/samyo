@@ -33,8 +33,8 @@ export function HeroVan({ className }: { className?: string }) {
               <feGaussianBlur stdDeviation="14" />
             </filter>
           </defs>
-          <ellipse cx="640" cy="585" rx="470" ry="46" transform="rotate(-13 640 585)" fill="#0e2563" opacity="0.26" filter="url(#van-ground)" />
-          <ellipse cx="640" cy="580" rx="400" ry="18" transform="rotate(-13 640 580)" fill="#0e2563" opacity="0.22" filter="url(#van-ground)" />
+          <ellipse cx="640" cy="585" rx="470" ry="46" transform="rotate(-13 640 585)" fill="#0f1e4f" opacity="0.26" filter="url(#van-ground)" />
+          <ellipse cx="640" cy="580" rx="400" ry="18" transform="rotate(-13 640 580)" fill="#0f1e4f" opacity="0.22" filter="url(#van-ground)" />
         </svg>
         <Image src={photo} alt={media.van.alt} width={1133} height={655} priority sizes="(min-width: 1024px) 32rem, 80vw" className="relative h-auto w-full" />
       </div>

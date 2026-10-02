@@ -137,7 +137,7 @@ export function InventoryPicker({ draft, update }: Props) {
                   onClick={() => setActiveKey(r.key)}
                   className={cn(
                     "flex h-11 shrink-0 items-center gap-2 rounded-full px-4 text-sm transition-[background-color,color,box-shadow] duration-200",
-                    selected ? "bg-ink text-paper" : "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(20_26_34/0.25)]",
+                    selected ? "bg-ink text-paper" : "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(16_24_48/0.25)]",
                   )}
                 >
                   <span className="font-medium">{r.label}</span>

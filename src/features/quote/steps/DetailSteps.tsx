@@ -208,7 +208,7 @@ function FloorPill({ active, onClick, children }: { active: boolean; onClick: ()
       onClick={onClick}
       className={cn(
         "num h-12 min-w-12 rounded-full px-4 text-[0.9375rem] transition-[background-color,color,box-shadow] duration-200 active:scale-95",
-        active ? "bg-marine-700 font-medium text-paper" : "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(20_26_34/0.25)]",
+        active ? "bg-marine-700 font-medium text-paper" : "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(16_24_48/0.25)]",
       )}
     >
       {children}
@@ -310,7 +310,7 @@ export function StepOptions({ draft, update }: Props) {
                 key={o.id}
                 className={cn(
                   "flex cursor-pointer items-center gap-3 rounded-[var(--radius-md)] bg-paper p-4 transition-shadow duration-200 has-[:focus-visible]:shadow-[0_0_0_2px_var(--color-ivory),0_0_0_4px_var(--color-marine-500)]",
-                  on ? "shadow-[0_0_0_1.5px_var(--color-marine-700)]" : "shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(20_26_34/0.25)]",
+                  on ? "shadow-[0_0_0_1.5px_var(--color-marine-700)]" : "shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(16_24_48/0.25)]",
                 )}
               >
                 <input
@@ -325,7 +325,7 @@ export function StepOptions({ draft, update }: Props) {
                 />
                 <span
                   aria-hidden
-                  className={cn("grid size-5 shrink-0 place-items-center rounded-[6px] transition-colors", on ? "bg-marine-700 text-paper" : "shadow-[inset_0_0_0_1.5px_rgb(20_26_34/0.25)]")}
+                  className={cn("grid size-5 shrink-0 place-items-center rounded-[6px] transition-colors", on ? "bg-marine-700 text-paper" : "shadow-[inset_0_0_0_1.5px_rgb(16_24_48/0.25)]")}
                 >
                   {on && (
                     <svg viewBox="0 0 12 12" className="size-3" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">

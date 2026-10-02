@@ -13,7 +13,7 @@ export function FinalCta() {
         <div className="absolute inset-0 bg-gradient-to-br from-marine-700 via-marine-700/90 to-marine-900/80" />
         <div className="container-page relative z-[2] py-28 text-center md:py-40">
           <Reveal>
-            <h2 id="cta-title" className="font-display mx-auto max-w-3xl text-5xl text-paper [font-weight:340]">
+            <h2 id="cta-title" className="font-display mx-auto max-w-3xl text-5xl text-paper">
               Votre nouveau départ commence ici.
             </h2>
           </Reveal>

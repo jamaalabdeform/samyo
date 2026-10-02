@@ -43,7 +43,7 @@ export function Header() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-[var(--duration-slow)] ease-[var(--ease-out)]",
-        scrolled || open ? "bg-ivory/85 shadow-[0_1px_0_rgb(20_26_34/0.07)] backdrop-blur-xl backdrop-saturate-150" : "bg-transparent",
+        scrolled || open ? "bg-ivory/85 shadow-[0_1px_0_rgb(16_24_48/0.07)] backdrop-blur-xl backdrop-saturate-150" : "bg-transparent",
       )}
     >
       {/* Barre d'identité bleu roi (desktop) */}

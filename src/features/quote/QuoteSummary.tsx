@@ -31,7 +31,7 @@ export function QuoteSummary({ draft }: { draft: QuoteDraft }) {
 
       <div className="mt-5 border-t border-ink/6 px-6 pt-5">
         <p className="eyebrow text-stone-600">Volume estimé</p>
-        <VolumeCounter value={volume} className={cn("font-display mt-1 text-[3.25rem] leading-none [font-weight:300]", volume === 0 && "text-stone-500")} />
+        <VolumeCounter value={volume} className={cn("font-display mt-1 text-[3.25rem] leading-none", volume === 0 && "text-stone-500")} />
       </div>
 
       <VolumeVisual volume={volume} vehicle={vehicle} className="mx-2 aspect-[16/11]" />

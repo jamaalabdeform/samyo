@@ -81,7 +81,7 @@ export function SimulatorTeaser() {
             <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
               <div>
                 <p className="eyebrow text-paper/55">Ordre de grandeur · {h.label}</p>
-                <p className="font-display num mt-3 whitespace-nowrap text-5xl text-paper [font-weight:300]" aria-live="polite">
+                <p className="font-display num mt-3 whitespace-nowrap text-5xl text-paper" aria-live="polite">
                   {lo}–{hi}
                   <span className="ml-2 text-2xl text-paper/60">m³</span>
                 </p>

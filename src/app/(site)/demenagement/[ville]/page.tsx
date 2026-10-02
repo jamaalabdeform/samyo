@@ -60,7 +60,7 @@ export default async function CityPage({ params }: { params: Promise<{ ville: st
                 <li aria-current="page">Déménagement à {loc.name}</li>
               </ol>
             </nav>
-            <h1 className="font-display mt-8 text-5xl [font-weight:360]">
+            <h1 className="font-display mt-8 text-5xl">
               Déménager à {loc.name}, <em className="text-marine-700">sans improviser.</em>
             </h1>
             <p className="mt-7 max-w-xl text-lg text-stone-600">{c.intro}</p>

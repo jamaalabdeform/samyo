@@ -1,51 +1,52 @@
-# Charte graphique — SAMYO Déménagement & Transport
+# Charte graphique — SAMYO Déménagement & Transport (version 2)
+
+Planche visuelle : `docs/charte/charte-samyo.pdf` (et `.html`, `.png`). Fichiers logo : `public/brand/` et `docs/charte/`.
 
 ## Logo
 
-**Idée :** le « S » de SAMYO est tracé comme un **itinéraire**. Le cercle ouvert en bas à gauche est le point de départ, la pastille turquoise en haut à droite est l'arrivée. On lit à la fois l'initiale de la marque et le métier : emmener quelque chose d'un point A à un point B, proprement.
+Le « S » de SAMYO est tracé comme un **itinéraire** : départ (cercle ouvert) en bas à gauche, arrivée (pastille aqua) en haut à droite. De A à B, sans détour. Le dessin est inchangé depuis la version 1 ; seules les couleurs ont évolué.
 
 | Fichier | Usage |
 |---|---|
-| `public/brand/samyo-logo.svg` | Version principale (bleu sur fond clair) |
-| `public/brand/samyo-logo-blanc.svg` | Sur fond bleu marine, photo sombre, camion |
-| `public/brand/samyo-symbole.svg` | Symbole seul (signature d'e-mail, tampon) |
-| `public/brand/samyo-symbole-carre.svg` | Avatar réseaux sociaux, favicon, application |
+| `samyo-logo.svg` | Version principale (bleu sur fond clair) |
+| `samyo-logo-blanc.svg` | Sur fond bleu nuit, bleu SAMYO, photo sombre, camion |
+| `samyo-symbole.svg` | Symbole seul (signature d'e-mail, tampon) |
+| `samyo-symbole-carre.svg` | Avatar réseaux sociaux, favicon, application |
 
-- **Zone de protection :** laisser autour du logo une marge au moins égale à la hauteur du symbole divisée par deux.
-- **Taille minimale :** 24 px de haut pour le logo complet. En dessous, utiliser le symbole seul.
-- **À ne pas faire :** déformer le logo, changer la couleur de la pastille, l'ombrer, le poser sur un fond turquoise.
-- **Camion :** logo blanc sur caisse bleu roi, ou logo bleu roi sur caisse blanche. Le symbole peut être agrandi sur les portes arrière.
-- Le lettrage est vectorisé : les fichiers s'ouvrent dans Illustrator, Figma ou chez un imprimeur sans qu'il faille installer de police. Pour le régénérer : `python3 scripts/build-logo.py`.
+- **Zone de protection :** une marge égale à la moitié de la hauteur du symbole.
+- **Taille minimale :** 24 px de haut pour le logo complet, sinon symbole seul.
+- **À éviter :** déformer, ombrer, changer la couleur de la pastille, poser le logo bleu sur un fond aqua ou sur une photo chargée.
+- **Camion :** logo blanc sur caisse bleu SAMYO, ou logo bleu sur caisse blanche.
+- Lettrage vectorisé (Instrument Sans Semibold) : aucune police à installer. Régénération : `python3 scripts/build-logo.py`.
 
 ## Couleurs
 
+Un seul bleu (teinte ≈ 227°), décliné du clair au nuit : les tons ne se contredisent jamais. Les neutres sont légèrement bleutés pour le prolonger.
+
 | Nom | Hex | Usage |
 |---|---|---|
-| Bleu roi profond | `#0E2563` | Sections sombres, pied de page, fond du symbole carré |
-| **Bleu roi** | `#1E4CC2` | **Couleur d'identité** : logo, barre supérieure, bande de réassurance, boutons, appel à l'action final |
-| Bleu 500 | `#3B6AE0` | Focus, survols |
-| Bleu 50 / 100 | `#EDF2FE` / `#D7E2FB` | Fonds teintés (témoignages, badges) |
-| **Lagon 400** | `#45C0B5` | **Accent** : pastille du logo, repères sur fond sombre |
-| Lagon 600 | `#0D7570` | Accent lisible sur fond clair (numéros de section) |
-| Lagon 100 | `#DDF3F0` | Badges légers |
-| Ivoire | `#F5F4F0` | Fond de page |
-| Papier | `#FBFBF9` | Cartes, formulaires |
-| Encre | `#121922` | Texte principal |
-| Pierre 600 | `#5F5C55` | Texte secondaire |
+| **Bleu SAMYO** | `#2348C4` | **Couleur d'identité** : logo, boutons, bandeaux, barre supérieure |
+| Bleu nuit | `#0F1E4F` | Sections sombres, pied de page, symbole carré |
+| Bleu 800 | `#1A3699` | Survol des boutons |
+| Bleu 500 | `#4870EE` | Focus, liens au survol |
+| Bleu 100 / 50 | `#DDE6FD` / `#F0F4FF` | Fonds d'information, fonds teintés |
+| **Aqua** | `#3EC3D3` | Accent : pastille du logo, repères sur fond sombre |
+| Aqua lisible | `#0B7C8E` | Accent en texte sur fond clair |
+| Encre | `#101830` | Texte principal |
+| Ardoise | `#566075` | Texte secondaire |
+| Brume | `#F5F7FB` | Fond de page |
+| Blanc | `#FFFFFF` | Cartes, formulaires |
 
-Règle de dosage : le bleu roi est présent sur chaque écran (environ 35 %), le reste en neutres clairs, et le turquoise reste sous 5 %. Le turquoise ne sert jamais de fond de bouton ni de couleur de texte courant.
-
-Les couleurs fonctionnelles sont à part : **ambre** `#93560A` pour ce qui est à vérifier, **rouge** `#B42F2A` pour les erreurs.
+**Dosage :** neutres ≈ 65 %, bleu SAMYO ≈ 22 %, bleu nuit ≈ 8 %, aqua ≤ 5 % (jamais en aplat ni en fond de bouton).
+**Contrastes (WCAG AA) :** bleu SAMYO sur blanc 7,5:1 · ardoise 6,3:1 · aqua lisible 4,9:1.
+Couleurs fonctionnelles à part : ambre `#8F5200` (à vérifier), rouge `#B42F2A` (erreurs).
 
 ## Typographies
 
-- **Titres :** Newsreader (serif éditoriale, graisses 300 à 400). C'est elle qui donne au site un ton humain et posé.
-- **Texte et interface :** Instrument Sans (400 à 600), avec des chiffres tabulaires pour les volumes et les montants.
-- **Logo :** Instrument Sans Semibold, capitales espacées.
-
-Les deux polices sont libres de droits (SIL Open Font License).
+- **Titres : Bricolage Grotesque**, graisse 500–600, interlettrage −2 %. Formes ouvertes et douces : chaleureuse et sérieuse.
+- **Texte et interface : Figtree**, 400 pour le texte, 600 pour les boutons et libellés. Très lisible sur mobile.
+- Polices libres (SIL Open Font License), disponibles sur Google Fonts.
 
 ## Ton
 
-Simple, précis, rassurant. On parle comme un conseiller au téléphone, pas comme une plaquette publicitaire.
-À éviter : « révolutionnaire », « sans couture », « l'excellence au service de… », les superlatifs et les promesses chiffrées non vérifiées.
+Simple, précis, rassurant : on parle comme un conseiller au téléphone. À éviter : superlatifs, jargon, promesses chiffrées non vérifiées.

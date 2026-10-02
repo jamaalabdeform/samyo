@@ -5,18 +5,15 @@ import { AnalyticsBoot } from "@/components/AnalyticsBoot";
 import "./globals.css";
 
 const sans = localFont({
-  src: "../fonts/instrument-sans-latin-wght-normal.woff2",
-  variable: "--font-instrument",
-  weight: "400 700",
+  src: "../fonts/figtree-latin-wght-normal.woff2",
+  variable: "--font-figtree",
+  weight: "300 900",
   display: "swap",
 });
 
-const serif = localFont({
-  src: [
-    { path: "../fonts/newsreader-latin-opsz-normal.woff2", style: "normal" },
-    { path: "../fonts/newsreader-latin-opsz-italic.woff2", style: "italic" },
-  ],
-  variable: "--font-newsreader",
+const heading = localFont({
+  src: "../fonts/bricolage-grotesque-latin-standard-normal.woff2",
+  variable: "--font-bricolage",
   weight: "200 800",
   display: "swap",
 });
@@ -30,14 +27,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f5f4f0",
+  themeColor: "#f5f7fb",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={site.lang} className={`${sans.variable} ${serif.variable}`}>
+    <html lang={site.lang} className={`${sans.variable} ${heading.variable}`}>
       <body className="min-h-dvh">
         <a
           href="#contenu"

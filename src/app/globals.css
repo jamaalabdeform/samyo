@@ -2,8 +2,9 @@
 
 /* ═══════════════════════════════════════════════════════════════════════════
    NORDÉA — DESIGN TOKENS
-   Palette SAMYO : bleu marine de confiance, turquoise « lagon » en accent,
-   neutres légèrement chauds pour garder un rendu humain et non « SaaS ».
+   Palette SAMYO : un bleu unique décliné du clair au nuit, un aqua accordé
+   en accent ponctuel, des neutres bleutés. Titres Bricolage Grotesque,
+   texte Figtree : chaleureux et professionnels.
    Tous les composants consomment ces tokens via les utilitaires Tailwind.
    ═══════════════════════════════════════════════════════════════════════════ */
 
@@ -14,43 +15,44 @@
   --color-transparent: transparent;
   --color-current: currentColor;
 
-  --color-ivory: #f5f4f0;          /* fond de page — blanc chaud, très légèrement minéral */
-  --color-paper: #fbfbf9;          /* surfaces, cartes */
-  --color-stone-100: #ecebe6;
-  --color-stone-200: #dfddd6;
-  --color-stone-300: #c8c5bc;
-  --color-stone-500: #827e74;      /* décor uniquement (contraste < 4.5) */
-  --color-stone-600: #5f5c55;      /* texte secondaire — AA sur ivory */
+  /* Neutres légèrement bleutés : ils prolongent le bleu au lieu de le contrarier */
+  --color-ivory: #f5f7fb;          /* fond de page */
+  --color-paper: #ffffff;          /* cartes, formulaires */
+  --color-stone-100: #ebeff6;
+  --color-stone-200: #dce2ec;
+  --color-stone-300: #c3cbda;
+  --color-stone-500: #808a9e;      /* décor uniquement (contraste < 4.5) */
+  --color-stone-600: #566075;      /* texte secondaire — AA */
 
-  --color-ink: #121922;            /* texte principal, noir bleuté */
-  --color-ink-2: #323a45;
+  --color-ink: #101830;            /* texte principal, encre bleutée */
+  --color-ink-2: #2c3550;
 
-  /* Bleu roi SAMYO — couleur d'identité : CTA, bandeaux, sections fortes */
-  --color-marine-50: #edf2fe;
-  --color-marine-100: #d7e2fb;
-  --color-marine-300: #94aef1;
-  --color-marine-500: #3b6ae0;
-  --color-marine-700: #1e4cc2;     /* bleu roi */
-  --color-marine-800: #173b98;
-  --color-marine-900: #0e2563;     /* bleu roi profond */
+  /* Bleu SAMYO — une seule teinte (≈ 227°), déclinée du clair au profond */
+  --color-marine-50: #f0f4ff;
+  --color-marine-100: #dde6fd;
+  --color-marine-300: #a3b8f6;
+  --color-marine-500: #4870ee;     /* survols, focus */
+  --color-marine-700: #2348c4;     /* bleu SAMYO : logo, boutons, bandeaux */
+  --color-marine-800: #1a3699;
+  --color-marine-900: #0f1e4f;     /* bleu nuit : sections sombres, pied de page */
 
-  /* Turquoise lagon — accent lumineux, utilisé avec parcimonie */
-  --color-lagon-100: #ddf3f0;
-  --color-lagon-300: #92dcd3;
-  --color-lagon-400: #45c0b5;
-  --color-lagon-600: #0d7570;      /* turquoise lisible sur fond clair (AA) */
+  /* Aqua — accent ponctuel, accordé au bleu (pastille du logo) */
+  --color-lagon-100: #def6f9;
+  --color-lagon-300: #8fdde7;
+  --color-lagon-400: #3ec3d3;
+  --color-lagon-600: #0b7c8e;      /* aqua lisible sur fond clair (AA) */
 
   /* Attention (contraintes à vérifier, objets spécifiques) */
-  --color-alert-50: #fbf2e1;
-  --color-alert-600: #93560a;
+  --color-alert-50: #fff4e0;
+  --color-alert-600: #8f5200;
 
   --color-danger: #b42f2a;
   --color-danger-50: #fbeceb;
   --color-success: #1f7a5a;
 
   /* ── Typographie ──────────────────────────────────────── */
-  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-bricolage), var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
 
   --text-2xs: 0.6875rem;
   --text-2xs--line-height: 1rem;
@@ -92,10 +94,10 @@
   --radius-arch: 999px 999px 1.25rem 1.25rem;
 
   /* ── Ombres (chaudes, jamais grises) ──────────────────── */
-  --shadow-hairline: 0 0 0 1px rgb(20 26 34 / 0.08);
-  --shadow-soft: 0 1px 2px rgb(20 30 45 / 0.05), 0 4px 16px -4px rgb(20 30 45 / 0.08);
-  --shadow-lift: 0 2px 4px rgb(20 30 45 / 0.05), 0 18px 40px -12px rgb(20 30 45 / 0.18);
-  --shadow-float: 0 30px 80px -24px rgb(14 37 99 / 0.35);
+  --shadow-hairline: 0 0 0 1px rgb(16 24 48 / 0.08);
+  --shadow-soft: 0 1px 2px rgb(16 24 48 / 0.05), 0 4px 16px -4px rgb(16 24 48 / 0.08);
+  --shadow-lift: 0 2px 4px rgb(16 24 48 / 0.05), 0 18px 40px -12px rgb(16 24 48 / 0.18);
+  --shadow-float: 0 30px 80px -24px rgb(15 30 79 / 0.35);
 
   /* ── Mouvement ────────────────────────────────────────── */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -130,7 +132,7 @@
     background: var(--color-ivory);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv11";
+    font-feature-settings: "kern";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -186,10 +188,11 @@
 
 /* Titres éditoriaux */
 @utility font-display {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-optical-sizing: auto;
-  font-weight: 380;
-  letter-spacing: var(--tracking-tight);
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  & em { font-style: normal; }
 }
 
 /* Étiquettes / surtitres */

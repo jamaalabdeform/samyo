@@ -30,7 +30,7 @@ export function Recap({ draft, onEdit }: { draft: QuoteDraft; onEdit: (s: StepId
         </div>
         <div className="relative z-[2] mt-6 flex flex-wrap items-end gap-x-8 gap-y-3">
           <p>
-            <span className="font-display num text-5xl [font-weight:300]">{formatNumber1(volume)}</span>
+            <span className="font-display num text-5xl">{formatNumber1(volume)}</span>
             <span className="ml-1.5 text-lg text-paper/60">m³</span>
           </p>
           <p className="pb-1.5 text-sm text-paper/65">

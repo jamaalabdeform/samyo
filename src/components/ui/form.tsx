@@ -10,7 +10,7 @@ import { spring } from "@/config/motion";
 
 export const inputClass =
   "h-14 w-full rounded-[var(--radius-md)] bg-paper px-4 text-[1rem] text-ink shadow-[var(--shadow-hairline)] outline-none transition-[box-shadow,background-color] duration-200 placeholder:text-stone-500 " +
-  "hover:shadow-[0_0_0_1px_rgb(20_26_34/0.2)] focus:bg-white focus:shadow-[0_0_0_1.5px_var(--color-marine-500),0_0_0_5px_rgb(30_76_194/0.14)] focus-visible:outline-none " +
+  "hover:shadow-[0_0_0_1px_rgb(16_24_48/0.2)] focus:bg-white focus:shadow-[0_0_0_1.5px_var(--color-marine-500),0_0_0_5px_rgb(35_72_196/0.14)] focus-visible:outline-none " +
   "aria-[invalid=true]:shadow-[0_0_0_1.5px_var(--color-danger)]";
 
 export const TextField = forwardRef<
@@ -77,7 +77,7 @@ export function Segmented<T extends string>({
               className={cn(
                 "relative flex min-h-12 cursor-pointer select-none items-center justify-center rounded-full px-4 py-2 text-center text-[0.9375rem] leading-tight transition-[background-color,color,box-shadow] duration-200",
                 "has-[:focus-visible]:shadow-[0_0_0_2px_var(--color-ivory),0_0_0_4px_var(--color-marine-500)]",
-                checked ? "bg-marine-700 font-medium text-paper" : "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(20_26_34/0.25)]",
+                checked ? "bg-marine-700 font-medium text-paper" : "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(16_24_48/0.25)]",
               )}
             >
               <input type="radio" name={name} value={o.value} checked={checked} onChange={() => onChange(o.value)} className="sr-only" />
@@ -170,8 +170,8 @@ export function ChoiceCard({
       className={cn(
         "relative flex w-full flex-col items-start rounded-[var(--radius-md)] p-5 text-left transition-[background-color,box-shadow,color] duration-200",
         selected
-          ? "bg-marine-700 text-paper shadow-[0_10px_30px_-12px_rgb(14_37_99/0.55)]"
-          : "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(20_26_34/0.22),var(--shadow-soft)]",
+          ? "bg-marine-700 text-paper shadow-[0_10px_30px_-12px_rgb(15_30_79/0.55)]"
+          : "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(16_24_48/0.22),var(--shadow-soft)]",
         className,
       )}
     >
@@ -179,7 +179,7 @@ export function ChoiceCard({
         aria-hidden
         className={cn(
           "absolute right-4 top-4 grid size-5 place-items-center rounded-full transition-all duration-200",
-          selected ? "bg-paper text-marine-700" : "shadow-[inset_0_0_0_1.5px_rgb(20_26_34/0.18)]",
+          selected ? "bg-paper text-marine-700" : "shadow-[inset_0_0_0_1.5px_rgb(16_24_48/0.18)]",
         )}
       >
         {selected && <Check className="size-3" strokeWidth={3} />}
@@ -213,7 +213,7 @@ export function Checkbox({
         aria-hidden
         className={cn(
           "mt-0.5 grid size-5 shrink-0 place-items-center rounded-[6px] transition-all duration-200 peer-focus-visible:shadow-[0_0_0_2px_var(--color-ivory),0_0_0_4px_var(--color-marine-500)]",
-          checked ? "bg-marine-700 text-paper" : cn("bg-paper", invalid ? "shadow-[inset_0_0_0_1.5px_var(--color-danger)]" : "shadow-[inset_0_0_0_1.5px_rgb(20_26_34/0.25)] group-hover:shadow-[inset_0_0_0_1.5px_rgb(20_26_34/0.45)]"),
+          checked ? "bg-marine-700 text-paper" : cn("bg-paper", invalid ? "shadow-[inset_0_0_0_1.5px_var(--color-danger)]" : "shadow-[inset_0_0_0_1.5px_rgb(16_24_48/0.25)] group-hover:shadow-[inset_0_0_0_1.5px_rgb(16_24_48/0.45)]"),
         )}
       >
         {checked && <Check className="size-3.5" strokeWidth={3} />}
