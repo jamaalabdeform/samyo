@@ -16,7 +16,7 @@ export function Hero() {
           <Reveal>
             <p className="eyebrow flex items-center gap-3 text-stone-600">
               <span aria-hidden className="size-1.5 rounded-full bg-lagon-600" />
-              Déménagement & transport · Montreuil
+              Déménagement & transport · Île-de-France et toute la France
             </p>
           </Reveal>
 

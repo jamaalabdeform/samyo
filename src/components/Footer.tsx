@@ -22,6 +22,7 @@ export function Footer() {
               <br />
               {[company.address.postalCode, company.address.city].filter(Boolean).join(" ")}
             </p>
+            <p className="text-paper/65">{company.serviceArea.display}</p>
             <p className="pt-2">
               <a href={telHref} className="num underline-offset-4 hover:underline">
                 {company.phone.display}

@@ -4,6 +4,7 @@ Mise à jour du 14/10/2026. Chaque ligne indique où l'information sera branché
 
 ## Déjà reçu
 - Nom commercial SAMYO Déménagement, interlocuteur Chafi Ouchari
+- Zone : principalement Île-de-France, et toute la France (`company.serviceArea`)
 - SIREN 519 804 330 (EI de Chafi Ouchari, micro-entreprise, APE 4942Z), confirmé inchangé par le client
 - Adresse : 17 place Général de Gaulle, Montreuil
 - Téléphone et WhatsApp : 07 44 63 02 06
@@ -22,7 +23,7 @@ Mise à jour du 14/10/2026. Chaque ligne indique où l'information sera branché
 
 ## Contenu à valider
 - [ ] Horaires de joignabilité → `company.hours` (format prévu dans `company.ts`)
-- [ ] Zones d'intervention réelles (villes, départements, longue distance, étranger ?) → `src/data/locations.ts`
+- [ ] Pages locales SEO : villes prioritaires d'Île-de-France à mettre en avant, avec contenu réel → `src/data/locations.ts`
 - [ ] Services réellement proposés et ceux à retirer (garde-meubles, monte-meubles, emballage…) → `src/data/services.ts`
 - [ ] Formules (contenu exact, inclus/exclu) → `formulas`, options → `quoteOptions`
 - [ ] Objets acceptés / refusés (piano, coffre-fort…) → `specialItems`

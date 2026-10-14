@@ -14,9 +14,9 @@ export const site = {
 
   seo: {
     titleTemplate: "%s · SAMYO Déménagement",
-    defaultTitle: "SAMYO Déménagement & Transport — Montreuil",
+    defaultTitle: "SAMYO Déménagement & Transport — Île-de-France et toute la France",
     description:
-      "SAMYO Déménagement, basé à Montreuil : déménagement et transport de mobilier. Calculez votre volume en quelques minutes et recevez un devis clair, vérifié par un conseiller.",
+      "SAMYO Déménagement, basé à Montreuil : déménagement et transport de mobilier en Île-de-France et partout en France. Calculez votre volume en quelques minutes et recevez un devis clair, vérifié par un conseiller.",
   },
 
   /** Libellés des CTA — centralisés pour tests A/B futurs */

@@ -107,7 +107,7 @@ export function StepAccess({ draft, update, which }: Props & { which: "origin" |
           label="Code postal"
           inputMode="numeric"
           maxLength={5}
-          placeholder="59000"
+          placeholder="93100"
           autoComplete={which === "origin" ? "postal-code" : "off"}
           value={a.postalCode}
           onChange={(e) => set({ postalCode: e.target.value.replace(/\D/g, "") })}

@@ -12,6 +12,10 @@ export interface FaqItem {
 
 export const faq: FaqItem[] = [
   {
+    q: "Où intervenez-vous ?",
+    a: "Nous sommes basés à Montreuil et intervenons principalement en Île-de-France : Paris, Seine-Saint-Denis, Val-de-Marne et toute la région. Nous réalisons aussi des déménagements et des transports partout en France, au départ ou à destination de l'Île-de-France comme d'une région à l'autre.",
+  },
+  {
     q: "Comment calculer le volume de mon déménagement ?",
     a: "Le plus fiable est de passer pièce par pièce. Notre simulateur liste le mobilier courant avec un volume indicatif pour chaque meuble, et additionne au fur et à mesure. Si vous manquez de temps, vous pouvez partir d'un inventaire type selon votre logement, puis l'ajuster. Un conseiller vérifie ensuite l'estimation avec vous avant tout devis définitif.",
   },

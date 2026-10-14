@@ -29,7 +29,13 @@ export const company = {
   wordmark: "SAMYO",
   descriptor: "Déménagement & Transport",
   tagline: "De A à B, sans détour.",
-  baseline: "Déménagement et transport de mobilier, depuis Montreuil.",
+  baseline: "Déménagement et transport de mobilier en Île-de-France et partout en France.",
+
+  /** Zone d'intervention confirmée par le client le 14/10/2026 */
+  serviceArea: {
+    display: "Principalement en Île-de-France, et partout en France",
+    short: "Île-de-France · toute la France",
+  },
 
   /** Interlocuteur (affiché uniquement dans les mentions légales) */
   contactPerson: { firstName: "Chafi", lastName: "Ouchari" },

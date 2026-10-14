@@ -47,7 +47,7 @@ export function organizationJsonLd() {
       addressLocality: a.city,
       addressCountry: a.countryCode,
     },
-    // Horaires et zones publiés seulement une fois confirmés par le client
+    // Horaires publiés seulement une fois confirmés par le client ; zone confirmée le 14/10/2026
     ...(company.hours
       ? {
           openingHoursSpecification: company.hours.schema.map((h) => ({
@@ -58,7 +58,11 @@ export function organizationJsonLd() {
           })),
         }
       : {}),
-    ...(publishedLocations.length ? { areaServed: publishedLocations.map((l) => ({ "@type": "City", name: l.name })) } : {}),
+    areaServed: [
+      { "@type": "AdministrativeArea", name: "Île-de-France" },
+      { "@type": "Country", name: "France" },
+      ...publishedLocations.map((l) => ({ "@type": "City", name: l.name })),
+    ],
     sameAs: Object.values(company.social).filter(Boolean),
   };
 }

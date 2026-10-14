@@ -81,7 +81,7 @@ export const services: Service[] = [
   {
     id: "longue-distance",
     title: "Longue distance",
-    text: "Pour les trajets plus longs, un interlocuteur unique suit votre dossier du départ à la livraison.",
+    text: "Depuis l'Île-de-France vers toute la France, ou d'une région à l'autre : un interlocuteur unique suit votre dossier du départ à la livraison.",
     icon: "route",
   },
   {
