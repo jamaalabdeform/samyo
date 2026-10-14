@@ -17,6 +17,7 @@ export function Reassurance() {
       <ul className="mx-auto grid max-w-[var(--container-page)] grid-cols-1 gap-px bg-paper/15 sm:grid-cols-2 lg:grid-cols-4">
         {points.map((p, i) => (
           <Reveal as="li" key={p.title} delay={i * 0.05} className="bg-marine-700 px-[var(--spacing-gutter)] py-7 sm:py-9 lg:px-8">
+            <span aria-hidden className="mb-3 block h-0.5 w-5 rounded-full bg-pistache-400" />
             <p className="text-[0.9375rem] font-semibold text-paper">{p.title}</p>
             <p className="mt-1.5 text-sm text-paper/75">{p.text}</p>
           </Reveal>

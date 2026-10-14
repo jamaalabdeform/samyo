@@ -7,7 +7,7 @@ import { WhatsAppIcon, WhatsAppLink } from "./WhatsAppLink";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-marine-900 text-paper">
+    <footer className="border-t-4 border-pistache-400 bg-marine-900 text-paper">
       <div className="container-page grid gap-14 pb-10 pt-20 md:grid-cols-12">
         <div className="md:col-span-4">
           <Logo tone="light" />

@@ -15,7 +15,7 @@ export function Hero() {
         <div className="lg:col-span-6 lg:pr-6">
           <Reveal>
             <p className="eyebrow flex items-center gap-3 text-stone-600">
-              <span aria-hidden className="size-1.5 rounded-full bg-lagon-600" />
+              <span aria-hidden className="size-2 rounded-full bg-pistache-400" />
               Déménagement & transport · Île-de-France et toute la France
             </p>
           </Reveal>

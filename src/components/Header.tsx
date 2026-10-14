@@ -47,7 +47,7 @@ export function Header() {
       )}
     >
       {/* Barre d'identité bleu roi (desktop) */}
-      <div className="hidden bg-marine-700 text-paper lg:block">
+      <div className="hidden border-b-2 border-pistache-400 bg-marine-700 text-paper lg:block">
         <div className="container-page flex h-9 items-center justify-between text-xs">
           <p className="text-paper/85">
             {company.descriptor} · {company.address.city}

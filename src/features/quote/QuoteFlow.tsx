@@ -310,8 +310,8 @@ function FlowHeader({ index, steps }: { index: number; steps: StepDef[] }) {
           </Link>
         </div>
       </div>
-      <div className="h-[2px] bg-ink/6" role="progressbar" aria-label="Avancement de la demande" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)}>
-        <motion.div className="h-full origin-left bg-marine-700" initial={false} animate={{ scaleX: progress }} transition={{ duration: 0.6, ease: ease.out }} />
+      <div className="h-[3px] bg-ink/6" role="progressbar" aria-label="Avancement de la demande" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)}>
+        <motion.div className="h-full origin-left bg-gradient-to-r from-marine-700 to-pistache-400" initial={false} animate={{ scaleX: progress }} transition={{ duration: 0.6, ease: ease.out }} />
       </div>
     </header>
   );

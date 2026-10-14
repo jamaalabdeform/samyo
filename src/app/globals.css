@@ -42,6 +42,13 @@
   --color-lagon-400: #3ec3d3;
   --color-lagon-600: #0b7c8e;      /* aqua lisible sur fond clair (AA) */
 
+  /* Pistache — couleur demandée par le client, en liserés et repères discrets.
+     Jamais en aplat ni en texte sur fond clair (sauf pistache-700, AA). */
+  --color-pistache-100: #eef6e4;
+  --color-pistache-300: #c2e0a3;
+  --color-pistache-400: #93c572;   /* pistache */
+  --color-pistache-700: #4b7429;   /* pistache lisible sur fond clair (AA) */
+
   /* Attention (contraintes à vérifier, objets spécifiques) */
   --color-alert-50: #fff4e0;
   --color-alert-600: #8f5200;

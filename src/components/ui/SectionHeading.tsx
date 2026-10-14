@@ -30,7 +30,7 @@ export function SectionHeading({
     <Reveal className={cn("max-w-3xl", align === "center" && "mx-auto text-center", className)}>
       <p className={cn("eyebrow flex items-center gap-3", align === "center" && "justify-center", dark ? "text-marine-300" : "text-stone-600")}>
         {index && <span className={cn("num", dark ? "text-lagon-300" : "text-marine-700")}>{index}</span>}
-        {index && <span aria-hidden className={cn("h-px w-6", dark ? "bg-paper/25" : "bg-marine-700/35")} />}
+        {index && <span aria-hidden className="h-0.5 w-6 rounded-full bg-pistache-400" />}
         <span>{eyebrow}</span>
       </p>
       <h2 id={id} className={cn("font-display mt-5 text-4xl", dark ? "text-paper" : "text-ink")}>

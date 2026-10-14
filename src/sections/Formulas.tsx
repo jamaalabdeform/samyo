@@ -33,7 +33,7 @@ export function Formulas() {
             >
               <div className="flex items-center justify-between">
                 <h3 className="eyebrow">{f.name}</h3>
-                {f.featured && <span className="rounded-full bg-paper/12 px-3 py-1 text-xs text-paper/85">Le plus demandé</span>}
+                {f.featured && <span className="rounded-full bg-pistache-400 px-3 py-1 text-xs font-medium text-marine-900">Le plus demandé</span>}
               </div>
               <p className={cn("font-display mt-8 text-2xl leading-tight lg:text-[1.75rem]", f.featured ? "text-paper" : "text-ink")}>{f.promise}</p>
               <p className={cn("mt-4 text-[0.9375rem]", f.featured ? "text-paper/70" : "text-stone-600")}>{f.description}</p>
@@ -41,7 +41,7 @@ export function Formulas() {
               <ul className={cn("mt-8 space-y-3 border-t pt-8 text-[0.9375rem]", f.featured ? "border-paper/15" : "border-ink/8")}>
                 {f.includes.map((line) => (
                   <li key={line} className="flex gap-3">
-                    <Check className={cn("mt-1 size-4 shrink-0", f.featured ? "text-lagon-400" : "text-marine-500")} strokeWidth={2} aria-hidden />
+                    <Check className={cn("mt-1 size-4 shrink-0", f.featured ? "text-pistache-300" : "text-marine-500")} strokeWidth={2} aria-hidden />
                     <span>{line}</span>
                   </li>
                 ))}
