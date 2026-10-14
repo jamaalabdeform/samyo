@@ -21,7 +21,8 @@ export default function Confidentialite() {
       <h2>Transmission</h2>
       <p>
         Votre demande est envoyée par e-mail à {company.name}. Si vous choisissez de nous écrire sur WhatsApp, l&apos;échange se déroule sur ce service,
-        selon ses propres conditions.
+        selon ses propres conditions. Les messages échangés dans la fenêtre de discussion du site sont traités par Jawabot, l&apos;assistant de{" "}
+        {company.name}, afin de répondre à vos questions et de préparer votre demande.
       </p>
       <h2>Durée de conservation</h2>
       <p>Les informations sont conservées le temps nécessaire au traitement de votre demande et au suivi de votre déménagement.</p>

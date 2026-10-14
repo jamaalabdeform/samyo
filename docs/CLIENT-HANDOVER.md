@@ -49,7 +49,8 @@ Aperçu sans envoyer de demande (développement) : `/api/dev/email-preview` (dev
 
 - Tous les boutons passent par `src/lib/whatsapp.ts` : lien `wa.me` vers le numéro de SAMYO, avec un message pré-rempli selon l'endroit (devis, rappel, suivi d'une demande avec sa référence…).
 - Changer de numéro : `NEXT_PUBLIC_WHATSAPP_NUMBER=+33…` (ou `company.ts`).
-- **Jawabot** : s'il répond sur le même numéro WhatsApp Business, rien à changer dans le site. S'il fournit un lien dédié, le mettre dans `NEXT_PUBLIC_JAWABOT_URL` : tous les boutons l'utiliseront. Ne pas annoncer d'assistant automatique sur le site tant qu'il n'est pas actif.
+- **Widget Jawabot** : la fenêtre de discussion est chargée sur les pages publiques et le calculateur (`src/components/JawabotWidget.tsx`, script `jawabot.stipway.com/widget.js`). Clé : `NEXT_PUBLIC_JAWABOT_WIDGET_KEY` (valeur par défaut intégrée), `off` pour le désactiver. Il n'est pas chargé dans `/espace-pro`.
+- **Jawabot sur WhatsApp** : s'il répond sur le même numéro WhatsApp Business, rien à changer dans le site. S'il fournit un lien dédié, le mettre dans `NEXT_PUBLIC_JAWABOT_URL` : tous les boutons l'utiliseront. Ne pas annoncer d'assistant automatique sur le site tant qu'il n'est pas actif.
 
 ## 5. Photos
 
@@ -90,6 +91,7 @@ Commandes : `npm run dev` · `npm run build` · `npm run lint` · `npm run typec
 | `NEXT_PUBLIC_CONTACT_EMAIL` | non | remplace l'e-mail public |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | non | remplace le numéro WhatsApp |
 | `NEXT_PUBLIC_JAWABOT_URL` | non | lien Jawabot dédié |
+| `NEXT_PUBLIC_JAWABOT_WIDGET_KEY` | non | clé du widget Jawabot (`off` pour le masquer) |
 | `ADMIN_ACCESS_CODE` | si `/espace-pro` est utilisé | code d'accès au module démo |
 | `LEAD_WEBHOOK_URL` | non | copie JSON de chaque demande (Make, n8n, futur CRM) |
 | `NEXT_PUBLIC_GTM_ID` | non | Google Tag Manager (bandeau de consentement requis) |

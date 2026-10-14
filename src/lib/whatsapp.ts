@@ -10,8 +10,8 @@ import { company } from "@/config/company";
  * WhatsApp Business, rien ne change dans le site. Si Jawabot fournit plus tard
  * un lien ou un widget dédié, renseigner NEXT_PUBLIC_JAWABOT_URL : tous les
  * boutons l'utiliseront automatiquement (le message reste transmis en `text`).
- * Ne pas annoncer sur le site qu'un assistant automatique répond tant que ce
- * n'est pas le cas.
+ * Le widget de discussion Jawabot est par ailleurs intégré sur le site
+ * (src/components/JawabotWidget.tsx).
  */
 
 export type WhatsAppContext = "general" | "estimate" | "callback" | "quote-followup" | "transport" | "question";
