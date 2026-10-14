@@ -9,7 +9,8 @@ export default function MentionsLegales() {
   const l = company.legal;
   const ids = [
     l.legalName && l.legalForm ? `${l.legalName} — ${l.legalForm}` : l.legalName,
-    l.siret && `SIRET : ${l.siret}`,
+    l.siret ? `SIRET : ${l.siret}` : l.siren && `SIREN : ${l.siren}`,
+    l.ape && `Code APE : ${l.ape}`,
     l.rcs && `RCS : ${l.rcs}`,
     l.vat && `TVA intracommunautaire : ${l.vat}`,
     l.transportRegistry,

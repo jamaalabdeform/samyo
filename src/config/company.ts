@@ -8,8 +8,9 @@
  *
  *  Règle : une valeur inconnue vaut `null` et n'est PAS affichée. Ne jamais
  *  inventer SIRET, RCS, TVA, assurance, horaires, zones, chiffres ou avis.
- *  Le document administratif reçu (cessation d'EI du 21/12/2023) ne doit pas
- *  servir de source pour les mentions légales actuelles.
+ *  SIREN : confirmé par le client le 14/10/2026 (identifiant de l'entreprise
+ *  individuelle de Chafi Ouchari, inchangé ; seul le nom commercial devient
+ *  SAMYO). Le SIRET de l'établissement de Montreuil reste à confirmer.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
@@ -75,8 +76,12 @@ export const company = {
    * récent (voir docs/CLIENT-HANDOVER.md).
    */
   legal: {
-    legalName: null as string | null,
-    legalForm: null as string | null,
+    legalName: "Chafi Ouchari, entrepreneur individuel (EI)" as string | null,
+    legalForm: "micro-entreprise" as string | null,
+    siren: "519 804 330" as string | null,
+    /** Code APE 4942Z : services de déménagement */
+    ape: "4942Z" as string | null,
+    /** SIRET = SIREN + NIC de l'établissement actuel : à confirmer (avis de situation SIRENE) */
     siret: null as string | null,
     rcs: null as string | null,
     vat: null as string | null,

@@ -4,13 +4,14 @@ Mise à jour du 14/10/2026. Chaque ligne indique où l'information sera branché
 
 ## Déjà reçu
 - Nom commercial SAMYO Déménagement, interlocuteur Chafi Ouchari
+- SIREN 519 804 330 (EI de Chafi Ouchari, micro-entreprise, APE 4942Z), confirmé inchangé par le client
 - Adresse : 17 place Général de Gaulle, Montreuil
 - Téléphone et WhatsApp : 07 44 63 02 06
 - E-mail : oucharichafi@gmail.com (provisoire)
 - Photos de camions (4 utilisées après floutage des plaques et lettrages)
 
 ## Prioritaire avant mise en production
-- [ ] **Extrait d'immatriculation récent** (Kbis ou avis de situation SIRENE) : raison sociale, forme juridique, SIRET, RCS, TVA → `company.legal`. Le document de cessation de 2023 ne peut pas servir de source.
+- [ ] **SIRET** de l'établissement de Montreuil (SIREN 519 804 330 confirmé par le client, nom commercial SAMYO) et n° de TVA s'il y en a un → `company.legal`. Vérifier sur annuaire-entreprises.data.gouv.fr que l'entreprise apparaît **active** : le document de décembre 2023 est une cessation, une reprise d'activité doit avoir été déclarée.
 - [ ] Inscription au registre des transporteurs / capacité de transport (si applicable) → `company.legal.transportRegistry`
 - [ ] Assurance : assureur, type de contrat → `company.legal.insurance`
 - [ ] **Code postal** de l'adresse de Montreuil → `company.address.postalCode`

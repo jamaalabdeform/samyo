@@ -25,7 +25,8 @@ Un seul fichier : **`src/config/company.ts`**. Tout le site (en-tête, pied de p
 | Téléphone / WhatsApp | 07 44 63 02 06 | reçu |
 | E-mail | oucharichafi@gmail.com | provisoire, en attendant une adresse au nom de domaine |
 | Horaires | — | non communiqués, rien n'est affiché |
-| SIRET, RCS, TVA, assurance | — | **à fournir** (extrait récent), rien n'est affiché |
+| SIREN / forme | 519 804 330 · Chafi Ouchari, EI, micro-entreprise · APE 4942Z | confirmé par le client, affiché |
+| SIRET, TVA, assurance | — | **à fournir**, rien n'est affiché |
 
 Règle : une valeur inconnue reste à `null` et n'apparaît pas sur le site. Ne jamais compléter « au jugé ».
 Quand les informations légales sont complètes, passer `provisional` à `false` dans `company.ts` (les pages légales deviennent indexables).
