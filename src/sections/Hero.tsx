@@ -15,14 +15,14 @@ export function Hero() {
         <div className="lg:col-span-6 lg:pr-6">
           <Reveal>
             <p className="eyebrow flex items-center gap-3 text-stone-600">
-              <span aria-hidden className="size-2 rounded-full bg-pistache-400" />
+              <span aria-hidden className="size-2.5 rounded-full bg-pistache-400" />
               Déménagement & transport · Île-de-France et toute la France
             </p>
           </Reveal>
 
           <Reveal delay={0.06}>
             <h1 id="hero-title" className="font-display mt-7 text-[clamp(2.75rem,1.6rem+2.9vw,4.25rem)] leading-[0.98] text-ink">
-              Un déménagement sans mauvaises <em className="text-marine-700">surprises.</em>
+              Un déménagement sans mauvaises <em className="bg-[linear-gradient(transparent_68%,var(--color-pistache-300)_68%,var(--color-pistache-300)_92%,transparent_92%)] text-marine-700 [box-decoration-break:clone]">surprises.</em>
             </h1>
           </Reveal>
 

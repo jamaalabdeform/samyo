@@ -17,7 +17,7 @@ export function FinalCta() {
             <h2 id="cta-title" className="font-display mx-auto max-w-3xl text-5xl text-paper">
               Votre nouveau départ commence ici.
             </h2>
-            <span aria-hidden className="mx-auto mt-7 block h-1 w-14 rounded-full bg-pistache-400" />
+            <span aria-hidden className="mx-auto mt-8 block h-1.5 w-24 rounded-full bg-pistache-400" />
           </Reveal>
           <Reveal delay={0.08}>
             <p className="mx-auto mt-6 max-w-md text-lg text-paper/70">Quelques minutes pour décrire votre projet. Un conseiller s&apos;occupe du reste.</p>

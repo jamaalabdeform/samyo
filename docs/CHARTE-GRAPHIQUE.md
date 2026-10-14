@@ -55,7 +55,7 @@ Simple, précis, rassurant : on parle comme un conseiller au téléphone. À év
 
 | Token | Valeur | Usage |
 |---|---|---|
-| `pistache-400` | `#93C572` | liserés et repères : bord de la barre du haut, trait des intitulés de section, pastille du hero, traits du bandeau d'engagements, badge « Le plus demandé », soulignement de l'appel final, bord du pied de page, fin de la barre de progression du calculateur |
+| `pistache-400` | `#93C572` | liserés et repères (version renforcée) : surlignage de « surprises. » dans le hero, bande en haut des 4 étapes, contour de la formule Confort, bord de la barre du haut, trait des intitulés de section, pastille du hero, traits du bandeau d'engagements, badge « Le plus demandé », soulignement de l'appel final, bord du pied de page, fin de la barre de progression du calculateur |
 | `pistache-300` | `#C2E0A3` | coches de la formule mise en avant (sur bleu) |
 | `pistache-700` | `#4B7429` | seule teinte autorisée pour du texte pistache sur fond clair (AA) |
 

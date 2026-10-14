@@ -27,7 +27,7 @@ export function Formulas() {
               className={cn(
                 "relative flex flex-col rounded-[var(--radius-lg)] p-8 transition-shadow duration-500 lg:p-10",
                 f.featured
-                  ? "bg-marine-700 text-paper shadow-[var(--shadow-float)]"
+                  ? "bg-marine-700 text-paper shadow-[var(--shadow-float)] ring-4 ring-pistache-400 ring-offset-0"
                   : "bg-paper shadow-[var(--shadow-hairline)] hover:shadow-[var(--shadow-lift)]",
               )}
             >
