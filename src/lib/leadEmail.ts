@@ -11,7 +11,7 @@ import { formatDate, formatFloor, formatNumber1 } from "@/lib/format";
  * Envoi via l'API Resend (https://resend.com). Variables d'environnement :
  *   RESEND_API_KEY   clé API (sans elle, rien n'est envoyé)
  *   LEAD_EMAIL_TO    destinataire(s), séparés par des virgules
- *                    (par défaut : l'e-mail de company.ts)
+ *                    (par défaut : company.leadInbox)
  *   LEAD_EMAIL_FROM  expéditeur sur un domaine vérifié dans Resend
  *                    (par défaut onboarding@resend.dev, réservé aux tests :
  *                    Resend ne livre alors qu'à l'adresse du compte Resend)
@@ -27,7 +27,7 @@ export interface LeadEmail {
 }
 
 export function leadRecipients() {
-  return (process.env.LEAD_EMAIL_TO?.trim() || company.email)
+  return (process.env.LEAD_EMAIL_TO?.trim() || company.leadInbox)
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);

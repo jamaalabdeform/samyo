@@ -15,7 +15,7 @@ export default function OgImage() {
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 86, lineHeight: 1.02, maxWidth: 900 }}>Un déménagement sans mauvaises surprises.</div>
-          <div style={{ fontSize: 30, marginTop: 30, opacity: 0.65, fontFamily: "sans-serif" }}>Calculez votre volume en quelques minutes · Déménagement & transport</div>
+          <div style={{ fontSize: 30, marginTop: 30, opacity: 0.65, fontFamily: "sans-serif" }}>Montreuil · Île-de-France · partout en France</div>
         </div>
       </div>
     ),

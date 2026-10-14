@@ -23,9 +23,10 @@ Un seul fichier : **`src/config/company.ts`**. Tout le site (en-tête, pied de p
 | Nom | SAMYO Déménagement | reçu |
 | Adresse | 17 place Général de Gaulle, Montreuil | code postal **non transmis**, laissé vide |
 | Téléphone / WhatsApp | 07 44 63 02 06 | reçu |
-| E-mail | oucharichafi@gmail.com | provisoire, en attendant une adresse au nom de domaine |
+| E-mail affiché | contact@samyo-demenagement.fr | **la boîte (ou une redirection) doit exister avant la mise en ligne** |
+| Réception des demandes | oucharichafi@gmail.com (`company.leadInbox`) | non affiché, remplaçable par `LEAD_EMAIL_TO` |
 | Horaires | — | non communiqués, rien n'est affiché |
-| SIREN / forme | 519 804 330 · Chafi Ouchari, EI, micro-entreprise · APE 4942Z | confirmé par le client, affiché |
+| SIREN / forme | 519 804 330 · Chafi Ouchari, EI, micro-entreprise · APE 4942Z | confirmé par le client, affiché (`provisional: false`) |
 | SIRET, TVA, assurance | — | **à fournir**, rien n'est affiché |
 
 Règle : une valeur inconnue reste à `null` et n'apparaît pas sur le site. Ne jamais compléter « au jugé ».
@@ -37,7 +38,7 @@ Service utilisé : **Resend** (offre gratuite suffisante au démarrage).
 
 1. Créer un compte sur resend.com avec l'adresse qui doit recevoir les demandes.
 2. Créer une clé API → variable `RESEND_API_KEY`.
-3. `LEAD_EMAIL_TO` = adresse(s) de réception, séparées par des virgules. Sans valeur, l'e-mail de `company.ts` est utilisé.
+3. `LEAD_EMAIL_TO` = adresse(s) de réception, séparées par des virgules. Sans valeur, `company.leadInbox` (Gmail du gérant) est utilisé.
 4. Tant qu'aucun domaine n'est vérifié dans Resend, l'expéditeur de test `onboarding@resend.dev` ne livre **qu'à l'adresse du compte Resend**. Une fois le domaine définitif acheté : Resend → Domains → ajouter le domaine, copier les enregistrements DNS (SPF, DKIM) chez le registrar, puis `LEAD_EMAIL_FROM="SAMYO devis <devis@votre-domaine.fr>"`.
 
 L'e-mail contient : boutons **Appeler**, **WhatsApp** (conversation pré-remplie avec le client) et **Répondre par e-mail** ; puis client, projet, départ, arrivée, objets spécifiques, inventaire, points à vérifier, message. Le « Répondre » de la messagerie écrit directement au client.

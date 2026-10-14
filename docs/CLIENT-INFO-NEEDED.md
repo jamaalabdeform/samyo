@@ -8,7 +8,7 @@ Mise à jour du 14/10/2026. Chaque ligne indique où l'information sera branché
 - SIREN 519 804 330 (EI de Chafi Ouchari, micro-entreprise, APE 4942Z), confirmé inchangé par le client
 - Adresse : 17 place Général de Gaulle, Montreuil
 - Téléphone et WhatsApp : 07 44 63 02 06
-- E-mail : oucharichafi@gmail.com (provisoire)
+- E-mail affiché : contact@samyo-demenagement.fr (à créer) ; demandes reçues sur oucharichafi@gmail.com
 - Photos de camions (4 utilisées après floutage des plaques et lettrages)
 
 ## Prioritaire avant mise en production
@@ -18,7 +18,7 @@ Mise à jour du 14/10/2026. Chaque ligne indique où l'information sera branché
 - [ ] **Code postal** de l'adresse de Montreuil → `company.address.postalCode`
 - [ ] Compte **Resend** (ou accès à la boîte qui recevra les demandes) → `RESEND_API_KEY`, `LEAD_EMAIL_TO`
 - [ ] **Nom de domaine** définitif (.fr et/ou .com) et accès au registrar
-- [ ] **Adresse e-mail professionnelle** sur ce domaine → `NEXT_PUBLIC_CONTACT_EMAIL`
+- [ ] **Créer contact@samyo-demenagement.fr** (boîte OVH Email Pro ou simple redirection vers le Gmail) — l'adresse est déjà affichée sur le site
 - [ ] Autorisation écrite d'utiliser les photos fournies (droits, personnes visibles)
 
 ## Contenu à valider

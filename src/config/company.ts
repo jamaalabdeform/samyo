@@ -10,7 +10,7 @@
  *  inventer SIRET, RCS, TVA, assurance, horaires, zones, chiffres ou avis.
  *  SIREN : confirmé par le client le 14/10/2026 (identifiant de l'entreprise
  *  individuelle de Chafi Ouchari, inchangé ; seul le nom commercial devient
- *  SAMYO). Le SIRET de l'établissement de Montreuil reste à confirmer.
+ *  SAMYO). SIREN, EI et APE 4942Z reconfirmés ; SIRET de l'établissement à ajouter.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
@@ -60,11 +60,17 @@ export const company = {
   },
 
   /**
-   * E-mail public. Celui fourni par le client tant que la messagerie au nom
-   * de domaine n'existe pas ; remplaçable sans toucher au code via
-   * NEXT_PUBLIC_CONTACT_EMAIL.
+   * E-mail public affiché sur le site (demande du client du 14/10/2026).
+   * ⚠ La boîte (ou une redirection vers leadInbox) doit exister sur le
+   * domaine avant la mise en ligne. Remplaçable via NEXT_PUBLIC_CONTACT_EMAIL.
    */
-  email: env(process.env.NEXT_PUBLIC_CONTACT_EMAIL) ?? "oucharichafi@gmail.com",
+  email: env(process.env.NEXT_PUBLIC_CONTACT_EMAIL) ?? "contact@samyo-demenagement.fr",
+
+  /**
+   * Boîte de réception réelle des demandes du site (non affichée), utilisée
+   * si LEAD_EMAIL_TO n'est pas défini.
+   */
+  leadInbox: "oucharichafi@gmail.com",
 
   /** Horaires non communiqués : rien n'est affiché tant que c'est `null` */
   hours: null as Hours | null,
@@ -97,8 +103,8 @@ export const company = {
     host: "Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis (vercel.com)",
   },
 
-  /** true tant que des informations légales restent à confirmer */
-  provisional: true,
+  /** true tant que des informations légales restent à confirmer (SIREN confirmé le 14/10/2026) */
+  provisional: false,
 };
 
 export type Company = typeof company;

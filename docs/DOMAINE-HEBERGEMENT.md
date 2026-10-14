@@ -17,6 +17,8 @@ Tant que `NEXT_PUBLIC_INDEXABLE` n'est pas à `1`, le site demande aux moteurs d
 
 ## 1. Nom de domaine
 
+**Éviter les accents** (samyodéménagement.fr) : un domaine accentué est converti en `xn--…`, il est mal saisi, mal affiché dans certains clients e-mail et pose problème pour les adresses e-mail. Le site et l'adresse affichée sont prévus pour **samyo-demenagement.fr** (le .com en redirection). Le jour du branchement : `NEXT_PUBLIC_SITE_URL=https://samyo-demenagement.fr` et `NEXT_PUBLIC_INDEXABLE=1`.
+
 À vérifier puis réserver chez OVHcloud (ou un autre registrar). La disponibilité n'a pas pu être contrôlée depuis l'environnement de développement.
 
 | Priorité | Domaine | Commentaire |

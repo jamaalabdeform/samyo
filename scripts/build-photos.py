@@ -18,6 +18,8 @@ JOBS = {
     "camion-ouvert-materiel": ("camion-samyo-03.jpeg", [(600, 1330, 830, 1405), (150, 1180, 275, 1235)], (215, 395, 1215, 1545)),
     "camion-chargement-lateral": ("camion-samyo-02.jpeg", [(100, 1350, 225, 1430)], (0, 380, 1536, 1600)),
     "camion-caisse": ("camion-samyo-04.jpeg", [(1845, 980, 1980, 1100), (1415, 215, 1800, 400)], (120, 150, 2040, 1450)),
+    # hero : intérieur de la caisse chargée, recadré au-dessus de la plaque
+    "hero-caisse": ("camion-samyo-03.jpeg", [], (290, 545, 1110, 1310)),
     "camion-face": ("camion-samyo-05.jpeg", [(905, 1488, 1155, 1585), (165, 470, 315, 660)], (90, 230, 1430, 1790)),
 }
 

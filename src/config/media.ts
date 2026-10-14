@@ -32,9 +32,10 @@ export const media = {
   // scripts/build-photos.py (plaques floutées, recadrage, WebP).
   hero: {
     id: "hero",
-    brief: "ASSET 01 — Hero video",
-    alt: "Déménageurs protégeant un meuble dans un appartement lumineux",
-    poster: null,
+    brief: "Photo client — intérieur de la caisse chargée (sans plaque)",
+    alt: "Caisse de camion de déménagement chargée : cartons, mobilier protégé et pile de couvertures",
+    poster: "/media/terrain/hero-caisse.webp",
+    position: "50% 50%",
     video: null,
     fallback: "window-light",
   },
@@ -67,10 +68,10 @@ export const media = {
   },
   protection: {
     id: "protection",
-    brief: "Photo client — camion ouvert, matériel et couvertures (plaques floutées)",
-    alt: "Camion de déménagement ouvert : mobilier calé dans la caisse et pile de couvertures de protection",
-    poster: "/media/terrain/camion-ouvert-materiel.webp",
-    position: "50% 40%",
+    brief: "Photo client — chargement latéral, couvertures (plaques floutées)",
+    alt: "Camion de déménagement ouvert sur le côté, couvertures de protection prêtes au chargement",
+    poster: "/media/terrain/camion-chargement-lateral.webp",
+    position: "28% 50%",
     video: null,
     fallback: "quilt",
   },
