@@ -9,8 +9,6 @@ import { Services } from "@/sections/Services";
 import { Trust } from "@/sections/Trust";
 import { Transparency } from "@/sections/Transparency";
 import { Gallery } from "@/sections/Gallery";
-import { Testimonials } from "@/sections/Testimonials";
-import { Zones } from "@/sections/Zones";
 import { Faq } from "@/sections/Faq";
 import { FinalCta } from "@/sections/FinalCta";
 
@@ -30,8 +28,6 @@ export default function HomePage() {
       <Trust />
       <Transparency />
       <Gallery />
-      <Testimonials />
-      <Zones />
       <Faq />
       <FinalCta />
     </>

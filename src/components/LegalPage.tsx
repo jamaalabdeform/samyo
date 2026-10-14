@@ -4,9 +4,9 @@ export function LegalPage({ title, children }: { title: string; children: React.
   return (
     <div className="container-page max-w-3xl pb-section pt-[calc(var(--header-h)+5rem)]">
       <h1 className="font-display text-4xl">{title}</h1>
-      {company.isDemo && (
+      {company.provisional && (
         <p className="mt-6 rounded-[var(--radius-md)] bg-stone-100 p-4 text-sm text-stone-600">
-          Les informations entre crochets seront complétées avec les données réelles de l&apos;entreprise.
+          Les informations d&apos;immatriculation de l&apos;entreprise seront ajoutées à cette page dès leur mise à jour.
         </p>
       )}
       <div className="mt-10 space-y-4 text-[0.9375rem] leading-relaxed text-ink-2 [&_h2]:pt-6 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-ink">{children}</div>

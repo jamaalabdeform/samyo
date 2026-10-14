@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { company, mailHref, telHref } from "@/config/company";
 import { routes, site } from "@/config/site";
-import { locations } from "@/data/locations";
 import { Logo } from "./Logo";
+import { WhatsAppIcon, WhatsAppLink } from "./WhatsAppLink";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -20,7 +20,7 @@ export function Footer() {
             <p>
               {company.address.street}
               <br />
-              {company.address.postalCode} {company.address.city}
+              {[company.address.postalCode, company.address.city].filter(Boolean).join(" ")}
             </p>
             <p className="pt-2">
               <a href={telHref} className="num underline-offset-4 hover:underline">
@@ -31,25 +31,24 @@ export function Footer() {
                 {company.email}
               </a>
             </p>
-            <p className="pt-2 text-paper/60">{company.hours.display}</p>
+            {company.hours && <p className="pt-2 text-paper/60">{company.hours.display}</p>}
           </address>
         </div>
 
         <div className="md:col-span-3">
-          <h2 className="eyebrow text-paper/50">Zones</h2>
-          <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-paper/85">
-            {locations.map((l) => (
-              <li key={l.slug}>
-                {l.published ? (
-                  <Link href={routes.city(l.slug)} className="underline-offset-4 hover:underline">
-                    {l.name}
-                  </Link>
-                ) : (
-                  l.name
-                )}
-              </li>
-            ))}
-            <li className="col-span-2 text-paper/60">et toute la France</li>
+          <h2 className="eyebrow text-paper/50">Écrire</h2>
+          <ul className="mt-5 space-y-2 text-sm text-paper/85">
+            <li>
+              <WhatsAppLink location="footer" className="inline-flex items-center gap-2 underline-offset-4 hover:underline">
+                <WhatsAppIcon className="size-4 text-lagon-300" />
+                WhatsApp
+              </WhatsAppLink>
+            </li>
+            <li>
+              <a href={mailHref} className="underline-offset-4 hover:underline">
+                Par e-mail
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -74,7 +73,6 @@ export function Footer() {
       <div className="flex flex-col gap-4 border-t border-paper/10 py-7 text-xs text-paper/50 md:flex-row md:items-center md:justify-between">
         <p>
           © {year} {company.name}
-          {site.flags.provisionalNotice && <span> · Coordonnées provisoires</span>}
         </p>
         <ul className="flex gap-6">
           <li>

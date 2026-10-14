@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { company } from "@/config/company";
 import { site } from "@/config/site";
-import { locations } from "@/data/locations";
+import { publishedLocations } from "@/data/locations";
 import { faq } from "@/data/faq";
 
 export const absoluteUrl = (path = "/") => `${site.url}${path.startsWith("/") ? path : `/${path}`}`;
@@ -30,6 +30,7 @@ export function pageMetadata({ title, description, path, noindex }: { title?: st
  * Volontairement sans AggregateRating ni Review : aucun avis réel à ce stade.
  */
 export function organizationJsonLd() {
+  const a = company.address;
   return {
     "@context": "https://schema.org",
     "@type": "MovingCompany",
@@ -41,23 +42,23 @@ export function organizationJsonLd() {
     image: absoluteUrl("/opengraph-image"),
     address: {
       "@type": "PostalAddress",
-      streetAddress: company.address.street,
-      postalCode: company.address.postalCode,
-      addressLocality: company.address.city,
-      addressRegion: company.address.region,
-      addressCountry: company.address.countryCode,
+      streetAddress: a.street,
+      ...(a.postalCode ? { postalCode: a.postalCode } : {}),
+      addressLocality: a.city,
+      addressCountry: a.countryCode,
     },
-    geo: { "@type": "GeoCoordinates", latitude: company.address.geo.lat, longitude: company.address.geo.lng },
-    openingHoursSpecification: company.hours.schema.map((h) => ({
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: h.days,
-      opens: h.opens,
-      closes: h.closes,
-    })),
-    areaServed: [
-      ...locations.map((l) => ({ "@type": "City", name: l.name })),
-      { "@type": "Country", name: "France" },
-    ],
+    // Horaires et zones publiés seulement une fois confirmés par le client
+    ...(company.hours
+      ? {
+          openingHoursSpecification: company.hours.schema.map((h) => ({
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: h.days,
+            opens: h.opens,
+            closes: h.closes,
+          })),
+        }
+      : {}),
+    ...(publishedLocations.length ? { areaServed: publishedLocations.map((l) => ({ "@type": "City", name: l.name })) } : {}),
     sameAs: Object.values(company.social).filter(Boolean),
   };
 }

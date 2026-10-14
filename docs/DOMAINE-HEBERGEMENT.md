@@ -26,13 +26,13 @@ Tant que `NEXT_PUBLIC_INDEXABLE` n'est pas à `1`, le site demande aux moteurs d
 | 3 | samyo-transport.fr | Pour l'activité transport, redirigé vers le .fr |
 | — | samyo-demenagements.fr | Variante au pluriel, à réserver pour protéger la marque |
 
-Le site est déjà configuré pour `samyo-demenagement.fr` : adresse e-mail `contact@samyo-demenagement.fr`, URL canonique, sitemap. Si un autre domaine est retenu, il suffit de modifier `NEXT_PUBLIC_SITE_URL` et `company.email`.
+Une fois le domaine choisi : `NEXT_PUBLIC_SITE_URL` pour l'URL canonique et le sitemap, puis, quand la boîte pro existe, `NEXT_PUBLIC_CONTACT_EMAIL` et `LEAD_EMAIL_TO`. Aucune adresse au nom de domaine n'est affichée avant sa création.
 
 **E-mail :** l'offre « Email Pro » d'OVH (ou Google Workspace / Microsoft 365) sur le même domaine, avec les enregistrements SPF, DKIM et DMARC configurés pour que les devis n'arrivent pas en indésirables.
 
 ## 2. Hébergement — deux options
 
-Le site utilise Next.js avec des fonctions serveur (réception des devis, espace entreprise protégé). Il lui faut donc un hébergement capable d'exécuter **Node.js**. Une offre « Hébergement Web » mutualisée classique (PHP) ne convient pas.
+Le site utilise Next.js avec des fonctions serveur (réception des devis et envoi des e-mails). Il lui faut donc un hébergement capable d'exécuter **Node.js**. Une offre « Hébergement Web » mutualisée classique (PHP) ne convient pas.
 
 ### Option A — Vercel + domaine OVH (recommandée)
 - Le plan gratuit suffit pour démarrer. HTTPS, CDN et déploiement automatique à chaque modification sont inclus.
@@ -63,19 +63,11 @@ PORT=3000 pm2 start .next/standalone/server.js --name samyo && pm2 save && pm2 s
 
 ## 3. Variables d'environnement
 
-| Variable | Rôle |
-|---|---|
-| `NEXT_PUBLIC_SITE_URL` | `https://www.samyo-demenagement.fr` |
-| `ADMIN_ACCESS_CODE` | Code d'accès à l'espace entreprise (obligatoire) |
-| `RESEND_API_KEY` / `LEAD_EMAIL_TO` / `LEAD_EMAIL_FROM` | Réception des devis par e-mail |
-| `NEXT_PUBLIC_INDEXABLE` | `1` uniquement sur le domaine définitif |
-| `LEAD_WEBHOOK_URL` | Facultatif : envoi de chaque demande vers un CRM, Make, n8n ou un e-mail |
-| `NEXT_PUBLIC_GTM_ID` | Facultatif : Google Tag Manager (avec un bandeau de consentement) |
+Liste complète et commentée : `.env.example` et `docs/CLIENT-HANDOVER.md` §9. Essentielles en production : `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`, `LEAD_EMAIL_TO`, `LEAD_EMAIL_FROM` (domaine vérifié), `NEXT_PUBLIC_INDEXABLE=1` sur le domaine définitif.
 
 ## 4. Avant la mise en ligne réelle
-- [ ] Remplacer les coordonnées provisoires (`src/config/company.ts`)
-- [ ] Remplacer le stockage local des leads par une base ou un CRM (`LeadRepository`)
-- [ ] Mettre en place une vraie authentification pour l'espace entreprise
-- [ ] Compléter les mentions légales et la politique de confidentialité
-- [ ] Ajouter un bandeau de consentement si des outils publicitaires sont activés
-- [ ] Passer `company.isDemo` et `site.flags.provisionalNotice` à `false`, et `NEXT_PUBLIC_INDEXABLE=1`
+- [ ] Compléter les informations légales dans `src/config/company.ts` à partir d'un extrait récent, puis `provisional: false`
+- [ ] Clé Resend, destinataire et expéditeur vérifiés ; envoyer une demande de test de bout en bout
+- [ ] Domaine définitif branché, `NEXT_PUBLIC_SITE_URL` et `NEXT_PUBLIC_INDEXABLE=1`
+- [ ] Bandeau de consentement si des outils publicitaires sont activés
+- [ ] `/espace-pro` : laisser hors navigation, ou mettre une vraie authentification et une base si on l'utilise

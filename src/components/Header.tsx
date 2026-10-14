@@ -10,13 +10,13 @@ import { duration, ease } from "@/config/motion";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/format";
 import { ButtonLink } from "./ui/Button";
+import { WhatsAppIcon, WhatsAppLink } from "./WhatsAppLink";
 import { Logo } from "./Logo";
 
 const nav = [
   { href: "/#fonctionnement", label: "Fonctionnement" },
   { href: "/#formules", label: "Formules" },
   { href: "/#services", label: "Services" },
-  { href: "/#zones", label: "Zones" },
   { href: "/#questions", label: "Questions" },
 ];
 
@@ -49,9 +49,14 @@ export function Header() {
       {/* Barre d'identité bleu roi (desktop) */}
       <div className="hidden bg-marine-700 text-paper lg:block">
         <div className="container-page flex h-9 items-center justify-between text-xs">
-          <p className="text-paper/85">{company.descriptor} · Lille, Nord et toute la France</p>
+          <p className="text-paper/85">
+            {company.descriptor} · {company.address.city}
+          </p>
           <div className="flex items-center gap-6 text-paper/85">
-            <span>{company.hours.short}</span>
+            <WhatsAppLink location="topbar" className="inline-flex items-center gap-1.5 transition-colors hover:text-paper">
+              <WhatsAppIcon className="size-3.5" />
+              WhatsApp
+            </WhatsAppLink>
             <a href={mailHref} className="transition-colors hover:text-paper">
               {company.email}
             </a>
@@ -130,10 +135,16 @@ export function Header() {
                 <ButtonLink href={routes.quote} size="lg" arrow onClick={() => setOpen(false)}>
                   {site.cta.primary}
                 </ButtonLink>
-                <a href={telHref} className="flex h-14 items-center justify-center gap-2 rounded-full text-base shadow-[var(--shadow-hairline)]">
-                  <Phone className="size-4 text-marine-500" strokeWidth={1.6} aria-hidden />
-                  <span className="num">{company.phone.display}</span>
-                </a>
+                <div className="grid grid-cols-2 gap-3">
+                  <a href={telHref} className="flex h-14 items-center justify-center gap-2 rounded-full text-base shadow-[var(--shadow-hairline)]">
+                    <Phone className="size-4 text-marine-500" strokeWidth={1.6} aria-hidden />
+                    <span className="num">Appeler</span>
+                  </a>
+                  <WhatsAppLink location="mobile_menu" className="flex h-14 items-center justify-center gap-2 rounded-full text-base shadow-[var(--shadow-hairline)]">
+                    <WhatsAppIcon className="size-[18px] text-marine-500" />
+                    WhatsApp
+                  </WhatsAppLink>
+                </div>
               </div>
             </nav>
           </motion.div>

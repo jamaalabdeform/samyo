@@ -57,7 +57,15 @@ export function MediaSlot({
   return (
     <div ref={ref} className={cn("relative overflow-hidden bg-stone-200", className)} data-asset={asset.brief}>
       {poster ? (
-        <Image src={poster} alt={asset.alt} fill priority={priority} sizes={sizes} className="object-cover" />
+        <Image
+          src={poster}
+          alt={asset.alt}
+          fill
+          priority={priority}
+          sizes={sizes}
+          className="object-cover"
+          style={"position" in asset && asset.position ? { objectPosition: asset.position } : undefined}
+        />
       ) : (
         <Scene kind={asset.fallback} label={asset.alt} />
       )}

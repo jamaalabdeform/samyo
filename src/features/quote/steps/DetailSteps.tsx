@@ -96,7 +96,7 @@ export function StepAccess({ draft, update, which }: Props & { which: "origin" |
           className="sm:col-span-6"
           label="Adresse"
           optional
-          placeholder={which === "origin" ? "28 rue des Ateliers" : "Numéro et rue"}
+          placeholder="Numéro et rue"
           autoComplete={which === "origin" ? "street-address" : "off"}
           value={a.address}
           onChange={(e) => set({ address: e.target.value })}
@@ -113,7 +113,7 @@ export function StepAccess({ draft, update, which }: Props & { which: "origin" |
           onChange={(e) => set({ postalCode: e.target.value.replace(/\D/g, "") })}
           optional
         />
-        <TextField className="sm:col-span-4" label="Ville" placeholder="Lille" value={a.city} onChange={(e) => set({ city: e.target.value })} />
+        <TextField className="sm:col-span-4" label="Ville" placeholder="Ville" value={a.city} onChange={(e) => set({ city: e.target.value })} />
       </div>
 
       {which === "destination" && (

@@ -1,80 +1,97 @@
 /**
  * ─────────────────────────────────────────────────────────────────────────────
- *  IDENTITÉ ENTREPRISE — SAMYO (coordonnées provisoires)
+ *  IDENTITÉ ENTREPRISE — SAMYO Déménagement
  * ─────────────────────────────────────────────────────────────────────────────
- *  SAMYO Déménagement & Transport.
- *  Le nom et la marque sont ceux du client ; en revanche ADRESSE, TÉLÉPHONE,
- *  HORAIRES et mentions légales sont des VALEURS PROVISOIRES à remplacer
- *  par les informations réelles (voir docs/CLIENT-INFO-NEEDED.md).
- *  Rien ici n'est un SIRET, un label, une certification ou une assurance réelle.
+ *  Source unique : header, footer, contact, WhatsApp, e-mails, schema.org et
+ *  pages légales lisent ce fichier. Informations reçues du client le
+ *  14/10/2026 (voir docs/CLIENT-HANDOVER.md).
  *
- *  Ce fichier est la SEULE source de vérité pour l'identité : le header, le
- *  footer, le schema.org, les métadonnées et les pages légales le lisent.
+ *  Règle : une valeur inconnue vaut `null` et n'est PAS affichée. Ne jamais
+ *  inventer SIRET, RCS, TVA, assurance, horaires, zones, chiffres ou avis.
+ *  Le document administratif reçu (cessation d'EI du 21/12/2023) ne doit pas
+ *  servir de source pour les mentions légales actuelles.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
-export const company = {
-  isDemo: true,
+const env = (v: string | undefined) => (v && v.trim() ? v.trim() : undefined);
 
-  name: "Samyo Déménagement",
-  shortName: "Samyo",
+interface Hours {
+  display: string;
+  short: string;
+  schema: Array<{ days: string[]; opens: string; closes: string }>;
+}
+
+export const company = {
+  name: "SAMYO Déménagement",
+  shortName: "SAMYO",
   /** Graphie utilisée dans le logo */
   wordmark: "SAMYO",
   descriptor: "Déménagement & Transport",
   tagline: "De A à B, sans détour.",
-  baseline:
-    "Déménagement et transport, basés à Lille. Particuliers et professionnels, dans le Nord et partout en France.",
+  baseline: "Déménagement et transport de mobilier, depuis Montreuil.",
+
+  /** Interlocuteur (affiché uniquement dans les mentions légales) */
+  contactPerson: { firstName: "Chafi", lastName: "Ouchari" },
 
   address: {
-    street: "28 rue des Ateliers", // provisoire
-    postalCode: "59000",
-    city: "Lille",
-    region: "Hauts-de-France",
+    street: "17 place Général de Gaulle",
+    /** Code postal non transmis par le client : laissé vide plutôt que deviné */
+    postalCode: null as string | null,
+    city: "Montreuil",
     country: "France",
     countryCode: "FR",
-    /** Coordonnées approximatives du centre de Lille — à remplacer */
-    geo: { lat: 50.6292, lng: 3.0573 },
   },
 
   phone: {
-    display: "03 20 84 27 61", // provisoire
-    e164: "+33320842761",
-  },
-  email: "contact@samyo-demenagement.fr",
-
-  hours: {
-    display: "Du lundi au samedi, 8 h – 19 h",
-    short: "Lun – sam · 8 h – 19 h",
-    /** Format schema.org */
-    schema: [{ days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "08:00", closes: "19:00" }],
+    display: "07 44 63 02 06",
+    e164: "+33744630206",
   },
 
-  /** Réseaux sociaux : laisser vide tant que le client n'a pas fourni ses comptes */
+  /** WhatsApp : même numéro que le téléphone (voir src/lib/whatsapp.ts) */
+  whatsapp: {
+    e164: env(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER) ?? "+33744630206",
+  },
+
+  /**
+   * E-mail public. Celui fourni par le client tant que la messagerie au nom
+   * de domaine n'existe pas ; remplaçable sans toucher au code via
+   * NEXT_PUBLIC_CONTACT_EMAIL.
+   */
+  email: env(process.env.NEXT_PUBLIC_CONTACT_EMAIL) ?? "oucharichafi@gmail.com",
+
+  /** Horaires non communiqués : rien n'est affiché tant que c'est `null` */
+  hours: null as Hours | null,
+
+  /** Réseaux sociaux : renseigner les URL quand le client les fournit */
   social: {
     instagram: "",
     facebook: "",
-    linkedin: "",
     googleBusiness: "",
   },
 
   /**
-   * Mentions réglementaires : volontairement génériques en mode démo.
-   * NE JAMAIS inventer de SIRET, de numéro d'inscription au registre des
-   * transporteurs, de compagnie d'assurance ou de label.
+   * Mentions légales : `null` = non confirmé, donc masqué sur le site.
+   * À compléter avec un extrait d'immatriculation / avis de situation SIRENE
+   * récent (voir docs/CLIENT-HANDOVER.md).
    */
   legal: {
-    legalName: "[Raison sociale — à compléter]",
-    legalForm: "[Forme juridique — à compléter]",
-    siret: "[SIRET — à compléter]",
-    vat: "[N° TVA — à compléter]",
-    transportRegistry: "[Inscription registre des transporteurs — à compléter]",
-    insurance: "[Assureur et contrat — à compléter]",
-    publisher: "[Directeur de la publication — à compléter]",
-    host: "[Hébergeur — à compléter]",
+    legalName: null as string | null,
+    legalForm: null as string | null,
+    siret: null as string | null,
+    rcs: null as string | null,
+    vat: null as string | null,
+    transportRegistry: null as string | null,
+    insurance: null as string | null,
+    publisher: "Chafi Ouchari",
+    host: "Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis (vercel.com)",
   },
-} as const;
+
+  /** true tant que des informations légales restent à confirmer */
+  provisional: true,
+};
 
 export type Company = typeof company;
 
 export const telHref = `tel:${company.phone.e164}`;
 export const mailHref = `mailto:${company.email}`;
+export const addressLine = [company.address.street, [company.address.postalCode, company.address.city].filter(Boolean).join(" ")].join(", ");

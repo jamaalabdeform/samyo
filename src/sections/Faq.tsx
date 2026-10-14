@@ -2,6 +2,7 @@ import { Plus } from "lucide-react";
 import { faq } from "@/data/faq";
 import { company, telHref } from "@/config/company";
 import { Reveal } from "@/components/ui/Reveal";
+import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 /** FAQ en <details> natif : accessible au clavier, fonctionne sans JavaScript */
@@ -10,13 +11,17 @@ export function Faq() {
     <section id="questions" aria-labelledby="faq-title" className="border-t border-ink/8 bg-paper py-section">
       <div className="container-page grid gap-14 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-4">
-          <SectionHeading id="faq-title" index="10" eyebrow="Questions fréquentes" title="Les questions qu'on nous pose le plus." />
+          <SectionHeading id="faq-title" index="08" eyebrow="Questions fréquentes" title="Les questions qu'on nous pose le plus." />
           <Reveal delay={0.1}>
             <p className="mt-8 text-[0.9375rem] text-stone-600">
               Une autre question ? Appelez-nous au{" "}
               <a href={telHref} className="num font-medium text-ink underline decoration-ink/25 underline-offset-4 hover:decoration-ink">
                 {company.phone.display}
-              </a>
+              </a>{" "}
+              ou écrivez-nous sur{" "}
+              <WhatsAppLink context="question" location="faq" className="font-medium text-ink underline decoration-ink/25 underline-offset-4 hover:decoration-ink">
+                WhatsApp
+              </WhatsAppLink>
               .
             </p>
           </Reveal>

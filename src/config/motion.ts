@@ -1,5 +1,5 @@
 /**
- * Langage de mouvement Nordéa.
+ * Langage de mouvement SAMYO.
  * Principe : le mouvement sert à orienter, jamais à décorer.
  * - reveal : apparition douce au scroll, une seule fois
  * - ui     : retours d'interaction (sélection, compteur)

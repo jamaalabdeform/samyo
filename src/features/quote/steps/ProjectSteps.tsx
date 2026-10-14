@@ -32,7 +32,7 @@ export function StepTrajet({ draft, update }: Props) {
     <div className="grid gap-5 sm:grid-cols-[1fr_auto_1fr] sm:items-end">
       <TextField
         label="Ville de départ"
-        placeholder="Lille"
+        placeholder="Montreuil"
         list={list}
         autoComplete="address-level2"
         value={draft.from.city}

@@ -21,7 +21,7 @@ export const QUOTE_EVENTS = [
 ] as const;
 
 export type QuoteEvent = (typeof QUOTE_EVENTS)[number];
-export type AnalyticsEvent = QuoteEvent | "cta_click" | "callback_requested" | "phone_click";
+export type AnalyticsEvent = QuoteEvent | "cta_click" | "callback_requested" | "phone_click" | "whatsapp_click";
 
 export type EventProps = Record<string, string | number | boolean | null | undefined>;
 

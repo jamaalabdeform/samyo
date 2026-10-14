@@ -31,6 +31,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
       </header>
       <main id="contenu" className="mx-auto max-w-[90rem] px-4 pb-24 pt-8 sm:px-8 sm:pt-10">
+        <p className="mb-8 rounded-2xl border border-alert-600/20 bg-alert-50 px-5 py-4 text-sm leading-relaxed text-ink-2">
+          <strong className="font-semibold text-ink">Module de démonstration, hors V1.</strong> Les demandes réelles arrivent par e-mail et WhatsApp et sont
+          traitées manuellement. Les fiches affichées ici sont des exemples enregistrés dans ce navigateur ; un suivi centralisé (CRM) pourra être branché plus tard.
+        </p>
         {children}
       </main>
     </div>

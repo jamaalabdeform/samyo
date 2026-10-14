@@ -8,6 +8,7 @@ import { routes, site } from "@/config/site";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/format";
 import { Arrow } from "./ui/Button";
+import { WhatsAppIcon, WhatsAppLink } from "./WhatsAppLink";
 
 /**
  * Barre d'action persistante sur mobile. Apparaît une fois le hero dépassé,
@@ -52,6 +53,15 @@ export function MobileCta() {
         >
           <Phone className="size-[18px]" strokeWidth={1.6} />
         </a>
+        <WhatsAppLink
+          location="mobile_bar"
+          context="estimate"
+          tabIndex={visible ? 0 : -1}
+          className="grid size-12 shrink-0 place-items-center rounded-full text-paper shadow-[inset_0_0_0_1px_rgb(251_249_244/0.2)]"
+          aria-label="Écrire sur WhatsApp"
+        >
+          <WhatsAppIcon className="size-5" />
+        </WhatsAppLink>
         <Link
           href={routes.quote}
           tabIndex={visible ? 0 : -1}

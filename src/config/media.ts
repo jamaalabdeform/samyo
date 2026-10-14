@@ -23,9 +23,13 @@ export interface MediaAsset {
   poster: string | null;
   video?: { webm?: string; mp4?: string; mobileMp4?: string } | null;
   fallback: FallbackScene;
+  /** Cadrage de l'image dans son cadre (CSS object-position) */
+  position?: string;
 }
 
 export const media = {
+  // Photos réelles (dossier client, 14/10/2026) : préparées par
+  // scripts/build-photos.py (plaques floutées, recadrage, WebP).
   hero: {
     id: "hero",
     brief: "ASSET 01 — Hero video",
@@ -54,27 +58,39 @@ export const media = {
   },
   truck: {
     id: "truck",
-    brief: "ASSET 03 — Camion dans une rue du Nord",
-    alt: "Camion de déménagement stationné dans une rue de maisons en brique",
-    poster: null,
+    brief: "Photo client — camion caisse (plaques floutées)",
+    alt: "Camion de déménagement à caisse blanche, vu de trois quarts",
+    poster: "/media/terrain/camion-caisse.webp",
+    position: "50% 55%",
     video: null,
     fallback: "street",
   },
   protection: {
     id: "protection",
-    brief: "ASSET 04 — Protection des biens",
-    alt: "Commode enveloppée dans une couverture de protection et sanglée",
-    poster: null,
+    brief: "Photo client — camion ouvert, matériel et couvertures (plaques floutées)",
+    alt: "Camion de déménagement ouvert : mobilier calé dans la caisse et pile de couvertures de protection",
+    poster: "/media/terrain/camion-ouvert-materiel.webp",
+    position: "50% 40%",
     video: null,
     fallback: "quilt",
   },
   carry: {
     id: "carry",
-    brief: "ASSET 04b — Manutention, plan mains",
-    alt: "Mains fermant un carton avec du ruban adhésif",
-    poster: null,
+    brief: "Photo client — chargement latéral (plaques floutées)",
+    alt: "Camion de déménagement ouvert sur le côté, couvertures de protection prêtes au chargement",
+    poster: "/media/terrain/camion-chargement-lateral.webp",
+    position: "30% 50%",
     video: null,
     fallback: "hands",
+  },
+  front: {
+    id: "front",
+    brief: "Photo client — camion de face (plaque floutée)",
+    alt: "Camion de déménagement blanc vu de face, prêt à partir",
+    poster: "/media/terrain/camion-face.webp",
+    video: null,
+    fallback: "street",
+    position: "50% 45%",
   },
   arrival: {
     id: "arrival",

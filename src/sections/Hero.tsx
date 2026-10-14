@@ -1,8 +1,9 @@
 import { Phone } from "lucide-react";
-import { company, telHref } from "@/config/company";
+import { telHref } from "@/config/company";
 import { site } from "@/config/site";
 import { MediaSlot } from "@/components/MediaSlot";
 import { HeroVan } from "@/components/HeroVan";
+import { WhatsAppIcon, WhatsAppLink } from "@/components/WhatsAppLink";
 import { media } from "@/config/media";
 import { Reveal } from "@/components/ui/Reveal";
 import { RouteForm } from "@/features/quote/RouteForm";
@@ -15,7 +16,7 @@ export function Hero() {
           <Reveal>
             <p className="eyebrow flex items-center gap-3 text-stone-600">
               <span aria-hidden className="size-1.5 rounded-full bg-lagon-600" />
-              Déménagement & transport · Lille et toute la France
+              Déménagement & transport · Montreuil
             </p>
           </Reveal>
 
@@ -39,7 +40,10 @@ export function Hero() {
                 {site.cta.advisor}
               </a>
               <span aria-hidden className="hidden h-3 w-px bg-ink/15 sm:block" />
-              <span>{company.hours.short}</span>
+              <WhatsAppLink context="estimate" location="hero" className="inline-flex items-center gap-2 font-medium text-ink underline-offset-4 hover:underline">
+                <WhatsAppIcon className="text-marine-500" />
+                Écrire sur WhatsApp
+              </WhatsAppLink>
             </div>
           </Reveal>
         </div>
@@ -58,7 +62,6 @@ export function Hero() {
             {!media.van.poster && (
               <figcaption className="mt-4 flex items-baseline justify-between gap-4 px-1 text-xs text-stone-600">
                 <span>Protection du mobilier avant chargement</span>
-                <span className="num hidden sm:inline">50°37′ N — 3°03′ E</span>
               </figcaption>
             )}
           </figure>

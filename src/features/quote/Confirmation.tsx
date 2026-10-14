@@ -8,6 +8,7 @@ import { pricingConfig } from "@/config/pricing.config";
 import { ease } from "@/config/motion";
 import { Logo } from "@/components/Logo";
 import { ButtonLink } from "@/components/ui/Button";
+import { WhatsAppIcon, WhatsAppLink } from "@/components/WhatsAppLink";
 
 const nextSteps = [
   { title: "Vérification", text: "Un conseiller relit votre inventaire et vos accès." },
@@ -70,6 +71,15 @@ export function Confirmation({
         )}
 
         <div className="mt-12 flex flex-col items-center gap-3 sm:flex-row">
+          <WhatsAppLink
+            context={kind === "callback" ? "callback" : "quote-followup"}
+            reference={reference}
+            location="confirmation"
+            className="group/btn inline-flex h-12 items-center justify-center gap-2.5 rounded-full bg-marine-700 px-6 text-[0.9375rem] font-medium text-paper transition-colors hover:bg-marine-900"
+          >
+            <WhatsAppIcon />
+            Continuer sur WhatsApp
+          </WhatsAppLink>
           <ButtonLink href="/" variant="secondary">
             Retour au site
           </ButtonLink>

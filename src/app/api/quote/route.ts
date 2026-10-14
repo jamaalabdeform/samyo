@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { quoteSchema, phoneRegex } from "@/features/quote/schema";
 import { PricingEngine } from "@/lib/pricing/engine";
-import { quoteEmailText, sendLeadEmail } from "@/lib/leadEmail";
+import { callbackEmail, quoteEmail, sendLeadEmail } from "@/lib/leadEmail";
 import { totalVolume, hasSpecialItem } from "@/features/inventory/volume";
 
 /**
@@ -76,18 +76,13 @@ export async function POST(req: Request) {
     }
   }
 
-  // Copie par e-mail à l'entreprise (canal de référence tant qu'aucune base n'est branchée)
+  // E-mail à SAMYO : canal de traitement principal (V1 sans CRM)
   try {
     if (body.kind === "quote") {
       const reasons = (payload.pricing as { reviewReasons?: string[] } | undefined)?.reviewReasons ?? [];
-      await sendLeadEmail(
-        `Devis ${ref} — ${body.draft.from.city} → ${body.draft.to.city} · ${body.draft.contact.firstName} ${body.draft.contact.lastName}`,
-        quoteEmailText(ref, body.draft, payload.volume as number, reasons),
-        body.draft.contact.email,
-      );
+      await sendLeadEmail(quoteEmail(ref, body.draft, payload.volume as number, reasons));
     } else {
-      const cb = body.callback;
-      await sendLeadEmail(`Demande de rappel ${ref} — ${cb.firstName}`, `Demande de rappel ${ref}\n\n${cb.firstName} — ${cb.phone}\nCréneau souhaité : ${cb.slot}`);
+      await sendLeadEmail(callbackEmail(ref, body.callback));
     }
   } catch (e) {
     console.error("[quote] email failed", e);

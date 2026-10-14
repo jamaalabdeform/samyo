@@ -13,10 +13,10 @@ export const site = {
   lang: "fr",
 
   seo: {
-    titleTemplate: "%s · Samyo Déménagement",
-    defaultTitle: "Samyo Déménagement & Transport — Lille, Nord et toute la France",
+    titleTemplate: "%s · SAMYO Déménagement",
+    defaultTitle: "SAMYO Déménagement & Transport — Montreuil",
     description:
-      "Déménagement et transport de mobilier à Lille, dans le Nord et vers toute la France. Calculez votre volume en quelques minutes et recevez un devis clair, vérifié par un conseiller.",
+      "SAMYO Déménagement, basé à Montreuil : déménagement et transport de mobilier. Calculez votre volume en quelques minutes et recevez un devis clair, vérifié par un conseiller.",
   },
 
   /** Libellés des CTA — centralisés pour tests A/B futurs */
@@ -28,8 +28,6 @@ export const site = {
   },
 
   flags: {
-    /** Mention « coordonnées provisoires » dans le pied de page, à retirer avec les vraies données */
-    provisionalNotice: true,
     /**
      * Affiche un repère discret sur les emplacements média non encore produits
      * (utile en revue interne, à désactiver pour la présentation client).

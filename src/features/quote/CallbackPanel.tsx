@@ -8,6 +8,7 @@ import { z } from "zod";
 import { company, telHref } from "@/config/company";
 import { routes } from "@/config/site";
 import { Logo } from "@/components/Logo";
+import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { Button } from "@/components/ui/Button";
 import { Checkbox, FieldError, Segmented, TextField } from "@/components/ui/form";
 import { leadRepository, type Lead } from "@/features/admin/leads";
@@ -91,9 +92,12 @@ export function CallbackPanel() {
             Ou appelez-nous directement au{" "}
             <a href={telHref} className="num font-medium text-ink underline underline-offset-4">
               {company.phone.display}
-            </a>
-            <br />
-            {company.hours.display}
+            </a>{" "}
+            ou écrivez-nous sur{" "}
+            <WhatsAppLink context="callback" location="callback_panel" className="font-medium text-ink underline underline-offset-4">
+              WhatsApp
+            </WhatsAppLink>
+            .
           </p>
         </div>
 

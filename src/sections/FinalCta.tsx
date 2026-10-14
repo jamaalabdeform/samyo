@@ -4,6 +4,7 @@ import { routes, site } from "@/config/site";
 import { ButtonLink } from "@/components/ui/Button";
 import { MediaSlot } from "@/components/MediaSlot";
 import { Reveal } from "@/components/ui/Reveal";
+import { WhatsAppIcon, WhatsAppLink } from "@/components/WhatsAppLink";
 
 export function FinalCta() {
   return (
@@ -28,6 +29,14 @@ export function FinalCta() {
               <Phone className="size-4" strokeWidth={1.6} aria-hidden />
               <span className="num">{company.phone.display}</span>
             </a>
+            <WhatsAppLink
+              location="final_cta"
+              context="estimate"
+              className="inline-flex h-14 items-center gap-2 rounded-full px-7 text-paper shadow-[inset_0_0_0_1px_rgb(251_249_244/0.28)] transition-shadow hover:shadow-[inset_0_0_0_1px_rgb(251_249_244/0.6)]"
+            >
+              <WhatsAppIcon />
+              WhatsApp
+            </WhatsAppLink>
           </Reveal>
         </div>
       </div>

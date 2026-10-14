@@ -36,7 +36,7 @@ export function RouteForm({ className }: { className?: string }) {
       )}
       aria-label="Commencer une estimation"
     >
-      <CityField label="Départ" placeholder="Lille" value={from} onChange={setFrom} listId={listId} />
+      <CityField label="Départ" placeholder="Montreuil" value={from} onChange={setFrom} listId={listId} />
       <div aria-hidden className="mx-5 h-px bg-ink/8 sm:hidden" />
       <CityField label="Arrivée" placeholder="Paris" value={to} onChange={setTo} listId={listId} divider />
       <datalist id={listId}>

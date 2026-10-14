@@ -27,7 +27,7 @@ export function Trust() {
           />
           <dl className="mt-14 divide-y divide-ink/10 border-y border-ink/10">
             {principles.map((p, i) => (
-              <Reveal key={p.word} delay={i * 0.04} className="grid gap-2 py-7 sm:grid-cols-[11rem_1fr] sm:gap-8">
+              <Reveal key={p.word} delay={i * 0.04} className="grid gap-2 py-7 sm:grid-cols-[14rem_1fr] sm:gap-8">
                 <dt className="font-display text-2xl text-ink">{p.word}</dt>
                 <dd className="text-[0.9375rem] leading-relaxed text-stone-600 sm:pt-1.5">{p.text}</dd>
               </Reveal>

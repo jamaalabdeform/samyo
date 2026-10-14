@@ -1,9 +1,10 @@
 # SAMYO Déménagement & Transport — documentation technique
 
-Maquette fonctionnelle de l'écosystème digital de SAMYO : site vitrine orienté conversion, **calculateur de volume et demande de devis** (déménagement complet ou transport de quelques objets), et back-office de suivi des demandes.
+Site de SAMYO Déménagement (Montreuil) : site vitrine orienté conversion et **calculateur de volume avec demande de devis** (déménagement complet ou transport de quelques objets). V1 : la demande part par e-mail, la conversation continue sur WhatsApp, SAMYO traite manuellement.
 
-- **Pas de paiement en ligne.** Les acomptes sont encaissés hors site, par exemple avec un lien SumUp envoyé au client. L'admin permet seulement de cocher « acompte encaissé ».
-- **Coordonnées provisoires.** L'adresse, le téléphone, les horaires et les mentions légales sont des valeurs à remplacer (voir `docs/CLIENT-INFO-NEEDED.md`).
+- **Pas de paiement, pas de CRM, aucun prix affiché** en V1.
+- **Coordonnées réelles** dans `src/config/company.ts` ; les informations non fournies (code postal, horaires, SIRET…) restent vides et ne sont pas affichées (voir `docs/CLIENT-INFO-NEEDED.md`).
+- Passation : [`CLIENT-HANDOVER.md`](CLIENT-HANDOVER.md).
 
 Autres documents : [`CHARTE-GRAPHIQUE.md`](CHARTE-GRAPHIQUE.md) · [`DOMAINE-HEBERGEMENT.md`](DOMAINE-HEBERGEMENT.md) · [`CLIENT-INFO-NEEDED.md`](CLIENT-INFO-NEEDED.md) · [`../creative/higgsfield-prompts.md`](../creative/higgsfield-prompts.md)
 
@@ -21,15 +22,16 @@ npm run lint && npm run typecheck
 
 | Route | Rôle |
 |---|---|
-| `/` | Homepage (13 sections) |
+| `/` | Homepage |
 | `/devis` | Calculateur et demande de devis (paramètres : `de`, `vers`, `logement`, `formule`, `besoin=transport`, `rappel=1`) |
-| `/demenagement-lille` | Page SEO locale (rewrite → `/demenagement/[ville]`) |
-| `/espace-pro` | Espace entreprise (code défini par la variable `ADMIN_ACCESS_CODE`, obligatoire en production) |
+| `/demenagement-{ville}` | Page SEO locale (rewrite → `/demenagement/[ville]`), aucune publiée tant que les zones ne sont pas confirmées |
+| `/espace-pro` | Module de démonstration hors V1 (code `ADMIN_ACCESS_CODE`), non lié publiquement |
+| `/api/dev/email-preview` | Aperçu de l'e-mail de demande (`?kind=callback`, `?format=text`), désactivé en production |
 | `/api/quote` | Réception des demandes (devis et rappel) |
 
 ### Réception des demandes
 Chaque demande (devis ou rappel) passe par `/api/quote`, qui la transmet :
-- **par e-mail** à l'entreprise via Resend (`RESEND_API_KEY`, `LEAD_EMAIL_TO`, `LEAD_EMAIL_FROM`) : récapitulatif complet, avec l'adresse du client en « répondre à » ;
+- **par e-mail** à l'entreprise via Resend (`RESEND_API_KEY`, `LEAD_EMAIL_TO`, `LEAD_EMAIL_FROM`), code dans `src/lib/leadEmail.ts` : version HTML lisible + texte, boutons Appeler / WhatsApp / Répondre, adresse du client en « répondre à » ;
 - **par webhook** si `LEAD_WEBHOOK_URL` est défini (CRM, Make, n8n).
 
 L'espace `/espace-pro` affiche les demandes enregistrées dans le navigateur où elles ont été saisies. Pour centraliser les demandes de tous les visiteurs, il faudra brancher une base de données (voir §6). D'ici là, **l'e-mail fait foi**.
@@ -49,19 +51,19 @@ src/
   proxy.ts             protection de /espace-pro (ex-« middleware » dans Next 16)
   config/              company, site, media, motion, pricing.config
   data/                furnitureCatalog, services, locations, faq, cities,
-                       testimonials.demo
   components/          Header, Footer, MobileCta, MediaSlot, Logo (+ logo-paths), ui/*
   sections/            une section de homepage par fichier
   features/
     quote/             QuoteFlow, étapes, schéma zod, brouillon persistant, récapitulatif
     inventory/         InventoryPicker, calcul du volume, vues 3D et isométrique
     admin/             dépôt des leads, tableau de bord, fiche lead
-  lib/                 analytics, pricing/ (moteur + règles), seo, format
+  lib/                 analytics, leadEmail, whatsapp, pricing/ (moteur + règles), seo, format
 public/brand/          logos SVG (couleur, blanc, symbole, symbole carré)
 scripts/build-logo.py  génération du lettrage vectorisé du logo
+scripts/build-photos.py préparation des photos terrain (floutage, recadrage, WebP)
 ```
 
-**Stack :** Next.js 16 (App Router, `output: "standalone"`), React 19, TypeScript strict, Tailwind CSS 4 (tokens `@theme`), Motion, React Three Fiber (chargé à la demande), React Hook Form + Zod 4, Lucide. Polices auto-hébergées (Newsreader, Instrument Sans).
+**Stack :** Next.js 16 (App Router, `output: "standalone"`), React 19, TypeScript strict, Tailwind CSS 4 (tokens `@theme`), Motion, React Three Fiber (chargé à la demande), React Hook Form + Zod 4, Lucide. Polices auto-hébergées (Bricolage Grotesque, Figtree).
 
 ---
 
@@ -74,7 +76,8 @@ scripts/build-logo.py  génération du lettrage vectorisé du logo
 | Logos à exporter (devis, camion, réseaux) | `public/brand/*.svg` |
 | Couleurs, typographies, rayons, ombres | `src/app/globals.css` → `@theme` |
 | Libellés des CTA | `src/config/site.ts` → `cta` |
-| Mention « coordonnées provisoires » | `company.isDemo`, `site.flags.provisionalNotice` |
+| Informations légales incomplètes | `company.provisional` (pages légales en noindex) |
+| WhatsApp / Jawabot | `src/lib/whatsapp.ts`, `src/components/WhatsAppLink.tsx` |
 | Indexation Google | `NEXT_PUBLIC_INDEXABLE=1` (désactivée par défaut sur samyo.stipway.com) |
 
 Détails de la charte : `docs/CHARTE-GRAPHIQUE.md`.
@@ -107,7 +110,7 @@ Détails de la charte : `docs/CHARTE-GRAPHIQUE.md`.
 
 ---
 
-## 6. Back-office
+## 6. Espace pro (démo, hors V1)
 
 - `features/admin/leads.ts` : interface `LeadRepository`. L'implémentation actuelle stocke les leads dans le navigateur (localStorage). En production, il suffit d'une implémentation API (Supabase/Postgres, CRM) qui respecte la même interface.
 - **Statuts :** Nouveau → À rappeler → Devis préparé → Devis envoyé → Relance → Accepté / Perdu.
@@ -116,22 +119,23 @@ Détails de la charte : `docs/CHARTE-GRAPHIQUE.md`.
 
 ---
 
-## 7. Médias & Higgsfield
+## 7. Médias
 
-- `src/config/media.ts` déclare chaque emplacement. `<MediaSlot>` gère image, vidéo WebM/MP4, version mobile, chargement différé et `prefers-reduced-motion`. Sans fichier, une composition de repli s'affiche.
+- Photos terrain du client : `public/media/terrain/`, préparées par `scripts/build-photos.py` (plaques et lettrages tiers floutés).
+- `src/config/media.ts` déclare chaque emplacement (texte alternatif, cadrage `position`). `<MediaSlot>` gère image, vidéo WebM/MP4, version mobile, chargement différé et `prefers-reduced-motion`. Sans fichier, une composition de repli s'affiche.
 - Prompts de production : `creative/higgsfield-prompts.md`. Le compte Higgsfield connecté n'avait pas de crédits, donc aucun asset n'a été généré.
 
 ---
 
 ### Fourgon du hero
-- Image finale : `public/media/samyo-van-logo.webp`, générée par `python3 scripts/build-van.py` à partir de `creative/van/van-detoure.png` (fourgon détouré) et `creative/van/logo-flanc.png`. Le logo est déformé en perspective et fondu en mode « produit » sur le panneau gris du flanc. Pour recaler, modifier `QUAD` (les 4 coins de la zone) dans le script.
+- Image finale : `public/media/samyo-van-v3.webp`, générée par `python3 scripts/build-van.py` à partir de `creative/van/van-detoure.png` (fourgon détouré) et `creative/van/logo-flanc.png`. Le logo est déformé en perspective et fondu en mode « produit » sur le panneau gris du flanc. Pour recaler, modifier `QUAD` (les 4 coins de la zone) dans le script.
 - `src/components/HeroVan.tsx` affiche l'image en grand devant l'arche, avec l'ombre au sol dans l'axe des roues et une entrée douce depuis la droite.
 - Image fournie par le client comme libre de droits : **conserver la source et la licence** (usage commercial autorisé).
 - Pour utiliser une autre photo (par exemple le vrai fourgon) : la détourer (`rembg`, modèle `isnet-general-use`), remplacer `creative/van/van-detoure.png`, ajuster `QUAD`, relancer le script. Changer le nom du fichier de sortie évite les problèmes de cache.
 
 ## 8. Analytics
 
-`track(event, props)` dans `src/lib/analytics.ts`. Événements : `quote_started`, `origin_completed`, `destination_completed`, `inventory_started`, `inventory_completed`, `special_item_added`, `contact_completed`, `quote_submitted`, `cta_click`, `phone_click`, `callback_requested`.
+`track(event, props)` dans `src/lib/analytics.ts`. Événements : `quote_started`, `origin_completed`, `destination_completed`, `inventory_started`, `inventory_completed`, `special_item_added`, `contact_completed`, `quote_submitted`, `cta_click`, `phone_click`, `callback_requested`, `whatsapp_click`.
 Ils sont envoyés au `dataLayer` (GTM → GA4, Google Ads, Meta) et à l'entonnoir de l'admin. L'attribution (UTM, gclid, fbclid) est jointe à chaque lead. GTM ne se charge que si `NEXT_PUBLIC_GTM_ID` est défini. **Un bandeau de consentement est obligatoire avant tout traceur publicitaire.**
 
 ---
@@ -155,5 +159,5 @@ Voir `docs/DOMAINE-HEBERGEMENT.md` : Vercel ou VPS OVH, configuration DNS, varia
 
 - Le bleu roi est la couleur d'identité : barre supérieure, bande de réassurance, aplat derrière le visuel du hero, boutons, chiffres, appel à l'action final. Le turquoise reste un accent ponctuel (pastille d'arrivée du logo).
 - Les contraintes à vérifier sont signalées en ambre, les erreurs en rouge : on ne mélange pas les couleurs de marque et les signaux.
-- Aucune statistique, aucun avis ni aucun prix inventé. Les témoignages sont présentés comme des exemples.
+- Aucune statistique, aucun avis ni aucun prix inventé. Pas de témoignages tant qu'il n'y a pas d'avis réels.
 - La 3D n'est utilisée qu'à un seul endroit, celui où elle informe : le remplissage du camion.
