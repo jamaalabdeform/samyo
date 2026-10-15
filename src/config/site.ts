@@ -41,6 +41,9 @@ export const routes = {
   quote: "/devis",
   legal: "/mentions-legales",
   privacy: "/confidentialite",
+  terms: "/cgu",
+  about: "/qui-sommes-nous",
+  contact: "/contact",
   admin: "/espace-pro",
   city: (slug: string) => `/demenagement-${slug}`,
 } as const;

@@ -9,7 +9,7 @@ export function LegalPage({ title, children }: { title: string; children: React.
           Les informations d&apos;immatriculation de l&apos;entreprise seront ajoutées à cette page dès leur mise à jour.
         </p>
       )}
-      <div className="mt-10 space-y-4 text-[0.9375rem] leading-relaxed text-ink-2 [&_h2]:pt-6 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-ink">{children}</div>
+      <div className="mt-10 space-y-4 text-[0.9375rem] leading-relaxed text-ink-2 [&_a]:text-marine-700 [&_a]:underline [&_a]:underline-offset-4 [&_h2]:pt-6 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-ink">{children}</div>
     </div>
   );
 }

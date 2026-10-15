@@ -16,6 +16,7 @@ import { attribution, track } from "@/lib/analytics";
 import { emptyDraft } from "./types";
 import { phoneRegex } from "./schema";
 import { Confirmation } from "./Confirmation";
+import { uid } from "@/lib/format";
 
 const schema = z.object({
   firstName: z.string().trim().min(1, "Indiquez votre prénom"),
@@ -53,7 +54,7 @@ export function CallbackPanel() {
       const draft = emptyDraft();
       draft.contact = { firstName: v.firstName, lastName: "", phone: v.phone, email: "", message: `Demande de rappel — créneau : ${slots.find((s) => s.value === v.slot)?.label}`, consent: true };
       const lead: Lead = {
-        id: crypto.randomUUID(),
+        id: uid(),
         reference: data.reference,
         createdAt: new Date().toISOString(),
         status: "a-rappeler",

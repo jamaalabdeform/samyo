@@ -1,6 +1,5 @@
 import { pageMetadata } from "@/lib/seo";
 import { QuoteEntry } from "./QuoteEntry";
-import { JawabotWidget } from "@/components/JawabotWidget";
 
 export const metadata = pageMetadata({
   title: "Estimer mon déménagement",
@@ -15,12 +14,9 @@ const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v)?
 export default async function DevisPage({ searchParams }: { searchParams: Search }) {
   const sp = await searchParams;
   return (
-    <>
-      <QuoteEntry
-        callback={one(sp.rappel) === "1"}
-        params={{ from: one(sp.de), to: one(sp.vers), housing: one(sp.logement), formula: one(sp.formule), kind: one(sp.besoin) }}
-      />
-      <JawabotWidget />
-    </>
+    <QuoteEntry
+      callback={one(sp.rappel) === "1"}
+      params={{ from: one(sp.de), to: one(sp.vers), housing: one(sp.logement), formula: one(sp.formule), kind: one(sp.besoin) }}
+    />
   );
 }

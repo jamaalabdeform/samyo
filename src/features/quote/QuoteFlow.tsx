@@ -15,7 +15,7 @@ import { IsoCargo } from "@/features/inventory/IsoCargo";
 import { filledCells } from "@/features/inventory/cargo";
 import { leadRepository, makeReference, type Lead } from "@/features/admin/leads";
 import { attribution, track } from "@/lib/analytics";
-import { cn } from "@/lib/format";
+import { cn, uid } from "@/lib/format";
 import { GROUPS, activeSteps, stepIndex, validateStep, type StepDef, type StepId } from "./steps";
 import { useQuoteDraft, type InitialParams } from "./useQuoteDraft";
 import { StepLogement, StepPieces, StepTrajet } from "./steps/ProjectSteps";
@@ -85,7 +85,7 @@ export default function QuoteFlow({ params }: { params: InitialParams }) {
       if (!res.ok || !data.ok) throw new Error(data.error ?? "submit_failed");
 
       const lead: Lead = {
-        id: crypto.randomUUID(),
+        id: uid(),
         reference: data.reference ?? makeReference(),
         createdAt: new Date().toISOString(),
         status: "nouveau",

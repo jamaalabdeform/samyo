@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { housingById, type HousingTypeId } from "@/data/furnitureCatalog";
 import { emptyDraft, type QuoteDraft, type QuoteKind } from "./types";
 import type { StepId } from "./steps";
+import { cloneJson } from "@/lib/format";
 
 /**
  * État du devis en cours. Persisté en sessionStorage : un rechargement ou un
@@ -99,7 +100,7 @@ export function useQuoteDraft(params: InitialParams) {
 
   const update = useCallback((fn: (d: QuoteDraft) => void) => {
     setState((s) => {
-      const draft = structuredClone(s.draft);
+      const draft = cloneJson(s.draft);
       fn(draft);
       return { ...s, draft };
     });

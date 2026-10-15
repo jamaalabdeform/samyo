@@ -49,7 +49,7 @@ Aperçu sans envoyer de demande (développement) : `/api/dev/email-preview` (dev
 
 - Tous les boutons passent par `src/lib/whatsapp.ts` : lien `wa.me` vers le numéro de SAMYO, avec un message pré-rempli selon l'endroit (devis, rappel, suivi d'une demande avec sa référence…).
 - Changer de numéro : `NEXT_PUBLIC_WHATSAPP_NUMBER=+33…` (ou `company.ts`).
-- **Widget Jawabot** : la fenêtre de discussion est chargée sur les pages publiques et le calculateur (`src/components/JawabotWidget.tsx`, script `jawabot.stipway.com/widget.js`). Clé : `NEXT_PUBLIC_JAWABOT_WIDGET_KEY` (valeur par défaut intégrée), `off` pour le désactiver. Il n'est pas chargé dans `/espace-pro`.
+- **Widget Jawabot** : la fenêtre de discussion est chargée sur les pages publiques (pas sur le calculateur, où la bulle masquerait le bouton « Continuer » sur mobile) (`src/components/JawabotWidget.tsx`, script `jawabot.stipway.com/widget.js`). Clé : `NEXT_PUBLIC_JAWABOT_WIDGET_KEY` (valeur par défaut intégrée), `off` pour le désactiver. Il n'est pas chargé dans `/espace-pro`.
 - **Jawabot sur WhatsApp** : s'il répond sur le même numéro WhatsApp Business, rien à changer dans le site. S'il fournit un lien dédié, le mettre dans `NEXT_PUBLIC_JAWABOT_URL` : tous les boutons l'utiliseront. Ne pas annoncer d'assistant automatique sur le site tant qu'il n'est pas actif.
 
 ## 5. Photos
@@ -94,17 +94,27 @@ Commandes : `npm run dev` · `npm run build` · `npm run lint` · `npm run typec
 | `NEXT_PUBLIC_JAWABOT_WIDGET_KEY` | non | clé du widget Jawabot (`off` pour le masquer) |
 | `ADMIN_ACCESS_CODE` | si `/espace-pro` est utilisé | code d'accès au module démo |
 | `LEAD_WEBHOOK_URL` | non | copie JSON de chaque demande (Make, n8n, futur CRM) |
-| `NEXT_PUBLIC_GTM_ID` | non | Google Tag Manager (bandeau de consentement requis) |
+| `NEXT_PUBLIC_GA_ID` | non | Google Analytics 4, chargé après accord du bandeau cookies |
+| `NEXT_PUBLIC_GTM_ID` | non | Google Tag Manager, même règle |
 | `ENABLE_EMAIL_PREVIEW` | non | aperçu e-mail en production (déconseillé) |
 | `NEXT_PUBLIC_VAN_IMAGE` | non | autre image de fourgon pour le hero |
 
 Aucune clé ne doit être écrite dans le dépôt : uniquement dans Vercel (ou `.env.local`, ignoré par git).
 
-## 10. Pages locales (SEO)
+## 10. Mesure d'audience
+
+- **Vercel Web Analytics** (déjà intégré, sans cookie donc sans bandeau) : l'activer dans Vercel → projet → onglet **Analytics** → Enable. Visites, pages vues, provenance, appareils.
+- **Google Analytics 4** : créer une propriété GA4, copier l'ID `G-…` dans `NEXT_PUBLIC_GA_ID`, redéployer. Un bandeau de consentement apparaît alors automatiquement (obligatoire en France, CNIL) ; GA n'est chargé qu'après « Accepter ». Lien « Gestion des cookies » en bas de page.
+
+## 11. Pages du site
+
+Accueil · `/devis` (calculateur) · `/qui-sommes-nous` · `/contact` · `/mentions-legales` · `/cgu` · `/confidentialite`. Menu : Services, Formules, Fonctionnement, Qui sommes-nous, Contact.
+
+## 12. Pages locales (SEO)
 
 `src/data/locations.ts` est vide : aucune zone d'intervention n'a été confirmée. Pour publier une page `/demenagement-{ville}`, ajouter une entrée avec un contenu réel (contraintes d'accès, quartiers, stationnement) et `published: true`. Elle entre automatiquement dans le sitemap et les données structurées.
 
-## 11. Évolutions prévues (hors V1)
+## 13. Évolutions prévues (hors V1)
 
 - CRM / base de données : implémenter `LeadRepository` (`src/features/admin/leads.ts`) côté serveur, ou brancher `LEAD_WEBHOOK_URL`.
 - Calcul de prix : grille dans `src/config/pricing.config.ts`, moteur dans `src/lib/pricing/`.

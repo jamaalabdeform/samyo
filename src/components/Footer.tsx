@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CookieSettingsLink } from "./Consent";
 import { company, mailHref, telHref } from "@/config/company";
 import { routes, site } from "@/config/site";
 import { Logo } from "./Logo";
@@ -71,20 +72,27 @@ export function Footer() {
       </div>
 
       <div className="container-page">
-      <div className="flex flex-col gap-4 border-t border-paper/10 py-7 text-xs text-paper/50 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-5 border-t border-paper/10 py-8 text-sm text-paper/70 md:flex-row md:items-center md:justify-between">
         <p>
           © {year} {company.name}
         </p>
-        <ul className="flex gap-6">
+        <ul className="flex flex-wrap gap-x-6 gap-y-2">
+          {[
+            { href: routes.about, label: "Qui sommes-nous" },
+            { href: routes.contact, label: "Contact" },
+            { href: "/#questions", label: "FAQ" },
+            { href: routes.legal, label: "Mentions légales" },
+            { href: routes.terms, label: "CGU" },
+            { href: routes.privacy, label: "Confidentialité" },
+          ].map((l) => (
+            <li key={l.href}>
+              <Link href={l.href} className="underline-offset-4 hover:text-paper hover:underline">
+                {l.label}
+              </Link>
+            </li>
+          ))}
           <li>
-            <Link href={routes.legal} className="hover:text-paper">
-              Mentions légales
-            </Link>
-          </li>
-          <li>
-            <Link href={routes.privacy} className="hover:text-paper">
-              Confidentialité
-            </Link>
+            <CookieSettingsLink className="underline-offset-4 hover:text-paper hover:underline" />
           </li>
         </ul>
       </div>

@@ -14,10 +14,11 @@ import { WhatsAppIcon, WhatsAppLink } from "./WhatsAppLink";
 import { Logo } from "./Logo";
 
 const nav = [
-  { href: "/#fonctionnement", label: "Fonctionnement" },
-  { href: "/#formules", label: "Formules" },
   { href: "/#services", label: "Services" },
-  { href: "/#questions", label: "Questions" },
+  { href: "/#formules", label: "Formules" },
+  { href: "/#fonctionnement", label: "Fonctionnement" },
+  { href: "/qui-sommes-nous", label: "Qui sommes-nous" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Header() {

@@ -32,7 +32,11 @@ export default function Confidentialite() {
         réclamation auprès de la CNIL.
       </p>
       <h2>Mesure d&apos;audience</h2>
-      <p>Ce site n&apos;utilise pas de traceur publicitaire. Si un outil de mesure est ajouté, votre accord vous sera demandé au préalable.</p>
+      <p>
+        Ce site n&apos;utilise pas de traceur publicitaire. La fréquentation est mesurée par Vercel Web Analytics, de façon anonyme et sans cookie.
+        Si Google Analytics est activé, il n&apos;est chargé qu&apos;après votre accord, que vous pouvez modifier à tout moment via le lien « Gestion
+        des cookies » en bas de page.
+      </p>
     </LegalPage>
   );
 }
