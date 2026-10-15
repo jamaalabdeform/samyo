@@ -24,4 +24,5 @@ Documentation :
 - [`docs/DOCUMENTATION-TECHNIQUE.md`](docs/DOCUMENTATION-TECHNIQUE.md) : architecture, calculateur, tarification, SEO
 - [`docs/CHARTE-GRAPHIQUE.md`](docs/CHARTE-GRAPHIQUE.md) : logo, couleurs, typographies, ton
 - [`docs/DOMAINE-HEBERGEMENT.md`](docs/DOMAINE-HEBERGEMENT.md) : Vercel, Cloudflare, domaine définitif, VPS
+- [`docs/GOOGLE-COMPTE-FICHE-ANALYTICS.md`](docs/GOOGLE-COMPTE-FICHE-ANALYTICS.md) : compte Google, fiche Google, Google Analytics
 - [`docs/CLIENT-INFO-NEEDED.md`](docs/CLIENT-INFO-NEEDED.md) : informations encore attendues de SAMYO

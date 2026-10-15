@@ -104,7 +104,7 @@ Aucune clé ne doit être écrite dans le dépôt : uniquement dans Vercel (ou `
 ## 10. Mesure d'audience
 
 - **Vercel Web Analytics** (déjà intégré, sans cookie donc sans bandeau) : l'activer dans Vercel → projet → onglet **Analytics** → Enable. Visites, pages vues, provenance, appareils.
-- **Google Analytics 4** : créer une propriété GA4, copier l'ID `G-…` dans `NEXT_PUBLIC_GA_ID`, redéployer. Un bandeau de consentement apparaît alors automatiquement (obligatoire en France, CNIL) ; GA n'est chargé qu'après « Accepter ». Lien « Gestion des cookies » en bas de page.
+- **Google Analytics 4** (procédure complète, avec la fiche Google : `docs/GOOGLE-COMPTE-FICHE-ANALYTICS.md`) : créer une propriété GA4, copier l'ID `G-…` dans `NEXT_PUBLIC_GA_ID`, redéployer. Un bandeau de consentement apparaît alors automatiquement (obligatoire en France, CNIL) ; GA n'est chargé qu'après « Accepter ». Lien « Gestion des cookies » en bas de page.
 
 ## 11. Pages du site
 
