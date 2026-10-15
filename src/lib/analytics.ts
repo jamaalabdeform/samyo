@@ -30,6 +30,7 @@ type Adapter = (event: AnalyticsEvent, props: EventProps) => void;
 declare global {
   interface Window {
     dataLayer?: Array<Record<string, unknown>>;
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -40,6 +41,10 @@ const adapters: Adapter[] = [
   (event, props) => {
     window.dataLayer = window.dataLayer ?? [];
     window.dataLayer.push({ event, ...props, ...attribution() });
+  },
+  // Google Analytics 4 direct (gtag), présent seulement après consentement
+  (event, props) => {
+    window.gtag?.("event", event, props);
   },
   // Entonnoir local (démo)
   (event) => {

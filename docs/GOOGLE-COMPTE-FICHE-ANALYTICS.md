@@ -25,7 +25,7 @@ Objectif : SAMYO possède **son** compte Google, **sa** fiche Google (Maps / rec
    Le bandeau de consentement apparaît alors automatiquement ; GA n'est chargé qu'après « Accepter » (obligation CNIL).
 5. Admin → Gestion des accès → ajouter l'agence en **Éditeur** (ou Lecteur).
 6. Admin → Événements → marquer `quote_submitted` (demande de devis envoyée) et `callback_requested` comme **événements clés** : ce sont les conversions du site. `phone_click` et `whatsapp_click` sont aussi remontés.
-   Ces événements passent par le `dataLayer` : pour qu'ils apparaissent dans GA4 avec leurs noms, le plus simple est d'utiliser Google Tag Manager (`NEXT_PUBLIC_GTM_ID`) avec un déclencheur « Événement personnalisé » par nom.
+   Le site envoie directement ces événements à GA4 (après consentement) : ils apparaissent dans Rapports → Engagement → Événements quelques heures après les premières visites.
 7. Lier la fiche Google et, plus tard, Google Ads et la Search Console à cette propriété.
 
 ## 4. Search Console (recommandé)
