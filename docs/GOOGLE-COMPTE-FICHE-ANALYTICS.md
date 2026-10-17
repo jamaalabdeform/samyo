@@ -7,7 +7,7 @@ Objectif : SAMYO possède **son** compte Google, **sa** fiche Google (Maps / rec
    - Idéalement avec l'adresse pro `contact@samyo-demenagement.fr` une fois créée (« Utiliser mon adresse e-mail actuelle ») ; à défaut, le Gmail du gérant.
 2. Activer la validation en deux étapes et noter les codes de secours. Le client garde le mot de passe.
 
-## 2. Fiche Google (Google Business Profile)
+## 2. Fiche Google (Google Business Profile, ex « Google My Business »)
 1. business.google.com → « Gérer maintenant » → nom : **SAMYO Déménagement**.
 2. Catégorie principale : **Déménageur** (secondaires possibles : Service de transport de meubles, Garde-meubles seulement si le service existe).
 3. Adresse : 17 place Général de Gaulle, Montreuil (code postal à indiquer). Si les clients ne viennent pas sur place : choisir « Je livre des produits et services à mes clients » et **masquer l'adresse**, puis zones desservies : Paris, Seine-Saint-Denis, Val-de-Marne, Hauts-de-Seine, Île-de-France.
