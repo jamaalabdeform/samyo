@@ -23,13 +23,13 @@ Légende : ✅ déjà fait dans le site · 🔲 à faire · 👤 action du clien
 
 ---
 
-## Phase 1 — Mise en ligne sur le domaine définitif (semaine 1)
+## Phase 1 — Mise en ligne sur le domaine définitif (semaine 1) — ✅ en ligne sur www.samyo-demenagement.com
 
-1. 👤 Acheter **samyo-demenagement.fr** (+ `.com` en redirection). Éviter le domaine accentué.
+1. ✅ Domaine **www.samyo-demenagement.com** actif (le `.fr` peut être acheté en redirection pour protéger la marque).
 2. 🛠 Brancher le domaine sur Vercel, HTTPS automatique, rediriger `www` → domaine principal (ou l'inverse, un seul des deux).
-3. 🛠 Variables Vercel : `NEXT_PUBLIC_SITE_URL=https://samyo-demenagement.fr` et **`NEXT_PUBLIC_INDEXABLE=1`** → redéployer.
-4. 🛠 Rediriger `samyo.stipway.com` (301) vers le domaine définitif.
-5. 👤 Créer `contact@samyo-demenagement.fr` (déjà affichée sur le site).
+3. ✅ URL canonique par défaut `https://www.samyo-demenagement.com` ; indexation **automatique en production Vercel** (`NEXT_PUBLIC_INDEXABLE=0` pour la couper).
+4. ✅ `samyo.stipway.com` redirige (301) vers le domaine définitif (si ce domaine reste attaché au projet Vercel).
+5. 👤 Créer **`contact@samyo-demenagement.com`** (adresse affichée sur le site) — boîte ou redirection vers le Gmail du gérant.
 6. 🛠 Vérifier : `https://samyo-demenagement.fr/robots.txt` autorise l'exploration, `sitemap.xml` contient les bonnes URL.
 
 ## Phase 2 — Outils Google (semaine 1)
@@ -37,7 +37,7 @@ Légende : ✅ déjà fait dans le site · 🔲 à faire · 👤 action du clien
 Procédure détaillée : `docs/GOOGLE-COMPTE-FICHE-ANALYTICS.md`.
 
 1. 👤 Compte Google au nom de SAMYO.
-2. 👤🛠 **Google Search Console** : propriété « Domaine » (enregistrement TXT chez le registrar) → envoyer `sitemap.xml` → demander l'indexation de l'accueil, `/devis`, `/contact`, `/qui-sommes-nous`.
+2. 👤🛠 **Google Search Console** : propriété « Domaine » (enregistrement TXT chez le registrar) **ou** « Préfixe d'URL » avec la balise HTML (coller le code dans `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`, déjà géré par le site) → envoyer `https://www.samyo-demenagement.com/sitemap.xml` → demander l'indexation de l'accueil, `/devis`, `/contact`, `/qui-sommes-nous`.
 3. 👤🛠 **Google Analytics 4** : ID `G-…` → `NEXT_PUBLIC_GA_ID` ; marquer `quote_submitted` et `callback_requested` comme événements clés.
 4. 🛠 Lier Search Console ↔ Analytics.
 5. 🔲 Bing Webmaster Tools : import direct depuis Search Console (5 minutes, ~5 % du trafic en France).
@@ -64,7 +64,9 @@ Procédure détaillée : `docs/GOOGLE-COMPTE-FICHE-ANALYTICS.md`.
 
 > *« Bonjour [Prénom], merci pour votre confiance aujourd'hui ! Si vous êtes satisfait, un petit avis nous aiderait beaucoup : [lien]. Bonne installation, l'équipe SAMYO. »*
 
-## Phase 5 — Pages locales (mois 1 à 3) — le levier n°2
+## Phase 5 — Pages locales (mois 1 à 3) — le levier n°2 — ✅ 6 villes publiées
+
+✅ En ligne : `/demenagement-montreuil`, `/demenagement-paris`, `/demenagement-vincennes`, `/demenagement-bagnolet`, `/demenagement-rosny-sous-bois`, `/demenagement-fontenay-sous-bois` — chacune avec accès spécifiques, secteurs, stationnement, FAQ locale (données FAQPage), maillage vers les autres villes, section « Zones d'intervention » sur l'accueil et liens en pied de page. 👤 À faire relire par le client (secteurs, contraintes réelles). Prochaines villes : Saint-Denis, Pantin, Noisy-le-Sec, Romainville, Créteil, Saint-Maur-des-Fossés, Ivry-sur-Seine.
 
 Le site est prêt : chaque ville ajoutée dans `src/data/locations.ts` crée une page `/demenagement-{ville}`, l'ajoute au sitemap et aux données structurées.
 
@@ -79,7 +81,9 @@ Le site est prêt : chaque ville ajoutée dans `src/data/locations.ts` crée une
 3. 🛠 Rythme : 2 à 4 pages par mois, d'abord les villes où SAMYO travaille le plus.
 4. 🛠 Maillage : lien depuis l'accueil (« Nos zones ») et entre villes voisines.
 
-## Phase 6 — Pages services (mois 2 à 3)
+## Phase 6 — Pages services (mois 2 à 3) — ✅ 2 pages publiées
+
+✅ En ligne : `/transport-de-meubles` et `/demenagement-longue-distance` (données Service + FAQPage, CTA vers le bon parcours du calculateur, liens depuis la section Services). Les autres pages attendent la validation des services.
 
 Une page dédiée par prestation réellement proposée (à valider par le client) :
 - `/transport-de-meubles` (canapé, armoire, achat Leboncoin…) — forte demande, peu de concurrence

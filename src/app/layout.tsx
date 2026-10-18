@@ -24,6 +24,8 @@ export const metadata: Metadata = {
   description: site.seo.description,
   formatDetection: { telephone: false },
   robots: site.indexable ? undefined : { index: false, follow: false },
+  // Search Console : méthode « balise HTML » (sinon vérification DNS du domaine)
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } } : {}),
 };
 
 export const viewport: Viewport = {

@@ -10,6 +10,7 @@ import { Trust } from "@/sections/Trust";
 import { Transparency } from "@/sections/Transparency";
 import { Gallery } from "@/sections/Gallery";
 import { Faq } from "@/sections/Faq";
+import { Zones } from "@/sections/Zones";
 import { FinalCta } from "@/sections/FinalCta";
 
 export const metadata = pageMetadata({ path: "/" });
@@ -28,6 +29,7 @@ export default function HomePage() {
       <Trust />
       <Transparency />
       <Gallery />
+      <Zones />
       <Faq />
       <FinalCta />
     </>

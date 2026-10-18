@@ -64,7 +64,7 @@ export const company = {
    * ⚠ La boîte (ou une redirection vers leadInbox) doit exister sur le
    * domaine avant la mise en ligne. Remplaçable via NEXT_PUBLIC_CONTACT_EMAIL.
    */
-  email: env(process.env.NEXT_PUBLIC_CONTACT_EMAIL) ?? "contact@samyo-demenagement.fr",
+  email: env(process.env.NEXT_PUBLIC_CONTACT_EMAIL) ?? "contact@samyo-demenagement.com",
 
   /**
    * Boîte de réception réelle des demandes du site (non affichée), utilisée

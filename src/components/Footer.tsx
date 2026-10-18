@@ -2,6 +2,7 @@ import Link from "next/link";
 import { CookieSettingsLink } from "./Consent";
 import { company, mailHref, telHref } from "@/config/company";
 import { routes, site } from "@/config/site";
+import { publishedLocations } from "@/data/locations";
 import { Logo } from "./Logo";
 import { WhatsAppIcon, WhatsAppLink } from "./WhatsAppLink";
 
@@ -72,6 +73,27 @@ export function Footer() {
       </div>
 
       <div className="container-page">
+      <nav aria-label="Zones et services" className="border-t border-paper/10 py-6 text-sm text-paper/60">
+        <ul className="flex flex-wrap gap-x-5 gap-y-2">
+          {publishedLocations.map((l) => (
+            <li key={l.slug}>
+              <Link href={routes.city(l.slug)} className="hover:text-paper">
+                Déménagement {l.name}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Link href={routes.furniture} className="hover:text-paper">
+              Transport de meubles
+            </Link>
+          </li>
+          <li>
+            <Link href={routes.longDistance} className="hover:text-paper">
+              Déménagement longue distance
+            </Link>
+          </li>
+        </ul>
+      </nav>
       <div className="flex flex-col gap-5 border-t border-paper/10 py-8 text-sm text-paper/70 md:flex-row md:items-center md:justify-between">
         <p>
           © {year} {company.name}

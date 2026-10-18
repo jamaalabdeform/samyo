@@ -21,7 +21,8 @@ export function pageMetadata({ title, description, path, noindex }: { title?: st
       description: desc,
     },
     twitter: { card: "summary_large_image", title: title ?? site.seo.defaultTitle, description: desc },
-    robots: noindex ? { index: false, follow: false } : undefined,
+    // jamais `robots: undefined` : cela écraserait le réglage global (noindex hors production)
+    ...(noindex || !site.indexable ? { robots: { index: false, follow: false } } : {}),
   };
 }
 

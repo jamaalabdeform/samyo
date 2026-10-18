@@ -16,6 +16,9 @@ const icons: Record<Service["icon"], LucideIcon> = {
   truck: Truck,
 };
 
+/** Services qui ont une page dédiée (SEO) */
+const pages: Record<string, string> = { transport: routes.furniture, "longue-distance": routes.longDistance };
+
 export function Services() {
   return (
     <section id="services" aria-labelledby="services-title" className="bg-paper py-section">
@@ -30,7 +33,7 @@ export function Services() {
               lead="Chaque demande est différente. Nous adaptons l'équipe, le véhicule et le matériel à ce que vous déménagez."
             />
             <Link
-              href={`${routes.quote}?besoin=transport`}
+              href={routes.furniture}
               className="group mt-8 inline-flex items-center gap-2 text-[0.9375rem] font-medium text-marine-700 underline decoration-marine-700/25 underline-offset-[6px] transition-colors hover:decoration-marine-700"
             >
               Quelques meubles à transporter ? Demander un transport
@@ -47,6 +50,11 @@ export function Services() {
                 <Icon className="size-6 text-marine-700 transition-transform duration-500 ease-[var(--ease-out)] group-hover:-translate-y-0.5" strokeWidth={1.4} aria-hidden />
                 <h3 className="mt-10 text-lg font-semibold text-ink">{s.title}</h3>
                 <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-stone-600">{s.text}</p>
+                {pages[s.id] && (
+                  <Link href={pages[s.id]} className="mt-4 inline-flex text-sm font-medium text-marine-700 underline-offset-4 hover:underline">
+                    En savoir plus
+                  </Link>
+                )}
               </Reveal>
             );
           })}

@@ -2,13 +2,14 @@
  * Réglages transverses du site : URL, indexation, SEO par défaut, drapeaux.
  */
 export const site = {
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://samyo.stipway.com").replace(/\/$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://www.samyo-demenagement.com").replace(/\/$/, ""),
   /**
-   * Indexation par les moteurs : désactivée par défaut (adresse de
-   * prévisualisation samyo.stipway.com). Mettre NEXT_PUBLIC_INDEXABLE=1 une fois
-   * le site servi sur son domaine définitif.
+   * Indexation : active en production Vercel (domaine www.samyo-demenagement.com).
+   * NEXT_PUBLIC_INDEXABLE=0 pour la couper, =1 pour la forcer hors Vercel.
+   * Les aperçus Vercel (preview) restent non indexés.
    */
-  indexable: process.env.NEXT_PUBLIC_INDEXABLE === "1",
+  indexable:
+    process.env.NEXT_PUBLIC_INDEXABLE === "1" || (process.env.NEXT_PUBLIC_INDEXABLE !== "0" && process.env.VERCEL_ENV === "production"),
   locale: "fr_FR",
   lang: "fr",
 
@@ -44,6 +45,8 @@ export const routes = {
   terms: "/cgu",
   about: "/qui-sommes-nous",
   contact: "/contact",
+  furniture: "/transport-de-meubles",
+  longDistance: "/demenagement-longue-distance",
   admin: "/espace-pro",
   city: (slug: string) => `/demenagement-${slug}`,
 } as const;

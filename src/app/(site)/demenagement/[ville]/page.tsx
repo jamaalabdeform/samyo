@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
-import { company } from "@/config/company";
+import { addressLine, company } from "@/config/company";
 import { routes, site } from "@/config/site";
 import { locationBySlug, publishedLocations } from "@/data/locations";
 import { JsonLd } from "@/components/JsonLd";
@@ -10,7 +10,6 @@ import { Reveal } from "@/components/ui/Reveal";
 import { RouteForm } from "@/features/quote/RouteForm";
 import { breadcrumbJsonLd, organizationJsonLd, pageMetadata } from "@/lib/seo";
 import { HowItWorks } from "@/sections/HowItWorks";
-import { Faq } from "@/sections/Faq";
 import { FinalCta } from "@/sections/FinalCta";
 
 /**
@@ -29,8 +28,8 @@ export async function generateMetadata({ params }: { params: Promise<{ ville: st
   const loc = locationBySlug(ville);
   if (!loc) return {};
   return pageMetadata({
-    title: `Déménagement à ${loc.name}`,
-    description: `Déménageur à ${loc.name} (${loc.postalCode}) : inventaire en ligne, accès et stationnement anticipés, devis vérifié par un conseiller. Départ ou arrivée à ${loc.name}.`,
+    title: `Déménagement ${loc.name} (${loc.postalCode}) · déménageur`,
+    description: `Déménageur à ${loc.name} (${loc.department}) basé à Montreuil : estimation du volume en ligne, accès et stationnement anticipés, devis clair vérifié par un conseiller. Transport de meubles et déménagement vers toute la France.`,
     path: routes.city(loc.slug),
   });
 }
@@ -44,6 +43,13 @@ export default async function CityPage({ params }: { params: Promise<{ ville: st
   return (
     <>
       <JsonLd data={{ ...organizationJsonLd(), "@id": `${site.url}${routes.city(loc.slug)}#business`, areaServed: { "@type": "City", name: loc.name } }} />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: c.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+        }}
+      />
       <JsonLd data={breadcrumbJsonLd([{ name: "Accueil", path: "/" }, { name: `Déménagement à ${loc.name}`, path: routes.city(loc.slug) }])} />
 
       <section className="pt-[var(--header-h)]">
@@ -68,7 +74,7 @@ export default async function CityPage({ params }: { params: Promise<{ ville: st
           </div>
           <Reveal className="lg:col-span-4 lg:col-start-9">
             <div className="rounded-[var(--radius-lg)] bg-paper p-8 shadow-[var(--shadow-hairline)]">
-              <p className="eyebrow text-stone-600">Quartiers desservis</p>
+              <p className="eyebrow text-stone-600">Secteurs desservis</p>
               <ul className="mt-5 flex flex-wrap gap-2">
                 {c.neighbourhoods.map((n) => (
                   <li key={n} className="rounded-full bg-stone-100 px-3 py-1.5 text-sm">
@@ -77,7 +83,7 @@ export default async function CityPage({ params }: { params: Promise<{ ville: st
                 ))}
               </ul>
               <p className="mt-8 text-sm text-stone-600">
-                {company.name} · {company.address.street}, {company.address.postalCode} {company.address.city}
+                {company.name} · {addressLine}
               </p>
             </div>
           </Reveal>
@@ -98,6 +104,10 @@ export default async function CityPage({ params }: { params: Promise<{ ville: st
                 </li>
               ))}
             </ul>
+            <div className="mt-10 rounded-[var(--radius-md)] border-l-4 border-pistache-400 bg-ivory p-6">
+              <h3 className="font-semibold text-ink">Stationnement du camion</h3>
+              <p className="mt-2 text-[0.9375rem] leading-relaxed text-stone-600">{c.parking}</p>
+            </div>
             <p className="mt-8 text-sm text-stone-600">{c.note}</p>
             <ButtonLink href={routes.quote + `?de=${encodeURIComponent(loc.name)}`} className="mt-10" arrow>
               {site.cta.primary}
@@ -106,8 +116,42 @@ export default async function CityPage({ params }: { params: Promise<{ ville: st
         </div>
       </section>
 
+      <section aria-labelledby="faq-locale" className="py-section">
+        <div className="container-page grid gap-12 lg:grid-cols-12">
+          <h2 id="faq-locale" className="font-display text-4xl lg:col-span-5">
+            Déménager à {loc.name} : vos questions.
+          </h2>
+          <dl className="space-y-8 lg:col-span-6 lg:col-start-7">
+            {c.faq.map((f) => (
+              <div key={f.q}>
+                <dt className="text-lg font-semibold text-ink">{f.q}</dt>
+                <dd className="mt-2 text-[0.9375rem] leading-relaxed text-stone-600">{f.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div className="container-page mt-16">
+          <p className="eyebrow text-stone-600">Nous intervenons aussi à</p>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {publishedLocations
+              .filter((l) => l.slug !== loc.slug)
+              .map((l) => (
+                <li key={l.slug}>
+                  <Link href={routes.city(l.slug)} className="inline-flex rounded-full bg-paper px-4 py-2 text-sm text-ink shadow-[var(--shadow-hairline)] hover:text-marine-700">
+                    Déménagement {l.name}
+                  </Link>
+                </li>
+              ))}
+            <li>
+              <Link href={routes.longDistance} className="inline-flex rounded-full bg-paper px-4 py-2 text-sm text-ink shadow-[var(--shadow-hairline)] hover:text-marine-700">
+                Déménagement vers toute la France
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <HowItWorks />
-      <Faq />
       <FinalCta />
     </>
   );
