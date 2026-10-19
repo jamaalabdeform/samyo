@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useEffect } from "react";
 import type { InitialParams } from "@/features/quote/useQuoteDraft";
 import { CallbackPanel } from "@/features/quote/CallbackPanel";
 
@@ -14,6 +15,14 @@ const QuoteFlow = dynamic(() => import("@/features/quote/QuoteFlow"), {
 });
 
 export function QuoteEntry({ params, callback }: { params: InitialParams; callback: boolean }) {
+  // Le widget de discussion Jawabot (chargé sur les pages du site) reste en place après la
+  // navigation vers /devis : sur mobile il recouvre les boutons du bas (« Continuer », envoi du
+  // rappel). On le masque sur toute la page, simulateur comme demande de rappel (cf. globals.css).
+  useEffect(() => {
+    document.documentElement.classList.add("quote-flow");
+    return () => document.documentElement.classList.remove("quote-flow");
+  }, []);
+
   if (callback) return <CallbackPanel />;
   return <QuoteFlow params={params} />;
 }
