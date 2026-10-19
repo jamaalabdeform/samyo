@@ -281,7 +281,15 @@
   }
 }
 
-/* Simulateur de devis : le widget Jawabot recouvrirait la barre d'actions mobile */
-html.quote-flow jawabot-widget {
+/* Widget Jawabot : sa zone fixe (~340 × 145 px) intercepte les appuis en bas d'écran.
+   On le masque quand un élément fixe du site occupe le bas de l'écran :
+   simulateur / rappel (/devis), barre d'actions mobile, bandeau cookies. */
+html.quote-flow jawabot-widget,
+html.consent-open jawabot-widget {
   display: none !important;
+}
+@media (max-width: 767px) {
+  html.mobile-cta-on jawabot-widget {
+    display: none !important;
+  }
 }

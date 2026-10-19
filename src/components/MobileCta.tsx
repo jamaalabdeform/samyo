@@ -35,6 +35,13 @@ export function MobileCta() {
     return () => io.disconnect();
   }, []);
 
+  // Tant que la barre est affichée, le widget Jawabot (zone fixe en bas d'écran) est masqué :
+  // sinon sa zone invisible intercepte les appuis sur la barre (cf. globals.css).
+  useEffect(() => {
+    document.documentElement.classList.toggle("mobile-cta-on", visible);
+    return () => document.documentElement.classList.remove("mobile-cta-on");
+  }, [visible]);
+
   return (
     <div
       className={cn(

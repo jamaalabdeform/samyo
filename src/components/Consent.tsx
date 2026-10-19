@@ -64,6 +64,13 @@ export function ConsentBanner() {
   }, []);
 
   const open = reopened || (hydrated && consent === null);
+
+  // Le widget Jawabot couvrirait les boutons du bandeau : masqué tant que le bandeau est ouvert
+  useEffect(() => {
+    const on = consentNeeded && open;
+    document.documentElement.classList.toggle("consent-open", on);
+    return () => document.documentElement.classList.remove("consent-open");
+  }, [open]);
   if (!consentNeeded || !open) return null;
   const choose = (v: "granted" | "denied") => {
     write(v);
