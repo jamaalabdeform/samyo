@@ -280,3 +280,8 @@
     animation: none;
   }
 }
+
+/* Simulateur de devis : le widget Jawabot recouvrirait la barre d'actions mobile */
+html.quote-flow jawabot-widget {
+  display: none !important;
+}

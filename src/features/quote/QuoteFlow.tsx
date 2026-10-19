@@ -41,6 +41,13 @@ export default function QuoteFlow({ params }: { params: InitialParams }) {
   const def = steps[index];
   const volume = totalVolume(draft);
 
+  // Le widget de discussion (chargé sur les pages du site) reste en place après la navigation
+  // vers /devis : sur mobile il recouvre la barre « Continuer ». On le masque pendant le simulateur.
+  useEffect(() => {
+    document.documentElement.classList.add("quote-flow");
+    return () => document.documentElement.classList.remove("quote-flow");
+  }, []);
+
   useEffect(() => {
     track("quote_started", { entry: params.from ? "hero" : params.housing ? "simulator" : "direct" }, { oncePerSession: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
