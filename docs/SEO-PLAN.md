@@ -28,7 +28,7 @@ Légende : ✅ déjà fait dans le site · 🔲 à faire · 👤 action du clien
 1. ✅ Domaine **www.samyo-demenagement.com** actif (le `.fr` peut être acheté en redirection pour protéger la marque).
 2. 🛠 Brancher le domaine sur Vercel, HTTPS automatique, rediriger `www` → domaine principal (ou l'inverse, un seul des deux).
 3. ✅ URL canonique par défaut `https://www.samyo-demenagement.com` ; indexation **automatique en production Vercel** (`NEXT_PUBLIC_INDEXABLE=0` pour la couper).
-4. ✅ `samyo.stipway.com` redirige (301) vers le domaine définitif (si ce domaine reste attaché au projet Vercel).
+4. 🛠 Redirection `samyo.stipway.com` → `www.samyo-demenagement.com` : à régler **dans Vercel** (Settings → Domains → samyo.stipway.com → « Redirect to »), pas dans le code, pour éviter toute boucle de redirection.
 5. 👤 Créer **`contact@samyo-demenagement.com`** (adresse affichée sur le site) — boîte ou redirection vers le Gmail du gérant.
 6. 🛠 Vérifier : `https://samyo-demenagement.fr/robots.txt` autorise l'exploration, `sitemap.xml` contient les bonnes URL.
 
