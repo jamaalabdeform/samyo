@@ -1,6 +1,6 @@
 import { company } from "@/config/company";
 import { cn } from "@/lib/format";
-import { DESCRIPTOR_PATH, LOGO_WIDTH, WORDMARK_PATH, WORDMARK_WIDTH } from "./logo-paths";
+import { LOGO_WIDTH, WORDMARK_PATH, WORDMARK_WIDTH } from "./logo-paths";
 
 /**
  * Logo SAMYO — le « S » est dessiné comme un trajet : départ (cercle ouvert)
@@ -31,6 +31,19 @@ function SymbolPaths({ stroke }: { stroke: string }) {
 export function Logo({ tone = "dark", compact = false, className }: { tone?: "dark" | "light"; compact?: boolean; className?: string }) {
   const fg = tone === "light" ? "var(--color-paper)" : "var(--color-marine-700)";
   const width = compact ? WORDMARK_WIDTH : LOGO_WIDTH;
+  if (!compact) {
+    // Logo complet : fichier SVG statique (mis en cache une fois) plutôt que ~20 Ko de tracés répétés dans chaque page
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={tone === "light" ? "/brand/samyo-logo-blanc.svg" : "/brand/samyo-logo.svg"}
+        alt={`${company.wordmark} ${company.descriptor}`}
+        width={LOGO_WIDTH * 4}
+        height={160}
+        className={cn("h-10 w-auto", className)}
+      />
+    );
+  }
   return (
     <svg
       viewBox={`0 0 ${width} 40`}
@@ -41,7 +54,6 @@ export function Logo({ tone = "dark", compact = false, className }: { tone?: "da
     >
       <SymbolPaths stroke={fg} />
       <path d={WORDMARK_PATH} fill={fg} />
-      {!compact && <path d={DESCRIPTOR_PATH} fill={fg} fillOpacity={tone === "light" ? 0.6 : 0.68} />}
     </svg>
   );
 }

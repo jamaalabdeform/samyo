@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
 import { media } from "@/config/media";
 import { cn } from "@/lib/format";
 
@@ -13,17 +10,11 @@ import { cn } from "@/lib/format";
  * Entrée douce depuis la droite, désactivée si l'utilisateur réduit les animations.
  */
 export function HeroVan({ className }: { className?: string }) {
-  const reduce = useReducedMotion();
   const photo = media.van.poster as string | null;
   if (!photo) return null;
 
   return (
-    <motion.div
-      className={cn("pointer-events-none select-none", className)}
-      initial={reduce ? false : { x: 48, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-    >
+    <div className={cn("animate-van-in pointer-events-none select-none", className)}>
       <div className="relative">
         {/* ombre au sol */}
         {/* ombre au sol, dans l'axe des roues (vue de trois quarts) */}
@@ -38,6 +29,6 @@ export function HeroVan({ className }: { className?: string }) {
         </svg>
         <Image src={photo} alt={media.van.alt} width={1133} height={655} priority sizes="(min-width: 1024px) 32rem, 80vw" className="relative h-auto w-full" />
       </div>
-    </motion.div>
+    </div>
   );
 }
