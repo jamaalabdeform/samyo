@@ -31,7 +31,7 @@ export default function QuoteFlow({ params }: { params: InitialParams }) {
   const { draft, step, update, goTo, reset } = useQuoteDraft(params);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [done, setDone] = useState<{ reference: string; leadId: string; message: string; firstName: string } | null>(null);
+  const [done, setDone] = useState<{ reference: string; leadId: string; message: string; firstName: string; emailTo?: string } | null>(null);
   const [dir, setDir] = useState(1);
   const topRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
@@ -100,7 +100,7 @@ export default function QuoteFlow({ params }: { params: InitialParams }) {
       };
       leadRepository.add(lead);
       track("quote_submitted", { volume, special_item: lead.specialItem, housing: draft.housing ?? "", formula: draft.formula ?? "" });
-      setDone({ reference: lead.reference, leadId: lead.id, message: data.pricing?.message ?? "", firstName: draft.contact.firstName });
+      setDone({ reference: lead.reference, leadId: lead.id, message: data.pricing?.message ?? "", firstName: draft.contact.firstName, emailTo: data.customerEmail ? draft.contact.email : undefined });
       reset();
       window.scrollTo({ top: 0 });
     } catch {

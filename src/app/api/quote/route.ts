@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { quoteSchema, phoneRegex } from "@/features/quote/schema";
 import { PricingEngine } from "@/lib/pricing/engine";
-import { callbackEmail, quoteEmail, sendLeadEmail } from "@/lib/leadEmail";
+import { callbackEmail, customerQuoteEmail, quoteEmail, sendEmail, sendLeadEmail } from "@/lib/leadEmail";
 import { totalVolume, hasSpecialItem } from "@/features/inventory/volume";
 
 /**
@@ -88,5 +88,15 @@ export async function POST(req: Request) {
     console.error("[quote] email failed", e);
   }
 
-  return NextResponse.json({ ok: true, reference: ref, pricing: payload.pricing ?? null, volume: payload.volume ?? null });
+  // Récapitulatif au client (indépendant : un échec ici ne bloque pas la demande)
+  let customerEmail = false;
+  if (body.kind === "quote" && body.draft.contact.email) {
+    try {
+      customerEmail = await sendEmail([body.draft.contact.email], customerQuoteEmail(ref, body.draft, payload.volume as number));
+    } catch (e) {
+      console.error("[quote] customer email failed", e);
+    }
+  }
+
+  return NextResponse.json({ ok: true, reference: ref, pricing: payload.pricing ?? null, volume: payload.volume ?? null, customerEmail });
 }

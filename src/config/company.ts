@@ -67,10 +67,10 @@ export const company = {
   email: env(process.env.NEXT_PUBLIC_CONTACT_EMAIL) ?? "contact@samyo-demenagement.com",
 
   /**
-   * Boîte de réception réelle des demandes du site (non affichée), utilisée
-   * si LEAD_EMAIL_TO n'est pas défini.
+   * Boîte qui reçoit les demandes du site, utilisée si LEAD_EMAIL_TO n'est pas
+   * défini (boîte Outlook créée le 20/10/2026).
    */
-  leadInbox: "oucharichafi@gmail.com",
+  leadInbox: "contact@samyo-demenagement.com",
 
   /** Horaires non communiqués : rien n'est affiché tant que c'est `null` */
   hours: null as Hours | null,

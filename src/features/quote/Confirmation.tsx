@@ -20,12 +20,14 @@ export function Confirmation({
   reference,
   message,
   firstName,
+  emailTo,
   kind = "quote",
 }: {
   reference: string;
   leadId: string;
   message: string;
   firstName?: string;
+  emailTo?: string;
   kind?: "quote" | "callback";
 }) {
   const reduce = useReducedMotion();
@@ -51,6 +53,11 @@ export function Confirmation({
           <p className="mt-6 text-sm text-stone-600">
             Référence de votre dossier : <span className="num font-semibold text-ink">{reference}</span>
           </p>
+          {emailTo && (
+            <p className="mt-2 text-sm text-stone-600">
+              Un récapitulatif vient de vous être envoyé à <span className="font-medium text-ink">{emailTo}</span> (pensez à vérifier vos courriers indésirables).
+            </p>
+          )}
         </motion.div>
 
         {kind === "quote" && (

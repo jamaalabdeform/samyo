@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { emptyDraft } from "@/features/quote/types";
 import { totalVolume } from "@/features/inventory/volume";
-import { callbackEmail, quoteEmail } from "@/lib/leadEmail";
+import { callbackEmail, customerQuoteEmail, quoteEmail } from "@/lib/leadEmail";
 
 /**
  * Aperçu de l'e-mail de demande (développement / staging uniquement).
  * /api/dev/email-preview            → devis d'exemple (HTML)
  * /api/dev/email-preview?kind=callback
+ * /api/dev/email-preview?kind=client   → récapitulatif envoyé au client
  * /api/dev/email-preview?format=text
  * Désactivé en production, sauf si ENABLE_EMAIL_PREVIEW=1.
  */
@@ -34,7 +35,10 @@ export async function GET(req: Request) {
     d.date = { value: "2026-11-21", flexible: true };
     d.options = ["demontage", "remontage"];
     d.contact = { firstName: "Camille", lastName: "Exemple", phone: "06 12 34 56 78", email: "camille@example.com", message: "Accès par la cour.", consent: true };
-    mail = quoteEmail("SM-EXEMPLE", d, totalVolume(d), ["Stationnement à vérifier (départ)"]);
+    mail =
+      url.searchParams.get("kind") === "client"
+        ? customerQuoteEmail("SM-EXEMPLE", d, totalVolume(d))
+        : quoteEmail("SM-EXEMPLE", d, totalVolume(d), ["Stationnement à vérifier (départ)"]);
   }
   if (url.searchParams.get("format") === "text") return new NextResponse(`Objet : ${mail.subject}\n\n${mail.text}`, { headers: { "content-type": "text/plain; charset=utf-8" } });
   return new NextResponse(mail.html, { headers: { "content-type": "text/html; charset=utf-8" } });

@@ -5,16 +5,20 @@ import { carryDistanceLabels, yesNoUnknownLabels, type Access, type QuoteDraft }
 import { formatDate, formatFloor, formatNumber1 } from "@/lib/format";
 
 /**
- * E-mail de demande envoyé à SAMYO : c'est l'outil de travail principal en V1
- * (traitement manuel par e-mail et WhatsApp, pas de CRM).
+ * E-mails envoyés à chaque demande :
+ *  - à SAMYO (LEAD_EMAIL_TO ou company.leadInbox) : outil de travail principal en V1
+ *    (traitement manuel par e-mail et WhatsApp, pas de CRM) ;
+ *  - au client : récapitulatif de sa demande et référence (pas de prix : le devis
+ *    chiffré est établi et envoyé par SAMYO).
  *
  * Envoi via l'API Resend (https://resend.com). Variables d'environnement :
  *   RESEND_API_KEY   clé API (sans elle, rien n'est envoyé)
  *   LEAD_EMAIL_TO    destinataire(s), séparés par des virgules
  *                    (par défaut : company.leadInbox)
- *   LEAD_EMAIL_FROM  expéditeur sur un domaine vérifié dans Resend
- *                    (par défaut onboarding@resend.dev, réservé aux tests :
- *                    Resend ne livre alors qu'à l'adresse du compte Resend)
+ *   LEAD_EMAIL_FROM  expéditeur sur un domaine VÉRIFIÉ dans Resend, ex.
+ *                    "SAMYO Déménagement <devis@samyo-demenagement.com>".
+ *                    Sans domaine vérifié (onboarding@resend.dev), Resend ne
+ *                    livre qu'à l'adresse du compte Resend : le client ne reçoit rien.
  * En développement sans clé, l'e-mail est affiché dans la console.
  * Aperçu : /api/dev/email-preview (hors production).
  */
@@ -33,20 +37,26 @@ export function leadRecipients() {
     .filter(Boolean);
 }
 
-export async function sendLeadEmail(mail: LeadEmail) {
+/** E-mail interne à SAMYO */
+export function sendLeadEmail(mail: LeadEmail) {
+  return sendEmail(leadRecipients(), mail);
+}
+
+/** Envoi via l'API Resend. Renvoie false (sans erreur) si aucune clé n'est configurée. */
+export async function sendEmail(to: string[], mail: LeadEmail) {
   const key = process.env.RESEND_API_KEY;
   if (!key) {
-    if (process.env.NODE_ENV !== "production") {
-      console.info(`[lead-email] RESEND_API_KEY absent : e-mail non envoyé.\nÀ : ${leadRecipients().join(", ")}\nObjet : ${mail.subject}\n\n${mail.text}`);
-    }
+    console.warn(`[email] RESEND_API_KEY absente : e-mail « ${mail.subject} » non envoyé à ${to.join(", ")}`);
+    if (process.env.NODE_ENV !== "production") console.info(mail.text);
     return false;
   }
-  const res = await fetch("https://api.resend.com/emails", {
+  // RESEND_API_URL : uniquement pour les tests (serveur factice)
+  const res = await fetch(process.env.RESEND_API_URL || "https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: process.env.LEAD_EMAIL_FROM || "SAMYO devis <onboarding@resend.dev>",
-      to: leadRecipients(),
+      from: process.env.LEAD_EMAIL_FROM || "SAMYO Déménagement <onboarding@resend.dev>",
+      to,
       reply_to: mail.replyTo || undefined,
       subject: mail.subject,
       text: mail.text,
@@ -226,4 +236,86 @@ export function callbackEmail(ref: string, cb: { firstName: string; phone: strin
     },
   ]);
   return { subject: `Rappel ${ref} — ${cb.firstName} · ${cb.phone}`, text, html };
+}
+
+/* ───────────────────────── E-mail au client ───────────────────────── */
+
+/**
+ * Récapitulatif envoyé au client après sa demande de devis. Aucun prix : le volume
+ * est indiqué comme estimation, le devis chiffré est envoyé ensuite par SAMYO.
+ */
+export function customerQuoteEmail(ref: string, d: QuoteDraft, volume: number): LeadEmail {
+  const c = d.contact;
+  const date = d.date.value ? formatDate(d.date.value, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : "À convenir";
+  const kind = d.kind === "transport" ? "Transport d'objets" : `Déménagement${d.housing ? ` · ${housingById[d.housing].label}` : ""}`;
+  const specials = Object.entries(d.specials).filter(([, n]) => n > 0);
+  const rows: Row[] = [
+    ["Référence", ref],
+    ["Type", kind],
+    ["Trajet", `${d.from.city} → ${d.to.city}`],
+    ["Date souhaitée", `${date}${d.date.flexible ? " (dates flexibles)" : ""}`],
+    ["Volume estimé", `${formatNumber1(volume)} m³ (estimation à partir de votre inventaire)`],
+  ];
+  if (d.kind !== "transport") rows.push(["Formule", formulas.find((f) => f.id === d.formula)?.name ?? "À définir avec vous"]);
+  if (d.options.length) rows.push(["Options", d.options.map((o) => quoteOptions.find((x) => x.id === o)?.label ?? o).join(", ")]);
+  if (specials.length) rows.push(["Objets particuliers", specials.map(([id, n]) => `${specialItemById[id]?.label ?? id} × ${n}`).join(", ")]);
+
+  const wa = `https://wa.me/${toWhatsAppNumber(company.whatsapp.e164)}?text=${encodeURIComponent(`Bonjour SAMYO, je viens d'envoyer ma demande de devis depuis le site. Référence : ${ref}.`)}`;
+  const tel = `tel:${company.phone.e164}`;
+  const site = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.samyo-demenagement.com").replace(/\/$/, "");
+  const steps = [
+    "Un conseiller relit votre inventaire et vos accès.",
+    "Il vous contacte si un point doit être précisé.",
+    "Vous recevez votre devis détaillé, poste par poste.",
+  ];
+
+  const text = [
+    `Bonjour ${c.firstName},`,
+    "",
+    `Merci pour votre demande. Elle est bien enregistrée sous la référence ${ref}.`,
+    "",
+    "— VOTRE DEMANDE —",
+    ...rows.map(([k, v]) => `${k} : ${v}`),
+    "",
+    "— LA SUITE —",
+    ...steps.map((s, i) => `${i + 1}. ${s}`),
+    "",
+    "Le volume indiqué est une estimation : le devis définitif vous est transmis après vérification.",
+    "",
+    `Une question ? Répondez à cet e-mail, appelez le ${company.phone.display} ou écrivez-nous sur WhatsApp : ${wa}`,
+    "",
+    `${company.name} · ${company.address.street}, ${company.address.city} · ${site}`,
+  ].join("\n");
+
+  const blue = "#2348C4";
+  const html = `<!doctype html><html lang="fr"><body style="margin:0;background:#F5F7FB;font-family:Arial,Helvetica,sans-serif;color:#101830">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F5F7FB;padding:24px 12px"><tr><td align="center">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:14px;overflow:hidden">
+<tr><td style="background:${blue};padding:22px 28px;border-bottom:5px solid #93C572;color:#ffffff">
+<div style="font-size:24px;font-weight:bold;letter-spacing:4px">SAMYO</div>
+<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-top:2px">Déménagement &amp; Transport</div>
+</td></tr>
+<tr><td style="padding:28px 28px 8px">
+<div style="font-size:22px;font-weight:bold">Merci ${esc(c.firstName)}, votre demande est bien reçue.</div>
+<div style="font-size:15px;line-height:1.6;color:#566075;margin-top:10px">Référence de votre dossier : <b style="color:#101830">${esc(ref)}</b>. Voici le récapitulatif de ce que vous nous avez transmis.</div>
+</td></tr>
+<tr><td style="padding:12px 28px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-size:15px">
+${rows.map(([k, v]) => `<tr><td style="padding:8px 0;border-bottom:1px solid #EBEFF6;color:#566075;width:40%;vertical-align:top">${esc(k)}</td><td style="padding:8px 0;border-bottom:1px solid #EBEFF6">${esc(v)}</td></tr>`).join("")}
+</table></td></tr>
+<tr><td style="padding:18px 28px 4px">
+<div style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#566075;font-weight:bold;margin-bottom:8px">La suite</div>
+${steps.map((s, i) => `<div style="font-size:15px;line-height:1.6;margin:4px 0"><b style="color:${blue}">${i + 1}.</b> ${esc(s)}</div>`).join("")}
+<div style="font-size:13px;line-height:1.6;color:#566075;margin-top:12px">Le volume indiqué est une estimation : le devis définitif vous est transmis après vérification.</div>
+</td></tr>
+<tr><td style="padding:20px 28px 8px">
+<a href="${esc(wa)}" style="display:inline-block;margin:0 8px 10px 0;padding:12px 20px;border-radius:999px;background:${blue};color:#ffffff;font-size:14px;font-weight:bold;text-decoration:none">Écrire sur WhatsApp</a>
+<a href="${esc(tel)}" style="display:inline-block;margin:0 8px 10px 0;padding:12px 20px;border-radius:999px;background:#F0F4FF;color:${blue};font-size:14px;font-weight:bold;text-decoration:none">Appeler le ${esc(company.phone.display)}</a>
+</td></tr>
+<tr><td style="padding:16px 28px 26px;font-size:12px;line-height:1.6;color:#808A9E;border-top:1px solid #EBEFF6">
+Vous pouvez répondre directement à cet e-mail.<br>${esc(company.name)} · ${esc(company.address.street)}, ${esc(company.address.city)} · <a href="${esc(site)}" style="color:#808A9E">${esc(site.replace(/^https?:\/\//, ""))}</a>
+</td></tr>
+</table></td></tr></table></body></html>`;
+
+  return { subject: `Votre demande de devis ${ref} — ${company.name}`, text, html, replyTo: company.email };
 }

@@ -32,18 +32,26 @@ Un seul fichier : **`src/config/company.ts`**. Tout le site (en-tête, pied de p
 Règle : une valeur inconnue reste à `null` et n'apparaît pas sur le site. Ne jamais compléter « au jugé ».
 Quand les informations légales sont complètes, passer `provisional` à `false` dans `company.ts` (les pages légales deviennent indexables).
 
-## 3. Réception des demandes par e-mail
+## 3. E-mails envoyés à chaque demande
 
-Service utilisé : **Resend** (offre gratuite suffisante au démarrage).
+À chaque demande de devis, le site envoie **deux e-mails** via **Resend** :
+1. **à SAMYO** (`LEAD_EMAIL_TO`, par défaut `contact@samyo-demenagement.com`) : fiche complète avec boutons Appeler / WhatsApp / Répondre ; « Répondre » écrit directement au client ;
+2. **au client** : récapitulatif de sa demande (référence, trajet, date, volume estimé, formule, options) et la suite. **Pas de prix** : le devis chiffré est établi et envoyé par SAMYO.
+La demande de rappel n'envoie que l'e-mail à SAMYO (pas d'adresse e-mail demandée).
 
-1. Créer un compte sur resend.com avec l'adresse qui doit recevoir les demandes.
-2. Créer une clé API → variable `RESEND_API_KEY`.
-3. `LEAD_EMAIL_TO` = adresse(s) de réception, séparées par des virgules. Sans valeur, `company.leadInbox` (Gmail du gérant) est utilisé.
-4. Tant qu'aucun domaine n'est vérifié dans Resend, l'expéditeur de test `onboarding@resend.dev` ne livre **qu'à l'adresse du compte Resend**. Une fois le domaine définitif acheté : Resend → Domains → ajouter le domaine, copier les enregistrements DNS (SPF, DKIM) chez le registrar, puis `LEAD_EMAIL_FROM="SAMYO devis <devis@votre-domaine.fr>"`.
+Mise en place (une seule fois) :
+1. Créer un compte sur resend.com.
+2. **Domains → Add domain → `samyo-demenagement.com`** → recopier les enregistrements DNS indiqués (TXT/MX sur un sous-domaine `send`, DKIM) dans Cloudflare, en **DNS only**. Ils ne touchent pas à la messagerie Outlook existante. Attendre « Verified ».
+3. **API Keys → Create** (permission « Sending access »).
+4. Vercel → projet `samyo` → Settings → Environment Variables (Production) :
+   - `RESEND_API_KEY` = la clé
+   - `LEAD_EMAIL_FROM` = `SAMYO Déménagement <devis@samyo-demenagement.com>`
+   - `LEAD_EMAIL_TO` = `contact@samyo-demenagement.com` (facultatif, c'est la valeur par défaut)
+   puis **Redeploy**.
+5. Faire une vraie demande sur le site avec une adresse personnelle : SAMYO et le client doivent recevoir chacun leur e-mail.
 
-L'e-mail contient : boutons **Appeler**, **WhatsApp** (conversation pré-remplie avec le client) et **Répondre par e-mail** ; puis client, projet, départ, arrivée, objets spécifiques, inventaire, points à vérifier, message. Le « Répondre » de la messagerie écrit directement au client.
-
-Aperçu sans envoyer de demande (développement) : `/api/dev/email-preview` (devis), `?kind=callback` (rappel), `?format=text` (version texte).
+Sans domaine vérifié, Resend n'envoie qu'à l'adresse du compte Resend : le client ne reçoit rien.
+Aperçus (hors production ou avec `ENABLE_EMAIL_PREVIEW=1`) : `/api/dev/email-preview` (SAMYO), `?kind=client` (client), `?kind=callback` (rappel).
 
 ## 4. WhatsApp et Jawabot
 
